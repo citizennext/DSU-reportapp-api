@@ -1,2 +1,2 @@
-# DSU-e-raport-client-web-app
-Aplicatie web pentru raportare
+# DSU-report-api
+API pentru raportare DSU
