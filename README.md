@@ -1,2 +1,2 @@
 # DSU-report-api
-API pentru raportare DSU
+API pentru aplicatia de raportare integrata a DSU
