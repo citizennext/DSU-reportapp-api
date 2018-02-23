@@ -10,6 +10,6 @@
   roles:
     - server
     - nginx
-    - php    
-    - percona-mysql    
+    - php        
+    - postgres
     - app

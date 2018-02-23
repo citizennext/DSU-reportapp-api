@@ -4,14 +4,6 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: Add mysql user
-  user:
-    name: mysql
-    comment: "MySQL Server,,,"
-    shell: "/bin/false"
-    home: "/var/lib/mysql"
-    createhome: yes
-
 - name: Install Pip modules
   block:
     - apt:

@@ -7,7 +7,7 @@ nginx:
   service_admin_email: "lucian.stuparu@civictech.ro"
   service_document_root: "/vagrant"
   renew_ssl_now: "off"
-  generate_dhparams: "off"
+  generate_dhparams: "on"
   certificate_path: "/etc/ssl/certs/dsu.civictech.local.crt"
   certificate_key_path: "/etc/ssl/private/dsu.civictech.local.key"
   generate_ssl_now: "on"
@@ -23,8 +23,6 @@ nginx:
   user:
     name: www-data
     group: www-data
-
-
 
 php:
   package_cli: php7.0-cli
