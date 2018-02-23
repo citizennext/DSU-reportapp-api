@@ -1,0 +1,29 @@
+---
+
+#- name: Enable error logging for PHP-FPM
+#  lineinfile: dest={{ php.path }}/fpm/php.ini regexp="^;?error_log" line="error_log = /var/log/php/error.log"
+#  notify: Restart PHP-FPM
+
+#- name: Enable opcache for PHP-FPM
+#  lineinfile: dest={{ php.path }}/fpm/php.ini regexp=";?opcache.enable=\d" line="opcache.enable=1"
+#  notify: Restart PHP-FPM
+
+- name: Install php.ini FPM configuration
+  with_items: "{{ php_config_ini.fpm }}"
+  ini_file:
+    dest: "{{ php.path }}/fpm/php.ini"
+    section: "{{ item.section|default('PHP') }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  when: php_config_ini is defined and php_config_ini.fpm is defined
+  notify: Restart PHP-FPM
+
+- name: Install pool FPM configuration
+  with_items: "{{ php_fpm_config_pool }}"
+  ini_file:
+    dest: "{{ php.path }}/fpm/pool.d/www.conf"
+    section: "{{ item.section|default('www') }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  when: php_fpm_config_pool is defined
+  notify: Restart PHP-FPM

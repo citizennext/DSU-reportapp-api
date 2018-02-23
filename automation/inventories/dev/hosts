@@ -1,0 +1,2 @@
+[local]
+dsu-local ansible_connection=local

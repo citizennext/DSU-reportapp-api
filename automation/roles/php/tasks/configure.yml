@@ -1,0 +1,7 @@
+---
+
+- include: php-fpm.yml
+  when: php.package_fpm is defined
+
+- include: php-cli.yml
+  when: php.package_cli is defined

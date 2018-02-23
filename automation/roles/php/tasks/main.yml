@@ -1,0 +1,21 @@
+---
+
+- name: Install PHP CLI
+  package: pkg={{ php.package_cli }} state=present
+  when: php.package_cli is defined
+
+- name: Install PHP-FPM
+  package: pkg={{ php.package_fpm }} state=present
+  when: php.package_fpm is defined
+
+- name: Install PHP extensions
+  package: pkg={{ item }} state=latest
+  with_items: "{{ php.extensions }}"
+  when: php.extensions is defined
+
+- name: Install & configure Xdebug
+  include: xdebug.yml
+  when: php.xdebug|default(false)
+
+- name: Configure PHP and PHP-FPM
+  include: configure.yml

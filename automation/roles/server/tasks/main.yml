@@ -1,0 +1,20 @@
+---
+- name: Update cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install Pip modules
+  block:
+    - apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python-pip        
+        - build-essential
+    - pip: 
+        name: pip
+        extra_args: --upgrade
+    - pip: 
+        name: passlib
+        state: latest

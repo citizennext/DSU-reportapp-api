@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# https://github.com/hashicorp/vagrant/issues/1777
+
+Vagrant.configure("2") do |config|
+
+    config.vm.define "dsu" do |dsu|
+        dsu.vm.box       = "bento/ubuntu-16.04"
+        dsu.vm.hostname  = "dsu.civictech.local"
+        dsu.vm.network "private_network", ip: "192.168.13.37"
+        dsu.vm.synced_folder "../", "/vagrant"
+    end
+
+    config.vm.provider "virtualbox" do |vbox|
+        vbox.memory = 512
+        vbox.cpus   = 1
+    end
+
+    config.vm.provision "shell", path: "Vagrantboot"
+
+    config.vm.provision "ansible_local" do |ansible|
+        ansible.inventory_path    = "automation/inventories/dev/hosts"
+        ansible.playbook          = "automation/local_target.yml"
+        ansible.limit             = "all"
+    end
+end
