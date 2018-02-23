@@ -1,0 +1,76 @@
+---
+server:
+  update_cache: yes
+
+nginx:
+  service_host: "dsu.civictech.local"
+  service_admin_email: "lucian.stuparu@civictech.ro"
+  service_document_root: "/vagrant"
+  renew_ssl_now: "off"
+  generate_dhparams: "off"
+  certificate_path: "/etc/ssl/certs/dsu.civictech.local.crt"
+  certificate_key_path: "/etc/ssl/private/dsu.civictech.local.key"
+  generate_ssl_now: "on"
+  self_signed_certificate:
+    - name: "DSU"      
+      country: "RO"
+      state: "Bucharest"
+      locality: "Bucharest"
+      organization: "DSU"
+      organizationalunit: "IT"
+      commonname: "dsu.civictech.local"
+      email: "lucian.stuparu@civictech.ro"
+  user:
+    name: www-data
+    group: www-data
+
+
+
+php:
+  package_cli: php7.0-cli
+  package_fpm: php7.0-fpm
+  path: /etc/php/7.0
+  service_name: php7.0-fpm
+  fastcgi_pass: 'unix:/run/php/php7.0-fpm.sock'
+  extensions:
+    - php7.0-cli
+    - php7.0-bcmath
+    - php7.0-mbstring
+    - php7.0-mcrypt
+    - php7.0-intl
+    - php7.0-curl
+    - php7.0-gd
+    - php7.0-zip
+    - php7.0-xml
+    - php7.0-mysql
+
+php_config_ini:
+  fpm:
+    - option: "upload_max_filesize"
+      value: "8M"
+    - option: "post_max_size"
+      value: "8M"
+      section: "PHP"
+  cli:
+    - option: "date.timezone"
+      value: "Europe/Bucharest"
+      section: "Date"
+
+php_fpm_config_pool:
+    - option: "user"
+      value: "www-data"
+    - option: "group"
+      value: "www-data"
+    - option: "listen.owner"
+      value: "www-data"
+    - option: "listen.group"
+      value: "www-data"
+#    - option: "pm.max_children"
+#      value: "25"
+#    - option: "pm.start_servers"
+#      value: "4"
+#    - option: "pm.min_spare_servers"
+#      value: "4"
+#    - option: "pm.max_spare_servers"
+#      value: "6"
+

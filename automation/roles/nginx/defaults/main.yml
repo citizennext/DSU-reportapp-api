@@ -1,0 +1,5 @@
+---
+nginx:
+  user:
+    name: nginx
+    group: nginx

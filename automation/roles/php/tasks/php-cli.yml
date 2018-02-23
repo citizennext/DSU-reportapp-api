@@ -1,0 +1,10 @@
+---
+
+- name: Install php.ini cli configuration
+  with_items: "{{ php_config_ini.cli }}"
+  ini_file:
+    dest: "{{ php.path }}/cli/php.ini"
+    section: "{{ item.section|default('PHP') }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  when: php_config_ini is defined and php_config_ini.cli is defined

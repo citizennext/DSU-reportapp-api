@@ -1,0 +1,7 @@
+---
+
+- name: Install the Xdebug extension
+  package: pkg=php-xdebug state=present
+
+- name: Configure Xdebug
+  template: src=xdebug.ini.tpl dest={{ php.path }}/mods-available/xdebug.ini mode=0644

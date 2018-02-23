@@ -1,0 +1,65 @@
+---
+- name: Install percona database server
+  apt: 
+    name: "{{ item }}" 
+    state: latest
+  with_items:
+    - percona-server-server-5.7
+    - percona-server-client-5.7
+    - percona-toolkit
+    - python-mysqldb   
+    - libmysqlclient-dev
+    - python-pip
+    - build-essential
+
+- name: Install Pip modules
+  block:    
+    - pip: 
+        name: pip
+        extra_args: --upgrade
+    - pip: 
+        name: mysqlclient
+        state: latest
+
+- name: Copy .my.cnf file into the root home folder
+  template: 
+    src: root-my-cnf.j2 
+    dest: /root/.my.cnf 
+    owner: root 
+    mode: 0600
+
+- name: Update MySQL root password
+  mysql_user:
+    name: root 
+    host: "{{ item }}" 
+    password: "{{ mysql.root_password }}" 
+    login_user: root 
+    login_password: "{{ mysql.root_password }}" 
+    check_implicit_admin: yes
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - localhost
+
+- name: Ensure anonymous users are not in the database
+  mysql_user: 
+    name: '' 
+    host: "{{ item }}" 
+    state: absent
+  with_items:
+    - "{{ ansible_hostname }}"
+    - localhost
+
+- name: remove test database
+  mysql_db: 
+    name: test 
+    state: absent
+
+- name: Write custom server configuration
+  template: 
+    src: my.cnf.j2 
+    dest: /etc/mysql/my.cnf 
+    owner: root 
+    mode: 0644
+  notify:
+    - restart percona
