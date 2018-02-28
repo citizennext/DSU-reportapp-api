@@ -3,9 +3,11 @@ server:
   update_cache: yes
 
 nginx:
-  service_host: "dsu.civictech.local"
+  service_host: "dsu.civictech.local"  
+  service_document_root: "/vagrant/DSU-reportapp-api"
+  service_host2: "dsu-admin.civictech.local"  
+  service_document_root2: "/vagrant/DSU-reportapp-api-admin"
   service_admin_email: "lucian.stuparu@civictech.ro"
-  service_document_root: "/vagrant"
   renew_ssl_now: "off"
   generate_dhparams: "on"
   certificate_path: "/etc/ssl/certs/dsu.civictech.local.crt"
