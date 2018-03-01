@@ -62,6 +62,18 @@
     dest: /etc/nginx/sites-enabled/vhost.conf 
     state: link
 
+# vhost2
+- name: Vhost2 upload
+  template: src=vhost2.conf.j2 dest=/etc/nginx/sites-available/vhost2.conf
+  when: nginx.service_document_root2 is defined
+
+- name: Enable vhost2
+  file: 
+    src: /etc/nginx/sites-available/vhost2.conf
+    dest: /etc/nginx/sites-enabled/vhost2.conf 
+    state: link
+  when: nginx.service_document_root2 is defined
+
 # ssl
 - name: Generate dhparams file
   shell: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048

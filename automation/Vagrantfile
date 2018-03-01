@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
         dsu.vm.box       = "bento/ubuntu-16.04"
         dsu.vm.hostname  = "dsu.civictech.local"
         dsu.vm.network "private_network", ip: "192.168.13.37"
-        dsu.vm.synced_folder "../", "/vagrant"
+        dsu.vm.synced_folder "../../", "/vagrant"
     end
 
     config.vm.provider "virtualbox" do |vbox|
@@ -20,8 +20,8 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", path: "Vagrantboot"
 
     config.vm.provision "ansible_local" do |ansible|
-        ansible.inventory_path    = "automation/inventories/dev/hosts"
-        ansible.playbook          = "automation/local_target.yml"
+        ansible.inventory_path    = "DSU-reportapp-api/automation/inventories/dev/hosts"
+        ansible.playbook          = "DSU-reportapp-api/automation/local_target.yml"
         ansible.limit             = "all"
     end
 end
