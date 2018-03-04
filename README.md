@@ -35,3 +35,6 @@ http://dsu.civictech.local
 ```
 http://dsu-admin.civictech.local
 ```
+
+
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/civictechro/DSU-reportapp-api.svg?columns=all)](https://waffle.io/civictechro/DSU-reportapp-api)
