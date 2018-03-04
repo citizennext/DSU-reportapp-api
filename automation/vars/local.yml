@@ -4,9 +4,9 @@ server:
 
 nginx:
   service_host: "dsu.civictech.local"  
-  service_document_root: "/vagrant/DSU-reportapp-api/public"
+  service_document_root: "/vagrant/DSU-reportapp-api/api/public"
   service_host2: "dsu-admin.civictech.local"  
-  service_document_root2: "/vagrant/DSU-reportapp-api-admin/public"
+  service_document_root2: "/vagrant/DSU-reportapp-api-admin/api/public"
   service_admin_email: "lucian.stuparu@civictech.ro"
   renew_ssl_now: "off"
   generate_dhparams: "on"
