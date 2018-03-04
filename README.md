@@ -10,6 +10,7 @@ API pentru aplicatia de raportare integrata a DSU
 192.168.13.37   dsu.civictech.local
 ```
 - git clone from the repository (DSU-reportapp-api)
+    - NOTE: Git Workflow -> [Wiki Doc](https://github.com/civictechro/DSU-reportapp-api/wiki/Git-Workflow)
 - cd to the automation directory
 - run the vm provisioning:
 ```
