@@ -1,4 +1,7 @@
 ---
+- name: Add PHP official repository
+  apt_repository: repo={{ php.repository }} state=present
+  when: ansible_distribution == "Ubuntu" and php.repository is defined
 
 - name: Install PHP CLI
   package: pkg={{ php.package_cli }} state=present

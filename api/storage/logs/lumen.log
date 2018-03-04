@@ -1,0 +1,370 @@
+[2018-03-04 15:24:23] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\Lumen\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\Lumen\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\Lumen\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#14 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\\Lumen\\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#14 {main}
+"} 
+[2018-03-04 15:24:23] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\Lumen\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\Lumen\Application->sendExceptionToHandler(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#12 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\\Lumen\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\\Lumen\\Application->sendExceptionToHandler(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#12 {main}
+"} 
+[2018-03-04 15:24:23] production.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Exception thrown without a stack frame in Unknown:0
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 16): Exception thrown without a stack frame at Unknown:0)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\\Lumen\\Application->handleShutdown()
+#1 [internal function]: Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 {main}
+"} 
+[2018-03-04 15:24:50] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\Lumen\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\Lumen\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\Lumen\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#14 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\\Lumen\\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#14 {main}
+"} 
+[2018-03-04 15:24:50] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\Lumen\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\Lumen\Application->sendExceptionToHandler(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#12 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\\Lumen\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\\Lumen\\Application->sendExceptionToHandler(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#12 {main}
+"} 
+[2018-03-04 15:24:50] production.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Exception thrown without a stack frame in Unknown:0
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 16): Exception thrown without a stack frame at Unknown:0)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\\Lumen\\Application->handleShutdown()
+#1 [internal function]: Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 {main}
+"} 
+[2018-03-04 15:25:52] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\Lumen\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\Lumen\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\Lumen\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#14 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\\Lumen\\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#14 {main}
+"} 
+[2018-03-04 15:25:52] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\Lumen\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\Lumen\Application->sendExceptionToHandler(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#12 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\\Lumen\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\\Lumen\\Application->sendExceptionToHandler(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#12 {main}
+"} 
+[2018-03-04 15:25:52] production.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Exception thrown without a stack frame in Unknown:0
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 16): Exception thrown without a stack frame at Unknown:0)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\\Lumen\\Application->handleShutdown()
+#1 [internal function]: Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 {main}
+"} 
+[2018-03-04 15:28:59] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\Lumen\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\Lumen\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\Lumen\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#14 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\\Lumen\\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#14 {main}
+"} 
+[2018-03-04 15:28:59] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\Lumen\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\Lumen\Application->sendExceptionToHandler(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#12 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:499)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\\Lumen\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\\Lumen\\Application->sendExceptionToHandler(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#12 {main}
+"} 
+[2018-03-04 15:28:59] production.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Exception thrown without a stack frame in Unknown:0
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 16): Exception thrown without a stack frame at Unknown:0)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\\Lumen\\Application->handleShutdown()
+#1 [internal function]: Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 {main}
+"} 
+[2018-03-04 15:29:31] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:637
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\Lumen\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\Lumen\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\Lumen\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#14 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:637)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(431): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(286): Laravel\\Lumen\\Application->prepareResponse('Lumen (5.6.1) (...')
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(260): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(160): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#11 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#12 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#13 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#14 {main}
+"} 
+[2018-03-04 15:29:31] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Parse error: syntax error, unexpected '?' in /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:637
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Illuminate\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\Lumen\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\Lumen\Application->sendExceptionToHandler(Object(Symfony\Component\Debug\Exception\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#12 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Parse error: syntax error, unexpected '?' at /vagrant/DSU-reportapp-api/api/vendor/symfony/http-foundation/Response.php:637)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#1 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Symfony\\\\Compone...')
+#2 /vagrant/DSU-reportapp-api/api/vendor/illuminate/http/Response.php(13): spl_autoload_call('Symfony\\\\Compone...')
+#3 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(444): include('/vagrant/DSU-re...')
+#4 /vagrant/DSU-reportapp-api/api/vendor/composer/ClassLoader.php(322): Composer\\Autoload\\includeFile('/vagrant/DSU-re...')
+#5 [internal function]: Composer\\Autoload\\ClassLoader->loadClass('Illuminate\\\\Http...')
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Exceptions/Handler.php(101): spl_autoload_call('Illuminate\\\\Http...')
+#7 /vagrant/DSU-reportapp-api/api/app/Exceptions/Handler.php(48): Laravel\\Lumen\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(105): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#9 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(170): Laravel\\Lumen\\Application->sendExceptionToHandler(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError))
+#10 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#11 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#12 {main}
+"} 
+[2018-03-04 15:29:31] production.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Exception thrown without a stack frame in Unknown:0
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 16): Exception thrown without a stack frame at Unknown:0)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\\Lumen\\Application->handleShutdown()
+#1 [internal function]: Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 {main}
+"} 
