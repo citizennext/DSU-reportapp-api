@@ -1,3 +1,5 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/civictechro/DSU-reportapp-api.svg?columns=all)](https://waffle.io/civictechro/DSU-reportapp-api)
+
 # DSU-report-api
 API pentru aplicatia de raportare integrata a DSU
 
