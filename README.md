@@ -5,6 +5,7 @@ API pentru aplicatia de raportare integrata a DSU
 - install Vagrant
 - install VirtualBox
 - add this line to your localhost file: 
+NOTE: Windows users -> localhost file is located here C:\Windows\System32\drivers\etc\hosts; deactivate your antivirus during editing hosts file.
 ```
 192.168.13.37   dsu.civictech.local
 ```
