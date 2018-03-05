@@ -16,6 +16,7 @@ storage/*.key
 .env
 Homestead.yaml
 Homestead.json
+api/storage/logs/
 
 ### PhpStorm ###
 .idea/
