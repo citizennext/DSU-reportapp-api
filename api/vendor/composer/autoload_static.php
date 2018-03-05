@@ -21,6 +21,7 @@ class ComposerStaticInit893ec66aae662aafd2037f2c992cf6b3
         ),
         'W' => 
         array (
+            'Wn\\Generators\\' => 14,
             'Webmozart\\Assert\\' => 17,
         ),
         'S' => 
@@ -104,6 +105,10 @@ class ComposerStaticInit893ec66aae662aafd2037f2c992cf6b3
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Wn\\Generators\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wn/lumen-generators/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -2671,6 +2676,27 @@ class ComposerStaticInit893ec66aae662aafd2037f2c992cf6b3
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
+        'Wn\\Generators\\Argument\\ArgumentFormat' => __DIR__ . '/..' . '/wn/lumen-generators/src/Argument/ArgumentFormat.php',
+        'Wn\\Generators\\Argument\\ArgumentFormatLoader' => __DIR__ . '/..' . '/wn/lumen-generators/src/Argument/ArgumentFormatLoader.php',
+        'Wn\\Generators\\Argument\\ArgumentParser' => __DIR__ . '/..' . '/wn/lumen-generators/src/Argument/ArgumentParser.php',
+        'Wn\\Generators\\CommandsServiceProvider' => __DIR__ . '/..' . '/wn/lumen-generators/src/CommandsServiceProvider.php',
+        'Wn\\Generators\\Commands\\BaseCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/BaseCommand.php',
+        'Wn\\Generators\\Commands\\ControllerCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/ControllerCommand.php',
+        'Wn\\Generators\\Commands\\ControllerRestActionsCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/ControllerRestActionsCommand.php',
+        'Wn\\Generators\\Commands\\FactoryCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/FactoryCommand.php',
+        'Wn\\Generators\\Commands\\MigrationCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/MigrationCommand.php',
+        'Wn\\Generators\\Commands\\ModelCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/ModelCommand.php',
+        'Wn\\Generators\\Commands\\PivotSeederCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/PivotSeederCommand.php',
+        'Wn\\Generators\\Commands\\PivotTableCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/PivotTableCommand.php',
+        'Wn\\Generators\\Commands\\ResourceCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/ResourceCommand.php',
+        'Wn\\Generators\\Commands\\ResourcesCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/ResourcesCommand.php',
+        'Wn\\Generators\\Commands\\RouteCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/RouteCommand.php',
+        'Wn\\Generators\\Commands\\SeederCommand' => __DIR__ . '/..' . '/wn/lumen-generators/src/Commands/SeederCommand.php',
+        'Wn\\Generators\\Exceptions\\ArgumentFormatException' => __DIR__ . '/..' . '/wn/lumen-generators/src/Exceptions/ArgumentFormatException.php',
+        'Wn\\Generators\\Exceptions\\ArgumentParserException' => __DIR__ . '/..' . '/wn/lumen-generators/src/Exceptions/ArgumentParserException.php',
+        'Wn\\Generators\\Exceptions\\TemplateException' => __DIR__ . '/..' . '/wn/lumen-generators/src/Exceptions/TemplateException.php',
+        'Wn\\Generators\\Template\\Template' => __DIR__ . '/..' . '/wn/lumen-generators/src/Template/Template.php',
+        'Wn\\Generators\\Template\\TemplateLoader' => __DIR__ . '/..' . '/wn/lumen-generators/src/Template/TemplateLoader.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',
