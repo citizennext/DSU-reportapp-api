@@ -752,3 +752,49 @@ Stack trace:
 #10 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #11 {main}
 "} 
+[2018-03-06 08:43:20] production.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: There are no commands defined in the "key" namespace. in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php:557
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(597): Symfony\Component\Console\Application->findNamespace('key')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(224): Symfony\Component\Console\Application->find('key:generate')
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#5 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): There are no commands defined in the \"key\" namespace. at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php:557)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(597): Symfony\\Component\\Console\\Application->findNamespace('key')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(224): Symfony\\Component\\Console\\Application->find('key:generate')
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
+[2018-03-06 08:59:58] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'Wn\Generators\CommandsServiceProvider' not found in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php:174
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\app\Providers\AppServiceProvider.php(18): Laravel\Lumen\Application->register('Wn\\Generators\\C...')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php(184): App\Providers\AppServiceProvider->register()
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\bootstrap\app.php(81): Laravel\Lumen\Application->register(Object(App\Providers\AppServiceProvider))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(18): require('C:\\Proiecte\\civ...')
+#4 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'Wn\\Generators\\CommandsServiceProvider' not found at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php:174)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\app\\Providers\\AppServiceProvider.php(18): Laravel\\Lumen\\Application->register('Wn\\\\Generators\\\\C...')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php(184): App\\Providers\\AppServiceProvider->register()
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\bootstrap\\app.php(81): Laravel\\Lumen\\Application->register(Object(App\\Providers\\AppServiceProvider))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(18): require('C:\\\\Proiecte\\\\civ...')
+#4 {main}
+"} 
+[2018-03-06 09:01:32] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'Wn\Generators\CommandsServiceProvider' not found in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php:174
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\app\Providers\AppServiceProvider.php(18): Laravel\Lumen\Application->register('Wn\\Generators\\C...')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php(184): App\Providers\AppServiceProvider->register()
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\bootstrap\app.php(81): Laravel\Lumen\Application->register(Object(App\Providers\AppServiceProvider))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(18): require('C:\\Proiecte\\civ...')
+#4 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'Wn\\Generators\\CommandsServiceProvider' not found at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php:174)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\app\\Providers\\AppServiceProvider.php(18): Laravel\\Lumen\\Application->register('Wn\\\\Generators\\\\C...')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php(184): App\\Providers\\AppServiceProvider->register()
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\bootstrap\\app.php(81): Laravel\\Lumen\\Application->register(Object(App\\Providers\\AppServiceProvider))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(18): require('C:\\\\Proiecte\\\\civ...')
+#4 {main}
+"} 
