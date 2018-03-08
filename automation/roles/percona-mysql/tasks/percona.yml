@@ -1,0 +1,6 @@
+---
+# file: tasks/percona.yml
+
+- import_tasks: repo.yml
+- import_tasks: install.yml
+- import_tasks: createdatabase.yml
