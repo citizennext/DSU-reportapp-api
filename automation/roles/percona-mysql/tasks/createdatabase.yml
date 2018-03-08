@@ -1,0 +1,21 @@
+---
+- name: Create application database
+  mysql_db: 
+    name: "{{item.name}}"
+    state: present 
+    collation: "{{ item.db_collation|default('utf8mb4_unicode_ci') }}"
+    encoding: "{{ item.db_character_set|default('utf8mb4') }}"
+  with_items: "{{ mysql.databases }}"
+  no_log: true
+
+- name: Create Application user database  
+  mysql_user: 
+    name: "{{ item.1.name }}"
+    password: "{{ item.1.password }}" 
+    priv: "{{ item.0.name }}.*:ALL"
+    host: "{{ item.1.host|default('localhost') }}"
+    state: present  
+  with_subelements: 
+    - "{{ mysql.databases }}"
+    - users
+  no_log: true
