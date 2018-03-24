@@ -626,3 +626,175 @@ Stack trace:
 #15 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
 #16 {main}
 "} 
+[2018-03-05 18:43:20] production.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "make:model" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php:611
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(224): Symfony\Component\Console\Application->find('make:model')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#5 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make:model\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php:611)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(224): Symfony\\Component\\Console\\Application->find('make:model')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2018-03-05 18:53:31] production.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "make:model" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php:611
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(224): Symfony\Component\Console\Application->find('make:model')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#5 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make:model\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php:611)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(224): Symfony\\Component\\Console\\Application->find('make:model')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2018-03-05 18:54:05] production.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "make:model" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php:611
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(224): Symfony\Component\Console\Application->find('make:model')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#5 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make:model\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php:611)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(224): Symfony\\Component\\Console\\Application->find('make:model')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2018-03-05 18:57:42] production.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: Command "make:model" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder
+    wn:model in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php:611
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(224): Symfony\Component\Console\Application->find('make:model')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#5 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make:model\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    make:seeder
+    wn:model at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php:611)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(224): Symfony\\Component\\Console\\Application->find('make:model')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2018-03-05 18:57:54] production.ERROR: Symfony\Component\Console\Exception\RuntimeException: The "--migration" option does not exist. in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Input\ArgvInput.php:217
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Input\ArgvInput.php(153): Symfony\Component\Console\Input\ArgvInput->addLongOption('migration', NULL)
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Input\ArgvInput.php(82): Symfony\Component\Console\Input\ArgvInput->parseLongOption('--migration')
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Input\Input.php(55): Symfony\Component\Console\Input\ArgvInput->parse()
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Command\Command.php(210): Symfony\Component\Console\Input\Input->bind(Object(Symfony\Component\Console\Input\InputDefinition))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Command.php(170): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Illuminate\Console\OutputStyle))
+#5 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(865): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(241): Symfony\Component\Console\Application->doRunCommand(Object(Wn\Generators\Commands\ModelCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#7 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#8 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#9 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#10 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--migration\" option does not exist. at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Input\\ArgvInput.php:217)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Input\\ArgvInput.php(153): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('migration', NULL)
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Input\\ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--migration')
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Command\\Command.php(210): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#5 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(865): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(241): Symfony\\Component\\Console\\Application->doRunCommand(Object(Wn\\Generators\\Commands\\ModelCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 {main}
+"} 
+[2018-03-06 08:43:20] production.ERROR: Symfony\Component\Console\Exception\CommandNotFoundException: There are no commands defined in the "key" namespace. in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php:557
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(597): Symfony\Component\Console\Application->findNamespace('key')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(224): Symfony\Component\Console\Application->find('key:generate')
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\symfony\console\Application.php(143): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\illuminate\console\Application.php(88): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Console\Kernel.php(84): Illuminate\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#5 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(35): Laravel\Lumen\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#6 {main} {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): There are no commands defined in the \"key\" namespace. at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php:557)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(597): Symfony\\Component\\Console\\Application->findNamespace('key')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(224): Symfony\\Component\\Console\\Application->find('key:generate')
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\symfony\\console\\Application.php(143): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\illuminate\\console\\Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Console\\Kernel.php(84): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(35): Laravel\\Lumen\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
+[2018-03-06 08:59:58] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'Wn\Generators\CommandsServiceProvider' not found in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php:174
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\app\Providers\AppServiceProvider.php(18): Laravel\Lumen\Application->register('Wn\\Generators\\C...')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php(184): App\Providers\AppServiceProvider->register()
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\bootstrap\app.php(81): Laravel\Lumen\Application->register(Object(App\Providers\AppServiceProvider))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(18): require('C:\\Proiecte\\civ...')
+#4 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'Wn\\Generators\\CommandsServiceProvider' not found at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php:174)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\app\\Providers\\AppServiceProvider.php(18): Laravel\\Lumen\\Application->register('Wn\\\\Generators\\\\C...')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php(184): App\\Providers\\AppServiceProvider->register()
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\bootstrap\\app.php(81): Laravel\\Lumen\\Application->register(Object(App\\Providers\\AppServiceProvider))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(18): require('C:\\\\Proiecte\\\\civ...')
+#4 {main}
+"} 
+[2018-03-06 09:01:32] production.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Class 'Wn\Generators\CommandsServiceProvider' not found in C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php:174
+Stack trace:
+#0 C:\Proiecte\civictech\DSU-reportapp-api\api\app\Providers\AppServiceProvider.php(18): Laravel\Lumen\Application->register('Wn\\Generators\\C...')
+#1 C:\Proiecte\civictech\DSU-reportapp-api\api\vendor\laravel\lumen-framework\src\Application.php(184): App\Providers\AppServiceProvider->register()
+#2 C:\Proiecte\civictech\DSU-reportapp-api\api\bootstrap\app.php(81): Laravel\Lumen\Application->register(Object(App\Providers\AppServiceProvider))
+#3 C:\Proiecte\civictech\DSU-reportapp-api\api\artisan(18): require('C:\\Proiecte\\civ...')
+#4 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'Wn\\Generators\\CommandsServiceProvider' not found at C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php:174)
+[stacktrace]
+#0 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\app\\Providers\\AppServiceProvider.php(18): Laravel\\Lumen\\Application->register('Wn\\\\Generators\\\\C...')
+#1 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\vendor\\laravel\\lumen-framework\\src\\Application.php(184): App\\Providers\\AppServiceProvider->register()
+#2 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\bootstrap\\app.php(81): Laravel\\Lumen\\Application->register(Object(App\\Providers\\AppServiceProvider))
+#3 C:\\Proiecte\\civictech\\DSU-reportapp-api\\api\\artisan(18): require('C:\\\\Proiecte\\\\civ...')
+#4 {main}
+"} 
