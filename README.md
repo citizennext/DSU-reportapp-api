@@ -1,4 +1,4 @@
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/civictechro/DSU-reportapp-api.svg?columns=all)](https://waffle.io/civictechro/DSU-reportapp-api)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/civictechro/DSU-reportapp-api.svg?columns=all)](https://waffle.io/civictechro/DSU-reportapp-api)  
 [![Latest Release](https://img.shields.io/github/release/civictechro/DSU-reportapp-api.svg?format=flat-square)](https://github.com/civictechro/DSU-reportapp-api/releases/latest)
 [![Latest Unstable Version](https://img.shields.io/badge/unstable-0.0.0-orange.svg?format=flat-square)](https://github.com/civictechro/DSU-reportapp-api/releases/tag/version/0.0.0)
 [![Open Issues](https://img.shields.io/github/issues/civictechro/DSU-reportapp-api.svg?format=flat-square)](https://github.com/civictechro/DSU-reportapp-api/issues)
