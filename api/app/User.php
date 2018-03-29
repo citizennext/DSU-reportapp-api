@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'nume', 'prenume', 'email', 'telefon_s', 'telefon_p', 'adresa', 'cod_postal', 'parola',
     ];
 
     /**
@@ -27,6 +27,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'parola', 'remember_token', 'api_key'
     ];
+
+    /**
+     * Get the unit that user belongs to.
+     */
+    public function unitate()
+    {
+        return $this->belongsTo(Unitate::class);
+    }
 }

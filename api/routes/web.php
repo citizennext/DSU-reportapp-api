@@ -14,3 +14,11 @@
 $router->get('/', function () use ($router) {
     return view('welcome', ['version' => $router->app->version()]);
 });
+
+// Domains routes
+$router->group(['prefix' => 'localitati'], function($router) {
+
+    // <api_url>/localitati
+    $router->get('/', 'LocalitateController@index');
+
+});

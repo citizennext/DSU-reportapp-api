@@ -1,4 +1,4 @@
-swagger: '2.0'
+openapi: 3.0.0
 
 ################################################################################
 #                              API Information                                 #
@@ -7,22 +7,101 @@ info:
   description: API pentru aplicatia de raportare integrata a DSU
   version: 0.0.1
   title: DSU API
-  termsOfService: ''
+  termsOfService: '/termeni-si-conditii'
   contact:
+    name: API Support
     email: tudor.rusu@hotmail.com
+    url: https://civictech.ro/contact
   license:
     name: Mozilla Public License 2.0
     url: 'https://www.mozilla.org/en-US/MPL/2.0/'
-host: dsu-api.ro
-basePath: /
-schemes:
-  - https
+servers:
+  - url: https://api.dsu.ro           # Server live - Production
+  - url: https://staging.api.dsu.ro   # Server testare - Staging
+  - url: https://dsu.civictech.local  # Server local - Vagrant
 
 ################################################################################
 #                                  Paths                                       #
 ################################################################################
-
+paths:
+  /localitati:
+    get:
+      summary: BROWSE - localitati
+      description: 'Returneaza toata colectia Localitati, inclusiv relatii'
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate localitatile.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  [
+                    {
+                        "id": 1,
+                        "judet_id": 1,
+                        "slug": "abrud",
+                        "nume": "Abrud",
+                        "created_at": "2018-03-25 11:46:19",
+                        "updated_at": null,
+                        "deleted_at": null,
+                        "judet": {
+                            "id": 1,
+                            "slug": "alba",
+                            "nume": "Alba",
+                            "created_at": "2018-03-25 11:21:19",
+                            "updated_at": null,
+                            "deleted_at": null
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "judet_id": 1,
+                        "slug": "aiud",
+                        "nume": "Aiud",
+                        "created_at": "2018-03-25 11:46:19",
+                        "updated_at": null,
+                        "deleted_at": null,
+                        "judet": {
+                            "id": 1,
+                            "slug": "alba",
+                            "nume": "Alba",
+                            "created_at": "2018-03-25 11:21:19",
+                            "updated_at": null,
+                            "deleted_at": null
+                        }
+                    }
+                  ]
+                items:
+                  $ref: '#/components/schemas/Localitati'
 
 ################################################################################
-#                                 Definitions                                  #
+#                                Components                                    #
 ################################################################################
+components:
+  schemas:
+    Localitati:
+      type: object
+      required: ["id", "judet_id", "nume"]
+      properties:
+        id: # cheie primara, auto incrementata
+          type: integer
+          format: int64
+        judet_id: # cheie straina -> Judete
+          type: integer
+          format: int64
+        nume:
+          type: string
+        slug: # format SEO - cu toate literele mici si spatiile inlocuite de simbolul minus
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at: # implementare Soft Delete
+          type: string
+          format: date-time
