@@ -15,10 +15,13 @@ $router->get('/', function () use ($router) {
     return view('welcome', ['version' => $router->app->version()]);
 });
 
-// Domains routes
+// Localitati routes
 $router->group(['prefix' => 'localitati'], function($router) {
 
     // <api_url>/localitati
     $router->get('/', 'LocalitateController@index');
+
+    // <api_url>/localitati/judet
+    $router->post('/judet/', 'LocalitateController@localitatiByJudet');
 
 });

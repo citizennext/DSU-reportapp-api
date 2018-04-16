@@ -76,6 +76,65 @@ paths:
                   ]
                 items:
                   $ref: '#/components/schemas/Localitati'
+  /localitati/judet:
+    post:
+      summary: BROWSE - localitati dintr-un judet
+      description: 'Returneaza toate localitatile dintr-um judet, bazat pe slug-ul judetului'
+      requestBody:
+        description: Obiect JSON ce contine slug-ul judetului
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/slugJudet'
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate localitatile dintr-um judet.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  [
+                    {
+                        "id": 1,
+                        "judet_id": 1,
+                        "slug": "abrud",
+                        "nume": "Abrud",
+                        "created_at": "2018-03-25 11:46:19",
+                        "updated_at": null,
+                        "deleted_at": null,
+                        "judet": {
+                            "id": 1,
+                            "slug": "alba",
+                            "nume": "Alba",
+                            "created_at": "2018-03-25 11:21:19",
+                            "updated_at": null,
+                            "deleted_at": null
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "judet_id": 1,
+                        "slug": "aiud",
+                        "nume": "Aiud",
+                        "created_at": "2018-03-25 11:46:19",
+                        "updated_at": null,
+                        "deleted_at": null,
+                        "judet": {
+                            "id": 1,
+                            "slug": "alba",
+                            "nume": "Alba",
+                            "created_at": "2018-03-25 11:21:19",
+                            "updated_at": null,
+                            "deleted_at": null
+                        }
+                    }
+                  ]
+                items:
+                  $ref: '#/components/schemas/Localitati'
 
 ################################################################################
 #                                Components                                    #
@@ -94,7 +153,7 @@ components:
           format: int64
         nume:
           type: string
-        slug: # format SEO - cu toate literele mici si spatiile inlocuite de simbolul minus
+        slug: # format SEO - cu toate literele mici si spatiile inlocuite de simbolul minus 
           type: string
         created_at:
           type: string
@@ -105,3 +164,18 @@ components:
         deleted_at: # implementare Soft Delete
           type: string
           format: date-time
+  requestBodies:
+    slugJudet:
+      description: a JSON object containing judet slug
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              slug:
+                type: string
+            example:
+              {
+                "slug": "alba"
+              }
