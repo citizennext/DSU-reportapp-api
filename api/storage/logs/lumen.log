@@ -1548,3 +1548,13 @@ Stack trace:
 #9 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
 #10 {main}
 "} 
+[2018-04-16 14:53:26] production.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Trait 'App\Authenticatable' not found in /vagrant/DSU-reportapp-api/api/app/User.php:13
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main} {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Trait 'App\\Authenticatable' not found at /vagrant/DSU-reportapp-api/api/app/User.php:13)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(54): Laravel\\Lumen\\Application->handleShutdown()
+#1 [internal function]: Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#2 {main}
+"} 
