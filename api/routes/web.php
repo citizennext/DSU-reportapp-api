@@ -21,7 +21,13 @@ $router->group(['prefix' => 'localitati'], function($router) {
     // <api_url>/localitati
     $router->get('/', 'LocalitateController@index');
 
-    // <api_url>/localitati/judet
-    $router->post('/judet/', 'LocalitateController@localitatiByJudet');
+    // <api_url>/localitati/judet/{slug}
+    $router->get('/judet/{slug}', 'LocalitateController@localitatiByJudet');
+
+    // <api_url>/localitati/{id}
+    $router->get('{id}', 'LocalitateController@find');
+
+    // <api_url>/localitati/slug/{slug}
+    $router->get('slug/{slug}', 'LocalitateController@findBySlug');
 
 });

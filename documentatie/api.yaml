@@ -1,28 +1,20 @@
 openapi: 3.0.0
-
-################################################################################
-#                              API Information                                 #
-################################################################################
 info:
   description: API pentru aplicatia de raportare integrata a DSU
   version: 0.0.1
   title: DSU API
-  termsOfService: '/termeni-si-conditii'
+  termsOfService: /termeni-si-conditii
   contact:
     name: API Support
     email: tudor.rusu@hotmail.com
-    url: https://civictech.ro/contact
+    url: 'https://civictech.ro/contact'
   license:
     name: Mozilla Public License 2.0
     url: 'https://www.mozilla.org/en-US/MPL/2.0/'
 servers:
-  - url: https://api.dsu.ro           # Server live - Production
-  - url: https://staging.api.dsu.ro   # Server testare - Staging
-  - url: https://dsu.civictech.local  # Server local - Vagrant
-
-################################################################################
-#                                  Paths                                       #
-################################################################################
+  - url: 'https://api.dsu.ro'
+  - url: 'https://staging.api.dsu.ro'
+  - url: 'https://dsu.civictech.local'
 paths:
   /localitati:
     get:
@@ -38,55 +30,47 @@ paths:
               schema:
                 type: array
                 example:
-                  [
-                    {
-                        "id": 1,
-                        "judet_id": 1,
-                        "slug": "abrud",
-                        "nume": "Abrud",
-                        "created_at": "2018-03-25 11:46:19",
-                        "updated_at": null,
-                        "deleted_at": null,
-                        "judet": {
-                            "id": 1,
-                            "slug": "alba",
-                            "nume": "Alba",
-                            "created_at": "2018-03-25 11:21:19",
-                            "updated_at": null,
-                            "deleted_at": null
-                        }
-                    },
-                    {
-                        "id": 2,
-                        "judet_id": 1,
-                        "slug": "aiud",
-                        "nume": "Aiud",
-                        "created_at": "2018-03-25 11:46:19",
-                        "updated_at": null,
-                        "deleted_at": null,
-                        "judet": {
-                            "id": 1,
-                            "slug": "alba",
-                            "nume": "Alba",
-                            "created_at": "2018-03-25 11:21:19",
-                            "updated_at": null,
-                            "deleted_at": null
-                        }
-                    }
-                  ]
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                  - id: 2
+                    judet_id: 1
+                    slug: aiud
+                    nume: Aiud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
                 items:
                   $ref: '#/components/schemas/Localitati'
-  /localitati/judet:
-    post:
+  /localitati/judet/{slug}:
+    get:
       summary: BROWSE - localitati dintr-un judet
       description: 'Returneaza toate localitatile dintr-um judet, bazat pe slug-ul judetului'
-      requestBody:
-        description: Obiect JSON ce contine slug-ul judetului
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/requestBodies/slugJudet'
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+          description: Slug-ul judetului
       tags:
         - localitati
       responses:
@@ -97,63 +81,129 @@ paths:
               schema:
                 type: array
                 example:
-                  [
-                    {
-                        "id": 1,
-                        "judet_id": 1,
-                        "slug": "abrud",
-                        "nume": "Abrud",
-                        "created_at": "2018-03-25 11:46:19",
-                        "updated_at": null,
-                        "deleted_at": null,
-                        "judet": {
-                            "id": 1,
-                            "slug": "alba",
-                            "nume": "Alba",
-                            "created_at": "2018-03-25 11:21:19",
-                            "updated_at": null,
-                            "deleted_at": null
-                        }
-                    },
-                    {
-                        "id": 2,
-                        "judet_id": 1,
-                        "slug": "aiud",
-                        "nume": "Aiud",
-                        "created_at": "2018-03-25 11:46:19",
-                        "updated_at": null,
-                        "deleted_at": null,
-                        "judet": {
-                            "id": 1,
-                            "slug": "alba",
-                            "nume": "Alba",
-                            "created_at": "2018-03-25 11:21:19",
-                            "updated_at": null,
-                            "deleted_at": null
-                        }
-                    }
-                  ]
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                  - id: 2
+                    judet_id: 1
+                    slug: aiud
+                    nume: Aiud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
                 items:
                   $ref: '#/components/schemas/Localitati'
-
-################################################################################
-#                                Components                                    #
-################################################################################
+  /localitati/{id}:
+    get:
+      summary: READ - localitati
+      description: 'Returneaza o localitate bazat pe id, inclusiv relatii'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID-ul localitatii
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Obiect JSON cu localitatea.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Localitati'
+  /localitati/slug/{slug}:
+    get:
+      summary: READ - localitati
+      description: 'Returneaza o localitate bazat pe slug, inclusiv relatii'
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+          description: Slug-ul localitatii
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Obiect JSON cu localitatea.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Localitati'
 components:
   schemas:
     Localitati:
       type: object
-      required: ["id", "judet_id", "nume"]
+      required:
+        - id
+        - judet_id
+        - nume
       properties:
-        id: # cheie primara, auto incrementata
+        id:
           type: integer
           format: int64
-        judet_id: # cheie straina -> Judete
+        judet_id:
           type: integer
           format: int64
         nume:
           type: string
-        slug: # format SEO - cu toate literele mici si spatiile inlocuite de simbolul minus 
+        slug:
           type: string
         created_at:
           type: string
@@ -161,21 +211,63 @@ components:
         updated_at:
           type: string
           format: date-time
-        deleted_at: # implementare Soft Delete
+        deleted_at:
           type: string
           format: date-time
-  requestBodies:
-    slugJudet:
-      description: a JSON object containing judet slug
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              slug:
-                type: string
-            example:
-              {
-                "slug": "alba"
-              }
+    Users:
+      type: object
+      required:
+        - id
+        - email
+        - parola
+        - nume
+        - prenume
+        - role_id
+        - telefon_s
+        - unitate_id
+      properties:
+        id:
+          type: integer
+          format: int64
+        role_id:
+          type: integer
+          format: int64
+        unitate_id:
+          type: integer
+          format: int64
+        nume:
+          type: string
+        prenume:
+          type: string
+        email:
+          type: string
+        parola:
+          type: string
+        telefon_s:
+          type: string
+        telefon_p:
+          type: string
+        adresa:
+          type: string
+        localitate:
+          type: string
+        cod_postal:
+          type: string
+        judet:
+          type: string
+        remember_token:
+          type: string
+        api_key:
+          type: string
+        api_key_expire:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time

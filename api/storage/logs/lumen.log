@@ -1522,3 +1522,29 @@ Stack trace:
 #15 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
 #16 {main}
 "} 
+[2018-04-16 13:18:52] production.ERROR: FastRoute\BadRouteException: Cannot register two routes matching "/localitati/([^/]+)" for method "GET" in /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/DataGenerator/RegexBasedAbstract.php:111
+Stack trace:
+#0 /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/DataGenerator/RegexBasedAbstract.php(32): FastRoute\DataGenerator\RegexBasedAbstract->addVariableRoute('GET', Array, Array)
+#1 /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/RouteCollector.php(44): FastRoute\DataGenerator\RegexBasedAbstract->addRoute('GET', Array, Array)
+#2 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(200): FastRoute\RouteCollector->addRoute('GET', '/localitati/{sl...', Array)
+#3 /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/functions.php(25): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}(Object(FastRoute\RouteCollector))
+#4 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(202): FastRoute\simpleDispatcher(Object(Closure))
+#5 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(164): Laravel\Lumen\Application->createDispatcher()
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\Lumen\Application->dispatch(NULL)
+#9 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\Lumen\Application->run()
+#10 {main} {"exception":"[object] (FastRoute\\BadRouteException(code: 0): Cannot register two routes matching \"/localitati/([^/]+)\" for method \"GET\" at /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/DataGenerator/RegexBasedAbstract.php:111)
+[stacktrace]
+#0 /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/DataGenerator/RegexBasedAbstract.php(32): FastRoute\\DataGenerator\\RegexBasedAbstract->addVariableRoute('GET', Array, Array)
+#1 /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/RouteCollector.php(44): FastRoute\\DataGenerator\\RegexBasedAbstract->addRoute('GET', Array, Array)
+#2 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(200): FastRoute\\RouteCollector->addRoute('GET', '/localitati/{sl...', Array)
+#3 /vagrant/DSU-reportapp-api/api/vendor/nikic/fast-route/src/functions.php(25): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}(Object(FastRoute\\RouteCollector))
+#4 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(202): FastRoute\\simpleDispatcher(Object(Closure))
+#5 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(164): Laravel\\Lumen\\Application->createDispatcher()
+#6 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(413): Laravel\\Lumen\\Application->Laravel\\Lumen\\Concerns\\{closure}()
+#7 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(166): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#8 /vagrant/DSU-reportapp-api/api/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(107): Laravel\\Lumen\\Application->dispatch(NULL)
+#9 /vagrant/DSU-reportapp-api/api/public/index.php(28): Laravel\\Lumen\\Application->run()
+#10 {main}
+"} 
