@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'users'], function($router) {
 
     // <api_url>/users/login
-    $router->post('login/', 'UserController@authenticate');
+    $router->post('login/', 'UserController@autentificare');
 
 });
 

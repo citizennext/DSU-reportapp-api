@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\User;
+use App\Setting;
 
 class UserController extends Controller
 {
@@ -21,21 +23,23 @@ class UserController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function authenticate(Request $request)
+    public function autentificare(Request $request)
     {
+        // validate data
         $this->validate($request, [
             'email' => 'required',
             'parola' => 'required'
         ]);
 
-        $user = User::where('email', $request->input('email'))->first();
+        $userModel = User::where('email', $request->input('email'))->first();
 
-        if(Hash::check($request->input('parola'), $user->parola)){
+        if(Hash::check($request->input('parola'), $userModel->parola)){
 
+            $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
             $apikey = base64_encode(str_random(40));
-            User::where('email', $request->input('email'))->update(['api_key' => "$apikey"]);
+            User::where('email', $request->input('email'))->update(['api_key' => $apikey, 'api_key_expire' => Carbon::now()->addMinutes($expireApiKeyTime)]);
 
-            return response()->json(['status' => 'success', 'api_key' => $apikey]);
+            return response()->json(['api_key' => encrypt($apikey)]);
         } else {
 
             return response()->json(['status' => 'fail'],401);
