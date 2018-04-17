@@ -7,9 +7,20 @@ use App\Judet;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Auth;
 
 class LocalitateController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Get all active localitati, including judet
      * Browse our Data Type (B)READ

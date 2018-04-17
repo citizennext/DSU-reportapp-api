@@ -33,11 +33,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->header('Authorization')) {
                 $key = explode(' ',$request->header('Authorization'));
-                $user = User::where('api_key', $key[1])->first();
-                if(!empty($user)){
-                    $request->request->add(['id' => $user->id]);
+                $userModel = User::where('api_key', decrypt($key[1]))->first();
+                if(!empty($userModel)){
+                    $request->request->add(['id' => $userModel->id]);
                 }
-                return $user;
+                return $userModel;
             }
         });
     }

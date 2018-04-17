@@ -19,10 +19,11 @@ class UserController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @param Request $request - data sent by http request: $request - user login data
+     * @return \Illuminate\Http\Response array JSON
+     */
     public function autentificare(Request $request)
     {
         // validate data
