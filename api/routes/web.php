@@ -15,6 +15,17 @@ $router->get('/', function () use ($router) {
     return view('welcome', ['version' => $router->app->version()]);
 });
 
+// Users routes
+$router->group(['prefix' => 'users'], function($router) {
+
+    // <api_url>/users/login
+    $router->post('login/', 'UserController@autentificare');
+
+    // <api_url>/users/logout
+    $router->post('logout/', 'UserController@deautentificare');
+
+});
+
 // Localitati routes
 $router->group(['prefix' => 'localitati'], function($router) {
 

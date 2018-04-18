@@ -7,9 +7,21 @@ use App\Judet;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Auth;
 
 class LocalitateController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // set authorization only for specific methods
+        $this->middleware('auth', ['only' => ['index']]);
+    }
+
     /**
      * Get all active localitati, including judet
      * Browse our Data Type (B)READ
@@ -18,8 +30,8 @@ class LocalitateController extends Controller
      */
     public function index()
     {
+//        $authUser = Auth::user();
         $collection = Localitate::with(['judet' => function($query) { $query->where('deleted_at',null); }])->where('deleted_at', null)->get();
-
         return response()->json($collection);
     }
 
