@@ -18,7 +18,8 @@ class LocalitateController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // set authorization only for specific methods
+        $this->middleware('auth', ['only' => ['index']]);
     }
 
     /**
@@ -29,8 +30,8 @@ class LocalitateController extends Controller
      */
     public function index()
     {
+//        $authUser = Auth::user();
         $collection = Localitate::with(['judet' => function($query) { $query->where('deleted_at',null); }])->where('deleted_at', null)->get();
-
         return response()->json($collection);
     }
 

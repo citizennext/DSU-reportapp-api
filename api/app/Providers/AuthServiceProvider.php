@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\User;
+use App\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,10 +34,17 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->header('Authorization')) {
-                $key = explode(' ',$request->header('Authorization'));
-                $userModel = User::where('api_key', decrypt($key[1]))->first();
+                $apiKey = explode(' ',$request->header('Authorization'));
+                $userModel = User::where('api_key', decrypt($apiKey[1]))->first();
                 if(!empty($userModel)){
-                    $request->request->add(['id' => $userModel->id]);
+                    // check expired token
+                    $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
+                    $diffExpire = floor(Carbon::now()->diffInMinutes(Carbon::parse($userModel->api_key_expire)));
+                    if($diffExpire > $expireApiKeyTime){
+                        $userModel = null;
+                    } else {
+                        $request->request->add(['id' => $userModel->id]);
+                    }
                 }
                 return $userModel;
             }
