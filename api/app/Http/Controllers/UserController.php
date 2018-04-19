@@ -99,6 +99,13 @@ class UserController extends Controller
             $collection = User::find($id);
             return response()->json($collection);
         } else {
+            // add a audit log
+            $auditLog = array(
+                'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                'new_value' => '401 /users/{id}',
+                'user_id' => Auth::user()->id
+            );
+            Audit::create($auditLog);
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
@@ -115,6 +122,13 @@ class UserController extends Controller
             $collection = User::where('email', $email)->first();
             return response()->json($collection);
         } else {
+            // add a audit log
+            $auditLog = array(
+                'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                'new_value' => '401 /users/email/{email}',
+                'user_id' => Auth::user()->id
+            );
+            Audit::create($auditLog);
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
