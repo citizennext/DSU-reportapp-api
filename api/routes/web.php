@@ -24,6 +24,12 @@ $router->group(['prefix' => 'users'], function($router) {
     // <api_url>/users/logout
     $router->post('logout/', 'UserController@deautentificare');
 
+    // <api_url>/users/{id}
+    $router->get('{id}', 'UserController@find');
+
+    // <api_url>/users/email/{email}
+    $router->get('email/{email}', 'UserController@findByEmail');
+
 });
 
 // Localitati routes

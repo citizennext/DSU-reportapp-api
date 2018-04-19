@@ -22,7 +22,7 @@ class UserController extends Controller
     public function __construct()
     {
         // set authorization only for specific methods
-        $this->middleware('auth', ['only' => ['deautentificare']]);
+        $this->middleware('auth', ['except' => ['autentificare']]);
     }
 
     /**
@@ -81,9 +81,41 @@ class UserController extends Controller
             );
             Audit::create($auditLog);
 
-            return response()->json(['success']);
+            return response()->json(['status' => 'success']);
         }
 
-        return response()->json(['error']);
+        return response()->json(['status' => 'error']);
+    }
+
+    /**
+     * Get individual user.
+     *
+     * @param integer $id - User ID
+     * @return array JSON
+     */
+    public function find($id)
+    {
+        if(Auth::user()->hasPermission('read_users')){
+            $collection = User::find($id);
+            return response()->json($collection);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+    }
+
+    /**
+     * Get individual user by email.
+     *
+     * @param string $email - User email
+     * @return array JSON
+     */
+    public function findByEmail($email)
+    {
+        if(Auth::user()->hasPermission('read_users')){
+            $collection = User::where('email', $email)->first();
+            return response()->json($collection);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 }

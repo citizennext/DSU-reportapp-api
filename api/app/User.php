@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
@@ -34,5 +35,20 @@ class User extends Model implements Authenticatable
     public function unitate()
     {
         return $this->belongsTo(Unitate::class);
+    }
+
+    /**
+     * Check if user has a permission, based on role.
+     *
+     * @param string $permission - Slug of permission
+     * @return boolean
+     */
+    public function hasPermission($permission){
+        if(!empty(Permission::where('key',$permission)->first()->id)) {
+            if(!empty(DB::table('permission_role')->where(['role_id' => $this->role_id, 'permission_id' => Permission::where('key',$permission)->first()->id])->first())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
