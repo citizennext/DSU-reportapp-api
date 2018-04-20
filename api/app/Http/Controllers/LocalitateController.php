@@ -18,7 +18,7 @@ class LocalitateController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['index', 'localitatiByJudet']]);
+        $this->middleware('auth');
     }
 
     /**
@@ -46,9 +46,12 @@ class LocalitateController extends Controller
      */
     public function find($id)
     {
-        $collection = Localitate::find($id);
-
-        return response()->json($collection);
+        if(Auth::user()->hasPermission('read_localitati')){
+            $collection = Localitate::find($id);
+            return response()->json($collection);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 
     /**
@@ -60,9 +63,12 @@ class LocalitateController extends Controller
      */
     public function findBySlug($slug)
     {
-        $collection = Localitate::where('slug', $slug)->first();
-
-        return response()->json($collection);
+        if(Auth::user()->hasPermission('read_localitati')){
+            $collection = Localitate::where('slug', $slug)->first();
+            return response()->json($collection);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
 
     /**

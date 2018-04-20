@@ -54,6 +54,7 @@ paths:
               schema:
                 type: object
                 example:
+                  message: "success"
                   api_key: "eyJpdiI6IlpOQ04wTURNcUEzK0dsMlE2OW5paGc9PSIsInZhbHVlIjoiZExURk1maHV6bHRIaU5lQkMyMStPM3RRMzQwRnZuK3ZXdThNUG9FemEyNGpjN3JXNGxaVTBYVlZwdWJFeWIzMlE2SlhLZXk1aWxTXC9NU2szRmlOd1dxbWRUbzRjc1YzdTI4VFdpSVcrdmh3PSIsIm1hYyI6IjUyMGRlZDJkMTk5NDFhMmM5MDEyMzIwNmNlNmIwMGE4OGZiNTA3NzRlYjUwZjNkMWZmNTUzMGQyYmIxZjFjOWMifQ=="
   /users/logout:
     post:
@@ -109,9 +110,11 @@ paths:
           content:
             application/json:
               schema:
-                type: array
+                type: object
                 example:
-                  - id: 5
+                  message: "success"
+                  user:
+                    id: 5
                     nume: "Tester"
                     email: "tester.structura@dsu.ro"
                     created_at: "2018-03-26 16:41:19"
@@ -159,9 +162,11 @@ paths:
           content:
             application/json:
               schema:
-                type: array
+                type: object
                 example:
-                  - id: 5
+                  message: "success"
+                  user:
+                    id: 5
                     nume: "Tester"
                     email: "tester.structura@dsu.ro"
                     created_at: "2018-03-26 16:41:19"

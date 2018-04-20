@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Carbon\Carbon;
 use Auth;
 
@@ -33,32 +34,44 @@ class UserController extends Controller
      */
     public function autentificare(Request $request)
     {
-        // validate data
-        $this->validate($request, [
-            'email' => 'required',
-            'parola' => 'required'
-        ]);
+        $result = array();
 
-        $userModel = User::where('email', $request->input('email'))->first();
+        try {
+            // validate data
+            $this->validate($request, [
+                'email' => 'required',
+                'parola' => 'required'
+            ]);
 
-        if(Hash::check($request->input('parola'), $userModel->parola)){
+            $userModel = User::where('email', $request->input('email'))->first();
 
-            $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
-            $apikey = base64_encode(str_random(40));
-            User::where('email', $request->input('email'))->update(['api_key' => $apikey, 'api_key_expire' => Carbon::now()->addMinutes($expireApiKeyTime)]);
+            if(Hash::check($request->input('parola'), $userModel->parola)){
 
-            // add a audit log
-            $auditLog = array(
-                'description' => 'Autentificare utilizator ' . (strlen($userModel->prenume) > 0 ? $userModel->prenume . ' ' . $userModel->nume : $userModel->nume),
-                'new_value' => 'Succes',
-                'user_id' => $userModel->id
-            );
-            Audit::create($auditLog);
+                $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
+                $apikey = base64_encode(str_random(40));
+                User::where('email', $request->input('email'))->update(['api_key' => $apikey, 'api_key_expire' => Carbon::now()->addMinutes($expireApiKeyTime)]);
 
-            return response()->json(['api_key' => encrypt($apikey)]);
-        } else {
-            return response()->json(['status' => 'fail'],401);
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Autentificare utilizator ' . (strlen($userModel->prenume) > 0 ? $userModel->prenume . ' ' . $userModel->nume : $userModel->nume),
+                    'new_value' => 'Succes',
+                    'user_id' => $userModel->id
+                );
+                Audit::create($auditLog);
+
+                $result['message'] = 'success';
+                $result['api_key'] = encrypt($apikey);
+
+            } else {
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
         }
+
+        return response()->json($result);
     }
 
     /**
@@ -68,23 +81,32 @@ class UserController extends Controller
      */
     public function deautentificare()
     {
-        if(!empty(Auth::user())){
-            Auth::user()->api_key = null;
-            Auth::user()->api_key_expire = null;
-            Auth::user()->save();
+        $result = array();
 
-            // add a audit log
-            $auditLog = array(
-                'description' => 'Deautentificare utilizator ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                'new_value' => 'Succes',
-                'user_id' => Auth::user()->id
-            );
-            Audit::create($auditLog);
+        try{
+            if(!empty(Auth::user())){
+                Auth::user()->api_key = null;
+                Auth::user()->api_key_expire = null;
+                Auth::user()->save();
 
-            return response()->json(['status' => 'success']);
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Deautentificare utilizator ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => 'Succes',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+
+                $result['message'] = 'success';
+            } else {
+                $result['message'] = 'fail';
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
         }
 
-        return response()->json(['status' => 'error']);
+        return response()->json($result);
     }
 
     /**
@@ -95,19 +117,35 @@ class UserController extends Controller
      */
     public function find($id)
     {
-        if(Auth::user()->hasPermission('read_users')){
-            $collection = User::find($id);
-            return response()->json($collection);
-        } else {
-            // add a audit log
-            $auditLog = array(
-                'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                'new_value' => '401 /users/{id}',
-                'user_id' => Auth::user()->id
-            );
-            Audit::create($auditLog);
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $result = array();
+
+        try{
+            if(Auth::user()->hasPermission('read_users')){
+                $collection = User::find($id);
+                if(!empty($collection)) {
+                    $result['message'] = 'success';
+                    $result['user'] = $collection;
+                } else {
+                    $result['message'] = 'fail';
+                    $result['description'] = 'Utilizator inexistent.';
+                }
+            } else {
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => '401 /users/{id}',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
         }
+
+        return response()->json($result);
     }
 
     /**
@@ -118,18 +156,95 @@ class UserController extends Controller
      */
     public function findByEmail($email)
     {
-        if(Auth::user()->hasPermission('read_users')){
-            $collection = User::where('email', $email)->first();
-            return response()->json($collection);
-        } else {
-            // add a audit log
-            $auditLog = array(
-                'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                'new_value' => '401 /users/email/{email}',
-                'user_id' => Auth::user()->id
-            );
-            Audit::create($auditLog);
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $result = array();
+
+        try{
+            if(Auth::user()->hasPermission('read_users')){
+                $collection = User::where('email', $email)->first();
+                if(!empty($collection)) {
+                    $result['message'] = 'success';
+                    $result['user'] = $collection;
+                } else {
+                    $result['message'] = 'fail';
+                    $result['description'] = 'Utilizator inexistent.';
+                }
+            } else {
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => '401 /users/email/{email}',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
         }
+
+        return response()->json($result);
+    }
+
+    /**
+     * Create user.
+     *
+     * @param Request $request - data sent by form | by http request
+     * @return array JSON
+     */
+    public function create(Request $request)
+    {
+        $result = array();
+
+        try {
+            if(Auth::user()->hasPermission('add_users')){
+                // validate data
+                $this->validate($request, [
+                    'nume' => 'required',
+                    'email' => 'required',
+                    'role_id' => 'required',
+                    'telefon_s' => 'required',
+                    'unitate_id' => 'required',
+                ]);
+                // check if exist an user with similar token
+                do {
+                    $token = str_random(60);
+                } while(User::where('remember_token', '=', $token)->count() > 0);
+                // insert token in the request array
+                $inputPass = str_random(12);
+                $request->request->add(['remember_token' => $token, 'parola' => Hash::make($inputPass)]);
+
+                // create user
+                $collection = User::create($request->all());
+                $result['message'] = 'success';
+                $result['description'] = 'Utilizator[#' . $collection['id'] . ' ' . $collection['email'] .'] creat';
+
+                //send a notification to user
+
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Utilizator no creat',
+                    'new_value' => 'Utilizator nou id[' . $collection['id'] . ']',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+            } else {
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => '401 /users/create',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
     }
 }

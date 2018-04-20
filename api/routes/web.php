@@ -30,6 +30,9 @@ $router->group(['prefix' => 'users'], function($router) {
     // <api_url>/users/email/{email}
     $router->get('email/{email}', 'UserController@findByEmail');
 
+    // <api_url>/users
+    $router->post('/', 'UserController@create');
+
 });
 
 // Localitati routes
