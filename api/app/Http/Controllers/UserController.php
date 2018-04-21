@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use App\Mail\ActivareUtilizator;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Auth;
 
@@ -45,7 +47,12 @@ class UserController extends Controller
 
             $userModel = User::where('email', $request->input('email'))->first();
 
-            if(Hash::check($request->input('parola'), $userModel->parola)){
+            if($userModel->active == 0){
+
+                $result['message'] = 'fail';
+                $result['description'] = 'Utilizatorul [' . $userModel['email'] .'] este inactiv';
+
+            } elseif(Hash::check($request->input('parola'), $userModel->parola)){
 
                 $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
                 $apikey = base64_encode(str_random(40));
@@ -218,13 +225,14 @@ class UserController extends Controller
                 // create user
                 $collection = User::create($request->all());
                 $result['message'] = 'success';
-                $result['description'] = 'Utilizator[#' . $collection['id'] . ' ' . $collection['email'] .'] creat';
+                $result['description'] = 'Utilizator [' . $collection['email'] .'] creat, dar inactiv';
 
-                //send a notification to user
+                //send activation mail to user
+                Mail::to($collection['email'])->send(new ActivareUtilizator($collection['id']));
 
                 // add a audit log
                 $auditLog = array(
-                    'description' => 'Utilizator no creat',
+                    'description' => 'Utilizator nou creat, inactiv',
                     'new_value' => 'Utilizator nou id[' . $collection['id'] . ']',
                     'user_id' => Auth::user()->id
                 );
