@@ -2,15 +2,22 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends Model implements Authenticatable
 {
-    use Authenticatable, Authorizable;
+    use AuthenticableTrait, SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +25,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'nume', 'prenume', 'email', 'telefon_s', 'telefon_p', 'adresa', 'cod_postal', 'localitate', 'judet', 'parola', 'role_id', 'unitate_id', 'remember_token', 'active',
     ];
 
     /**
@@ -27,6 +34,29 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'parola', 'remember_token', 'api_key', 'api_key_expire'
     ];
+
+    /**
+     * Get the unit that user belongs to.
+     */
+    public function unitate()
+    {
+        return $this->belongsTo(Unitate::class);
+    }
+
+    /**
+     * Check if user has a permission, based on role.
+     *
+     * @param string $permission - Slug of permission
+     * @return boolean
+     */
+    public function hasPermission($permission){
+        if(!empty(Permission::where('key',$permission)->first()->id)) {
+            if(!empty(DB::table('permission_role')->where(['role_id' => $this->role_id, 'permission_id' => Permission::where('key',$permission)->first()->id])->first())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

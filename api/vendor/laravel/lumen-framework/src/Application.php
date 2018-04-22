@@ -124,7 +124,7 @@ class Application extends Container
      */
     public function version()
     {
-        return 'Lumen (5.6.1) (Laravel Components 5.6.*)';
+        return 'Lumen (5.6.3) (Laravel Components 5.6.*)';
     }
 
     /**
@@ -818,6 +818,7 @@ class Application extends Container
             'Illuminate\Contracts\Queue\Queue' => 'queue.connection',
             'request' => 'Illuminate\Http\Request',
             'Laravel\Lumen\Routing\Router' => 'router',
+            'Illuminate\Contracts\Translation\Translator' => 'translator',
             'Laravel\Lumen\Routing\UrlGenerator' => 'url',
             'Illuminate\Contracts\Validation\Factory' => 'validator',
             'Illuminate\Contracts\View\Factory' => 'view',

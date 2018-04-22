@@ -1,28 +1,742 @@
-swagger: '2.0'
-
-################################################################################
-#                              API Information                                 #
-################################################################################
+openapi: 3.0.0
 info:
   description: API pentru aplicatia de raportare integrata a DSU
   version: 0.0.1
   title: DSU API
-  termsOfService: ''
+  termsOfService: /termeni-si-conditii
   contact:
+    name: API Support
     email: tudor.rusu@hotmail.com
+    url: 'https://civictech.ro/contact'
   license:
     name: Mozilla Public License 2.0
     url: 'https://www.mozilla.org/en-US/MPL/2.0/'
-host: dsu-api.ro
-basePath: /
-schemes:
-  - https
-
-################################################################################
-#                                  Paths                                       #
-################################################################################
-
-
-################################################################################
-#                                 Definitions                                  #
-################################################################################
+servers:
+  - url: 'https://api.dsu.ro'
+  - url: 'https://staging.api.dsu.ro'
+  - url: 'https://dsu.civictech.local'
+paths:
+  /utilizator/logare:
+    post:
+      summary: autentificare utilizator
+      description: 'Autentifica un utilizator pe baza parolei si user-name (email) si returneaza un token criptat pentru access API'
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+      requestBody:
+        description: Datele pentru autentificare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - parola
+              properties:
+                email:
+                  type: string
+                  example: "tudor.rusu@hotmail.com"
+                parola:
+                  type: string
+                  example: "123654789"
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: API Token criptat.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  api_key: "eyJpdiI6IlpOQ04wTURNcUEzK0dsMlE2OW5paGc9PSIsInZhbHVlIjoiZExURk1maHV6bHRIaU5lQkMyMStPM3RRMzQwRnZuK3ZXdThNUG9FemEyNGpjN3JXNGxaVTBYVlZwdWJFeWIzMlE2SlhLZXk1aWxTXC9NU2szRmlOd1dxbWRUbzRjc1YzdTI4VFdpSVcrdmh3PSIsIm1hYyI6IjUyMGRlZDJkMTk5NDFhMmM5MDEyMzIwNmNlNmIwMGE4OGZiNTA3NzRlYjUwZjNkMWZmNTUzMGQyYmIxZjFjOWMifQ=="
+        '200 Fail':
+          description: Utilizator existent, dar inactiv.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizatorul #1 [tudor.rusu@hotmail.com] inactiv"
+  /utilizator/delogare:
+    post:
+      summary: deautentificare utilizator
+      description: 'Deautentifica un utilizator pe baza token-ului criptat'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      tags:
+        - utilizatori
+      responses:
+        '200':
+          description: Success. API Token criptat.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  status: "success"
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/{id}:
+    get:
+      summary: READ - utilizator
+      description: 'Returneaza un user bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID-ul utilizatorului
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Obiect JSON cu utilizatorul.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  user:
+                    id: 5
+                    nume: "Tester"
+                    email: "tester.structura@dsu.ro"
+                    created_at: "2018-03-26 16:41:19"
+                    updated_at: "2018-03-26 16:41:19"
+                    avatar: "users/default.png"
+                    role_id: 6
+                    deleted_at: null
+                    prenume: "Structura Smurd"
+                    telefon_s: null
+                    telefon_p: null
+                    adresa: null
+                    cod_postal: null
+                    localitate: null
+                    judet: null
+                    unitate_id: 7
+                items:
+                  $ref: '#/components/schemas/Users'
+        '200 Fail':
+          description: Utilizator inexistent - id-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator inexistent."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/email/{email}:
+    get:
+      summary: READ - utilizator
+      description: 'Returneaza un user bazat pe email, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+          description: email-ul utilizatorului
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Obiect JSON cu utilizatorul.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  user:
+                    id: 5
+                    nume: "Tester"
+                    email: "tester.structura@dsu.ro"
+                    created_at: "2018-03-26 16:41:19"
+                    updated_at: "2018-03-26 16:41:19"
+                    avatar: "users/default.png"
+                    role_id: 6
+                    deleted_at: null
+                    prenume: "Structura Smurd"
+                    telefon_s: null
+                    telefon_p: null
+                    adresa: null
+                    cod_postal: null
+                    localitate: null
+                    judet: null
+                    unitate_id: 7
+                items:
+                  $ref: '#/components/schemas/Users'
+        '200 Fail':
+          description: Utilizator inexistent - email-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator inexistent."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/adaugare:
+    post:
+      summary: ADD - inregistrare utilizator nou
+      description: 'Inregistrarea unui nou utilizator'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Datele pentru iregistrare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - nume
+                - role_id
+                - telefon_s
+                - unitate_id
+              example:
+                nume: "Test"
+                prenume: "Adaugare Utilizator"
+                email: "test.add@dsu.ro"
+                role_id: "3"
+                telefon_s: "+40569874569"
+                telefon_p: "0230569874"
+                adresa: "str. Mihai Viteazau, nr. 5"
+                cod_postal: "52987"
+                localitate: "Selimbar"
+                judet: "Sibiu"
+                unitate_id: "7"
+              items:
+                  $ref: '#/components/schemas/Users'
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator creat, dar inactiv.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Utilizator [test.add@dsu.ro] creat, dar inactiv"
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  email: ["The email field is required."]
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/activare/{token}:
+    get:
+      summary: activare utilizator
+      description: 'Activeaza un cont de utilizator, bazat pe remember_token'
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: remember_token
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Contul a fost activat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Contul a fost activat cu succes."
+        '200 Fail':
+          description: Utilizator activat deja sau inexistent - id-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator activat deja sau inexistent."
+  /utilizator/editare:
+    put:
+      summary: EDIT - editare utilizator
+      description: 'Editarea datelor unui utilizator'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Datele pentru editare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              example:
+                id: 74
+                nume: "Nume modificat"
+                prenume: "Prenume modificat"
+              items:
+                  $ref: '#/components/schemas/Users'
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator modificat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Utilizator [test.add@dsu.ro] modificat cu succes."
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator inexistent."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/resetare-parola:
+    put:
+      summary: EDIT - resetare parola utilizator
+      description: 'Resetarea parolei unui utilizator'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Noua parola
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - parola
+              example:
+                parola: "asdagfsdh656asdasd"
+              items:
+                  $ref: '#/components/schemas/Users'
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator modificat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Parola utilizatorului [test.add@dsu.ro] modificata cu succes."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/stergere/{id}:
+    delete:
+      summary: DELETE - utilizator
+      description: 'Sterge(soft) un utilizator bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id-ul utilizatorului
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator sters cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Utilizator [test.add@dsu.ro] sters cu succes."
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizatorul [test.add@dsu.ro] nu poate fi sters. Probabil nu exista."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /localitati:
+    get:
+      summary: BROWSE - localitati
+      description: 'Returneaza toata colectia Localitati, inclusiv relatii, bazat pe rolul utilizatorului'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate localitatile.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                  - id: 2
+                    judet_id: 1
+                    slug: aiud
+                    nume: Aiud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Localitati'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /localitati/judet/{slug}:
+    get:
+      summary: BROWSE - localitati dintr-un judet
+      description: 'Returneaza toate localitatile dintr-um judet, bazat pe slug-ul judetului'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+          description: Slug-ul judetului
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate localitatile dintr-um judet.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                  - id: 2
+                    judet_id: 1
+                    slug: aiud
+                    nume: Aiud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Localitati'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /localitati/{id}:
+    get:
+      summary: READ - localitate
+      description: 'Returneaza o localitate bazat pe id, inclusiv relatii'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID-ul localitatii
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Obiect JSON cu localitatea.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Localitati'
+  /localitati/slug/{slug}:
+    get:
+      summary: READ - localitate
+      description: 'Returneaza o localitate bazat pe slug, inclusiv relatii'
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+          description: Slug-ul localitatii
+      tags:
+        - localitati
+      responses:
+        '200':
+          description: Success. Obiect JSON cu localitatea.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Localitati'
+components:
+  responses:
+    UnauthorizedError:
+      description: Token-ul lipseste sau este incorect - '{"error":"Unauthorized"}'
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+  schemas:
+    Localitati:
+      type: object
+      required:
+        - id
+        - judet_id
+        - nume
+      properties:
+        id:
+          type: integer
+          format: int64
+        judet_id:
+          type: integer
+          format: int64
+        nume:
+          type: string
+        slug:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+    Users:
+      type: object
+      required:
+        - id
+        - email
+        - parola
+        - nume
+        - prenume
+        - role_id
+        - telefon_s
+        - unitate_id
+      properties:
+        id:
+          type: integer
+          format: int64
+        role_id:
+          type: integer
+          format: int64
+        unitate_id:
+          type: integer
+          format: int64
+        nume:
+          type: string
+        prenume:
+          type: string
+        email:
+          type: string
+        parola:
+          type: string
+        telefon_s:
+          type: string
+        telefon_p:
+          type: string
+        adresa:
+          type: string
+        localitate:
+          type: string
+        cod_postal:
+          type: string
+        judet:
+          type: string
+        remember_token:
+          type: string
+        api_key:
+          type: string
+        api_key_expire:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
