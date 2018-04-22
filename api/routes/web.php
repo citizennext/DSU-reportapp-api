@@ -36,6 +36,12 @@ $router->group(['prefix' => 'users'], function($router) {
     // <api_url>/users/activare/{token}
     $router->get('activare/{token}', ['as' => 'activare.utilizator', 'uses' => 'UserController@activare']);
 
+    // <api_url>/users/edit
+    $router->put('edit/', 'UserController@edit');
+
+    // <api_url>/users/{id}
+    $router->delete('{id}', 'UserController@delete');
+
 });
 
 // Localitati routes

@@ -280,6 +280,63 @@ paths:
                   email: ["The email field is required."]
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+  /users/edit:
+    put:
+      summary: EDIT - editare utilizator
+      description: 'Editarea datelor unui utilizator'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Datele pentru editare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              example:
+                id: 74
+                nume: "Nume modificat"
+                prenume: "Prenume modificat"
+              items:
+                  $ref: '#/components/schemas/Users'
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator modificat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Utilizator [test.add@dsu.ro] modificat cu succes."
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator inexistent."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /users/activare/{token}:
     get:
       summary: activare utilizator

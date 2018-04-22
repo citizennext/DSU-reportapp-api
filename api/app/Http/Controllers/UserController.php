@@ -26,7 +26,7 @@ class UserController extends Controller
     public function __construct()
     {
         // set authorization only for specific methods
-        $this->middleware('auth', ['except' => ['autentificare', 'activare']]);
+        $this->middleware('auth', ['except' => ['autentificare', 'activare', 'edit']]);
     }
 
     /**
@@ -119,6 +119,7 @@ class UserController extends Controller
 
     /**
      * Get individual user.
+     * Read our Data Type B(R)EAD
      *
      * @param integer $id - User ID
      * @return array JSON
@@ -158,6 +159,7 @@ class UserController extends Controller
 
     /**
      * Get individual user by email.
+     * Read our Data Type B(R)EAD
      *
      * @param string $email - User email
      * @return array JSON
@@ -197,6 +199,7 @@ class UserController extends Controller
 
     /**
      * Create user.
+     * Add Data Type BRE(A)D
      *
      * @param Request $request - data sent by form | by http request
      * @return array JSON
@@ -289,6 +292,65 @@ class UserController extends Controller
             } else {
                 $result['message'] = 'fail';
                 $result['description'] = 'Utilizator activat deja sau inexistent.';
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
+    }
+
+    /**
+     * Edit individual user.
+     * Edit our Data Type BR(E)AD
+     *
+     * @param Request $request - data sent by form | by http request
+     * @return array JSON
+     */
+    public function edit(Request $request)
+    {
+        $result = array();
+
+        try{
+            if($userModel = User::find($request->input('id'))){
+                if($userModel->id === Auth::user()->id || Auth::user()->hasPermission('edit_users')){
+                    $requestOld = $userModel->toArray();
+                    $requestData = $request->all();
+                    unset($requestData['id'], $requestData['_url']);
+                    $userModel->update($requestData);
+                    // add a audit log
+                    $dataOld = '';
+                    $dataChanged = '';
+                    foreach($requestData as $key=>$value){
+                        $dataOld .= $key . ' = ' . $requestOld[$key] . ', ';
+                        $dataChanged .= $key . ' = ' . $value . ', ';
+                    }
+                    $dataOld = substr($dataOld, 0, -2);
+                    $dataChanged = substr($dataChanged, 0, -2);
+                    $auditLog = array(
+                        'description' => 'Utilizatorul [' . $userModel->email . '] modificat cu succes.',
+                        'old_value' => $dataOld,
+                        'new_value' => $dataChanged,
+                        'user_id' => Auth::user()->id
+                    );
+                    Audit::create($auditLog);
+                    $result['message'] = 'success';
+                    $result['description'] = 'Utilizatorul [' . $userModel->email . '] modificat cu succes.';
+                } else {
+                    // add a audit log
+                    $auditLog = array(
+                        'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                        'new_value' => '401 /users/edit',
+                        'user_id' => Auth::user()->id
+                    );
+                    Audit::create($auditLog);
+                    $result['message'] = 'fail';
+                    return response()->json($result, 401);
+                }
+            } else {
+                $result['message'] = 'fail';
+                $result['description'] = 'Utilizator inexistent.';
             }
         } catch (QueryException $exception) {
             $result['message'] = 'fail';
