@@ -3,12 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
 class User extends Model implements Authenticatable
 {
-    use AuthenticableTrait;
+    use AuthenticableTrait, SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +25,7 @@ class User extends Model implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nume', 'prenume', 'email', 'telefon_s', 'telefon_p', 'adresa', 'cod_postal', 'localitate', 'judet', 'parola',
+        'nume', 'prenume', 'email', 'telefon_s', 'telefon_p', 'adresa', 'cod_postal', 'localitate', 'judet', 'parola', 'role_id', 'unitate_id', 'remember_token', 'active',
     ];
 
     /**
@@ -34,5 +43,20 @@ class User extends Model implements Authenticatable
     public function unitate()
     {
         return $this->belongsTo(Unitate::class);
+    }
+
+    /**
+     * Check if user has a permission, based on role.
+     *
+     * @param string $permission - Slug of permission
+     * @return boolean
+     */
+    public function hasPermission($permission){
+        if(!empty(Permission::where('key',$permission)->first()->id)) {
+            if(!empty(DB::table('permission_role')->where(['role_id' => $this->role_id, 'permission_id' => Permission::where('key',$permission)->first()->id])->first())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

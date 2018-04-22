@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->header('Authorization')) {
                 $apiKey = explode(' ',$request->header('Authorization'));
-                $userModel = User::where('api_key', decrypt($apiKey[1]))->first();
+                $userModel = User::where(['api_key' => decrypt($apiKey[1]), 'active' => 1])->first();
                 if(!empty($userModel)){
                     // check expired token
                     $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
