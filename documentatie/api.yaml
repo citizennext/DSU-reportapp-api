@@ -47,8 +47,8 @@ paths:
       tags:
         - utilizatori
       responses:
-        '200':
-          description: Success. API Token criptat.
+        '200 Success':
+          description: API Token criptat.
           content:
             application/json:
               schema:
@@ -56,6 +56,15 @@ paths:
                 example:
                   message: "success"
                   api_key: "eyJpdiI6IlpOQ04wTURNcUEzK0dsMlE2OW5paGc9PSIsInZhbHVlIjoiZExURk1maHV6bHRIaU5lQkMyMStPM3RRMzQwRnZuK3ZXdThNUG9FemEyNGpjN3JXNGxaVTBYVlZwdWJFeWIzMlE2SlhLZXk1aWxTXC9NU2szRmlOd1dxbWRUbzRjc1YzdTI4VFdpSVcrdmh3PSIsIm1hYyI6IjUyMGRlZDJkMTk5NDFhMmM5MDEyMzIwNmNlNmIwMGE4OGZiNTA3NzRlYjUwZjNkMWZmNTUzMGQyYmIxZjFjOWMifQ=="
+        '200 Fail':
+          description: Utilizator existent, dar inactiv.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizatorul #1 [tudor.rusu@hotmail.com] inactiv"
   /users/logout:
     post:
       summary: deautentificare utilizator
@@ -105,8 +114,8 @@ paths:
       tags:
         - utilizatori
       responses:
-        '200':
-          description: Success. Obiect JSON cu utilizatorul.
+        '200 Success':
+          description: Obiect JSON cu utilizatorul.
           content:
             application/json:
               schema:
@@ -132,6 +141,15 @@ paths:
                     unitate_id: 7
                 items:
                   $ref: '#/components/schemas/Users'
+        '200 Fail':
+          description: Utilizator inexistent - id-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator inexistent."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /users/email/{email}:
@@ -151,14 +169,13 @@ paths:
           name: email
           required: true
           schema:
-            type: integer
-            minimum: 1
+            type: string
           description: email-ul utilizatorului
       tags:
         - utilizatori
       responses:
-        '200':
-          description: Success. Obiect JSON cu utilizatorul.
+        '200 Success':
+          description: Obiect JSON cu utilizatorul.
           content:
             application/json:
               schema:
@@ -184,8 +201,117 @@ paths:
                     unitate_id: 7
                 items:
                   $ref: '#/components/schemas/Users'
+        '200 Fail':
+          description: Utilizator inexistent - email-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator inexistent."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+  /users:
+    post:
+      summary: ADD - inregistrare utilizator nou
+      description: 'Inregistrarea unui nou utilizator'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Datele pentru iregistrare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - nume
+                - role_id
+                - telefon_s
+                - unitate_id
+              example:
+                nume: "Test"
+                prenume: "Adaugare Utilizator"
+                email: "test.add@dsu.ro"
+                role_id: "3"
+                telefon_s: "+40569874569"
+                telefon_p: "0230569874"
+                adresa: "str. Mihai Viteazau, nr. 5"
+                cod_postal: "52987"
+                localitate: "Selimbar"
+                judet: "Sibiu"
+                unitate_id: "7"
+              items:
+                  $ref: '#/components/schemas/Users'
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator creat, dar inactiv.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Utilizator [test.add@dsu.ro] creat, dar inactiv"
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  email: ["The email field is required."]
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /users/activare/{token}:
+    get:
+      summary: activare utilizator
+      description: 'Activeaza un cont de utilizator, bazat pe remember_token'
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: remember_token
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Contul a fost activat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Contul a fost activat cu succes."
+        '200 Fail':
+          description: Utilizator activat deja sau inexistent - id-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator activat deja sau inexistent."
   /localitati:
     get:
       summary: BROWSE - localitati

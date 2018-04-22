@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Mail\ActivareUtilizator;
+use App\Mail\WelcomeUtilizator;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Auth;
@@ -25,7 +26,7 @@ class UserController extends Controller
     public function __construct()
     {
         // set authorization only for specific methods
-        $this->middleware('auth', ['except' => ['autentificare']]);
+        $this->middleware('auth', ['except' => ['autentificare', 'activare']]);
     }
 
     /**
@@ -228,7 +229,7 @@ class UserController extends Controller
                 $result['description'] = 'Utilizator [' . $collection['email'] .'] creat, dar inactiv';
 
                 //send activation mail to user
-                Mail::to($collection['email'])->send(new ActivareUtilizator($collection['id']));
+                Mail::to($collection['email'])->send(new ActivareUtilizator($collection['id'], $inputPass));
 
                 // add a audit log
                 $auditLog = array(
@@ -247,6 +248,47 @@ class UserController extends Controller
                 Audit::create($auditLog);
                 $result['message'] = 'fail';
                 return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
+    }
+
+    /**
+     * Activate user.
+     *
+     * @param string $token - User remember token
+     * @return array JSON
+     */
+    public function activare($token)
+    {
+        $result = array();
+
+        try{
+            $user = User::where('remember_token', $token)->first();
+            if(!empty($user)) {
+                // update user
+                $user->update(['active' => 1, 'remember_token' => null]);
+
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Utilizator activat',
+                    'new_value' => 'Utilizatorul [' . $user->email . '] a fost activat cu succes.',
+                    'user_id' => $user->id
+                );
+                Audit::create($auditLog);
+
+                // send welcome mail
+                Mail::to($user->email)->send(new WelcomeUtilizator($user->id));
+
+                $result['message'] = 'success';
+                $result['description'] = 'Contul a fost activat cu succes.';
+            } else {
+                $result['message'] = 'fail';
+                $result['description'] = 'Utilizator activat deja sau inexistent.';
             }
         } catch (QueryException $exception) {
             $result['message'] = 'fail';

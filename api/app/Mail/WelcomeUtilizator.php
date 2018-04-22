@@ -10,22 +10,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use App\Setting;
 
-class ActivareUtilizator extends Mailable
+class WelcomeUtilizator extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $user;
-    protected $parola;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($userId, $parola)
+    public function __construct($userId)
     {
         $this->user = User::find($userId);
-        $this->parola = $parola;
     }
 
     /**
@@ -37,16 +35,13 @@ class ActivareUtilizator extends Mailable
     {
         return $this->from(Setting::where('key', 'api.email_support')->first()->value, Setting::where('key', 'api.support_signature')->first()->value)
             ->replyTo('no-reply@dsu-api.ro', 'NO REPLY')
-            ->subject('Activare utilizator')
-            ->markdown('emails.users.activare', [
+            ->subject('Cont de utilizator activat')
+            ->markdown('emails.users.welcome', [
                 'level' => 'success',
                 'greeting' => 'Bună ' . (!empty($this->user->prenume) ? $this->user->prenume . ' ' . $this->user->nume : $this->user->nume) . ',',
-                'message_1' => 'Contul tău de utilizator pentru aplicația de raportare integrată DSU a fost creat cu succes. Pentru conectare, contul tău trebuie activat. Datele tale de conectare sunt:',
-                'message_2' => 'Păstreaza aceste date pentru conectare, necesare dupa activarea contului, apăsând butonul de mai jos.',
-                'user_name' => $this->user->email,
-                'password' => $this->parola,
-                'actionUrl' => url(route('activare.utilizator', ['token' => $this->user->remember_token])),
-                'actionText' => 'Activare',
+                'message_1' => 'Contul tău de utilizator pentru aplicația de raportare integrată DSU a fost activat cu succes. Te sfătuim să modifici parola după logare.',
+                'actionUrl' => url(route('login.utilizator')),
+                'actionText' => 'Logare',
                 'salutation' => 'Toate cele bune,',
                 'signature' => 'Echipa tehnică',
                 'subcopy_content' => sprintf('Dacă întâmpini probleme la clic pe butonul Activare, copiază și inserează adresa URL de mai jos în browser-ul tău:'),

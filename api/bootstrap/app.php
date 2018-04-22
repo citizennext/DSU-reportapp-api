@@ -86,6 +86,7 @@ $app->register(Illuminate\Mail\MailServiceProvider::class);
 
 $app->configure('services');
 $app->configure('mail');
+$app->configure('app');
 
 /*
 |--------------------------------------------------------------------------

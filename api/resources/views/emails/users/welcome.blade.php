@@ -16,14 +16,6 @@
 {{ $message_1 }}
 @endif
 
-@component('mail::panel')
-Nume utilizator: {{$user_name}}<br />Parola: <strong>{{$password}}</strong>
-@endcomponent
-
-@if (! empty($message_2))
-{{ $message_2 }}
-@endif
-
 {{-- Action Button --}}
 @isset($actionText)
 <?php

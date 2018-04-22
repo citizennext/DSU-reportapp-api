@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'users'], function($router) {
 
     // <api_url>/users/login
-    $router->post('login/', 'UserController@autentificare');
+    $router->post('login/', ['as' => 'login.utilizator', 'uses' => 'UserController@autentificare']);
 
     // <api_url>/users/logout
     $router->post('logout/', 'UserController@deautentificare');
@@ -32,6 +32,9 @@ $router->group(['prefix' => 'users'], function($router) {
 
     // <api_url>/users
     $router->post('/', 'UserController@create');
+
+    // <api_url>/users/activare/{token}
+    $router->get('activare/{token}', ['as' => 'activare.utilizator', 'uses' => 'UserController@activare']);
 
 });
 
