@@ -16,13 +16,13 @@ $router->get('/', function () use ($router) {
 });
 
 // Users routes
-$router->group(['prefix' => 'users'], function($router) {
+$router->group(['prefix' => 'utilizator'], function($router) {
 
-    // <api_url>/users/login
-    $router->post('login/', ['as' => 'login.utilizator', 'uses' => 'UserController@autentificare']);
+    // <api_url>/users/logare
+    $router->post('logare/', ['as' => 'login.utilizator', 'uses' => 'UserController@autentificare']);
 
-    // <api_url>/users/logout
-    $router->post('logout/', 'UserController@deautentificare');
+    // <api_url>/users/delogare
+    $router->post('delogare/', 'UserController@deautentificare');
 
     // <api_url>/users/{id}
     $router->get('{id}', 'UserController@find');
@@ -30,17 +30,20 @@ $router->group(['prefix' => 'users'], function($router) {
     // <api_url>/users/email/{email}
     $router->get('email/{email}', 'UserController@findByEmail');
 
-    // <api_url>/users
-    $router->post('/', 'UserController@create');
+    // <api_url>/users/adaugare
+    $router->post('adaugare/', 'UserController@create');
 
     // <api_url>/users/activare/{token}
     $router->get('activare/{token}', ['as' => 'activare.utilizator', 'uses' => 'UserController@activare']);
 
-    // <api_url>/users/edit
-    $router->put('edit/', 'UserController@edit');
+    // <api_url>/users/editare
+    $router->put('editare/', 'UserController@edit');
 
-    // <api_url>/users/{id}
-    $router->delete('{id}', 'UserController@delete');
+    // <api_url>/users/stergere/{id}
+    $router->delete('stergere/{id}', 'UserController@delete');
+
+    // <api_url>/users/resetare-parola
+    $router->put('resetare-parola/', 'UserController@resetPassword');
 
 });
 

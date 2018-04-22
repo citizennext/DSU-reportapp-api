@@ -16,7 +16,7 @@ servers:
   - url: 'https://staging.api.dsu.ro'
   - url: 'https://dsu.civictech.local'
 paths:
-  /users/login:
+  /utilizator/logare:
     post:
       summary: autentificare utilizator
       description: 'Autentifica un utilizator pe baza parolei si user-name (email) si returneaza un token criptat pentru access API'
@@ -65,7 +65,7 @@ paths:
                 example:
                   message: "fail"
                   description: "Utilizatorul #1 [tudor.rusu@hotmail.com] inactiv"
-  /users/logout:
+  /utilizator/delogare:
     post:
       summary: deautentificare utilizator
       description: 'Deautentifica un utilizator pe baza token-ului criptat'
@@ -91,7 +91,7 @@ paths:
                   status: "success"
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /users/{id}:
+  /utilizator/{id}:
     get:
       summary: READ - utilizator
       description: 'Returneaza un user bazat pe id, inclusiv relatii'
@@ -152,7 +152,7 @@ paths:
                   description: "Utilizator inexistent."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /users/email/{email}:
+  /utilizator/email/{email}:
     get:
       summary: READ - utilizator
       description: 'Returneaza un user bazat pe email, inclusiv relatii'
@@ -212,7 +212,7 @@ paths:
                   description: "Utilizator inexistent."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /users:
+  /utilizator/adaugare:
     post:
       summary: ADD - inregistrare utilizator nou
       description: 'Inregistrarea unui nou utilizator'
@@ -280,7 +280,39 @@ paths:
                   email: ["The email field is required."]
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /users/edit:
+  /utilizator/activare/{token}:
+    get:
+      summary: activare utilizator
+      description: 'Activeaza un cont de utilizator, bazat pe remember_token'
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: remember_token
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Contul a fost activat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Contul a fost activat cu succes."
+        '200 Fail':
+          description: Utilizator activat deja sau inexistent - id-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Utilizator activat deja sau inexistent."
+  /utilizator/editare:
     put:
       summary: EDIT - editare utilizator
       description: 'Editarea datelor unui utilizator'
@@ -337,38 +369,94 @@ paths:
                   description: "Utilizator inexistent."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /users/activare/{token}:
-    get:
-      summary: activare utilizator
-      description: 'Activeaza un cont de utilizator, bazat pe remember_token'
+  /utilizator/resetare-parola:
+    put:
+      summary: EDIT - resetare parola utilizator
+      description: 'Resetarea parolei unui utilizator'
+      security:
+        - apiKey: []
       parameters:
-        - in: path
-          name: token
+        - in: header
+          name: Content-Type
           required: true
           schema:
             type: string
-          description: remember_token
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Noua parola
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - parola
+              example:
+                parola: "asdagfsdh656asdasd"
+              items:
+                  $ref: '#/components/schemas/Users'
       tags:
         - utilizatori
       responses:
         '200 Success':
-          description: Contul a fost activat cu succes.
+          description: Utilizator modificat cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
                   message: "success"
-                  description: "Contul a fost activat cu succes."
+                  description: "Parola utilizatorului [test.add@dsu.ro] modificata cu succes."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /utilizator/stergere/{id}:
+    delete:
+      summary: DELETE - utilizator
+      description: 'Sterge(soft) un utilizator bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id-ul utilizatorului
+      tags:
+        - utilizatori
+      responses:
+        '200 Success':
+          description: Utilizator sters cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Utilizator [test.add@dsu.ro] sters cu succes."
         '200 Fail':
-          description: Utilizator activat deja sau inexistent - id-ul nu exista in baza de date.
+          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
           content:
             application/json:
               schema:
                 type: object
                 example:
                   message: "fail"
-                  description: "Utilizator activat deja sau inexistent."
+                  description: "Utilizatorul [test.add@dsu.ro] nu poate fi sters. Probabil nu exista."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /localitati:
     get:
       summary: BROWSE - localitati

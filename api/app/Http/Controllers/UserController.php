@@ -245,7 +245,7 @@ class UserController extends Controller
                 // add a audit log
                 $auditLog = array(
                     'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                    'new_value' => '401 /users/create',
+                    'new_value' => '401 /users/adaugare',
                     'user_id' => Auth::user()->id
                 );
                 Audit::create($auditLog);
@@ -341,7 +341,7 @@ class UserController extends Controller
                     // add a audit log
                     $auditLog = array(
                         'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                        'new_value' => '401 /users/edit',
+                        'new_value' => '401 /users/editare',
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
@@ -351,6 +351,102 @@ class UserController extends Controller
             } else {
                 $result['message'] = 'fail';
                 $result['description'] = 'Utilizator inexistent.';
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
+    }
+
+    /**
+     * Delete user.
+     * Delete our Data Type BREA(D)
+     *
+     * @param integer $id - User ID
+     * @return array JSON
+     */
+    public function delete($id)
+    {
+        $result = array();
+
+        try {
+            if(Auth::user()->hasPermission('delete_users')) {
+                // soft delete user
+                $userModel = User::find($id);
+                $count = User::destroy($id);
+
+                if($count === 1)
+                {
+                    // soft delete all audits records
+                    Audit::where('user_id', '=', $id)->update(['deleted_at' => Carbon::now()]);
+
+                    $auditLog = array(
+                        'description' =>  'Utilizatorul [' . $userModel->email . '] sters cu succes.',
+                        'new_value' => Carbon::now(),
+                        'user_id' => Auth::user()->id
+                    );
+                    Audit::create($auditLog);
+
+                    $result['message'] = 'success';
+                    $result['description'] = 'Utilizatorul [' . $userModel->email . '] sters cu succes.';
+                } else {
+                    $result['message'] = 'fail';
+                    $result['description'] = 'Utilizatorul [' . $userModel->email . '] nu poate fi sters. Probabil nu exista.';
+                }
+            } else {
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => '401 /users/stergere',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
+    }
+
+    /**
+     * Reset password for individual user.
+     * Edit our Data Type BR(E)AD
+     *
+     * @param Request $request - data sent by form | by http request
+     * @return array JSON
+     */
+    public function resetPassword(Request $request)
+    {
+        $result = array();
+
+        try{
+            if(Auth::user()){
+                User::where('id', '=', Auth::user()->id)->update(['parola' => Hash::make($request->input('parola'))]);
+
+                $auditLog = array(
+                    'description' => 'Parola utilizatorului [' . Auth::user()->email . '] modificata cu succes.',
+                    'new_value' => 'password reset',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'success';
+                $result['description'] = 'Parola utilizatorului [' . Auth::user()->email . '] modificata cu succes.';
+            } else {
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => '401 /users/resetare-parola',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
             }
         } catch (QueryException $exception) {
             $result['message'] = 'fail';
