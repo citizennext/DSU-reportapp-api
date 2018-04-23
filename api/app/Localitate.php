@@ -20,6 +20,15 @@ class Localitate extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nume', 'slug', 'judet_id',
+    ];
+
+    /**
      * Get the parent that owns the loc.
      */
     public function judet() {
