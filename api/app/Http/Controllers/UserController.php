@@ -203,6 +203,7 @@ class UserController extends Controller
      *
      * @param Request $request - data sent by form | by http request
      * @return array JSON
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function create(Request $request)
     {

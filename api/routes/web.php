@@ -62,4 +62,34 @@ $router->group(['prefix' => 'localitati'], function($router) {
     // <api_url>/localitati/slug/{slug}
     $router->get('slug/{slug}', 'LocalitateController@findBySlug');
 
+    // <api_url>/localitati/adaugare
+    $router->post('adaugare/', 'LocalitateController@create');
+
+    // <api_url>/localitati/editare
+    $router->put('editare/', 'LocalitateController@edit');
+
+    // <api_url>/localitati/stergere/{id}
+    $router->delete('stergere/{id}', 'LocalitateController@delete');
+});
+
+// Judete routes
+$router->group(['prefix' => 'judete'], function($router) {
+
+    // <api_url>/judete
+    $router->get('/', 'JudetController@index');
+
+    // <api_url>/judete/{id}
+    $router->get('{id}', 'JudetController@find');
+
+    // <api_url>/judete/slug/{slug}
+    $router->get('slug/{slug}', 'JudetController@findBySlug');
+
+    // <api_url>/judete/adaugare
+    $router->post('adaugare/', 'JudetController@create');
+
+    // <api_url>/judete/editare
+    $router->put('editare/', 'JudetController@edit');
+
+    // <api_url>/judete/stergere/{id}
+    $router->delete('stergere/{id}', 'JudetController@delete');
 });
