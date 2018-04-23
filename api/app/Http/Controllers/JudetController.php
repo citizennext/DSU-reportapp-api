@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Carbon\Carbon;
 use Auth;
 
 use App\Localitate;
 use App\Judet;
 use App\Audit;
 
-class LocalitateController extends Controller
+class JudetController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,15 +24,15 @@ class LocalitateController extends Controller
     }
 
     /**
-     * Get all active localitati, including judet
+     * Get all active judete
      * Browse our Data Type (B)READ
      *
      * @return array JSON
      */
     public function index()
     {
-        if(Auth::user()->hasPermission('browse_localitati')){
-            $collection = Localitate::with(['judet' => function($query) { $query->where('deleted_at',null); }])->where('deleted_at', null)->get();
+        if(Auth::user()->hasPermission('browse_judete')){
+            $collection = Judet::where('deleted_at', null)->get();
             return response()->json($collection);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -39,16 +40,16 @@ class LocalitateController extends Controller
     }
 
     /**
-     * Get individual record Localitate, by ID
+     * Get individual record Judet, by ID
      * Read our Data Type B(R)EAD
      *
-     * @param integer $id - Localitate ID
+     * @param integer $id - Judet ID
      * @return array JSON
      */
     public function find($id)
     {
-        if(Auth::user()->hasPermission('read_localitati')){
-            $collection = Localitate::find($id);
+        if(Auth::user()->hasPermission('read_judete')){
+            $collection = Judet::find($id);
             return response()->json($collection);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -56,34 +57,16 @@ class LocalitateController extends Controller
     }
 
     /**
-     * Get individual record Localitate, by Slug
+     * Get individual record Judet, by Slug
      * Read our Data Type B(R)EAD
-     *
-     * @param string $slug - Localitate slug
-     * @return array JSON
-     */
-    public function findBySlug($slug)
-    {
-        if(Auth::user()->hasPermission('read_localitati')){
-            $collection = Localitate::where('slug', $slug)->first();
-            return response()->json($collection);
-        } else {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-    }
-
-    /**
-     * Get all active localitati related to one judet, by judet slug
-     * Browse our Data Type (B)READ
      *
      * @param string $slug - Judet slug
      * @return array JSON
      */
-    public function localitatiByJudet($slug)
+    public function findBySlug($slug)
     {
-        if(Auth::user()->hasPermission('browse_localitati')){
-            $modelJudet = Judet::select('id')->where(['slug' => $slug, 'deleted_at' => null])->first();
-            $collection = Localitate::where(['judet_id' => $modelJudet->id, 'deleted_at' => null])->get();
+        if(Auth::user()->hasPermission('read_judete')){
+            $collection = Judet::where('slug', $slug)->first();
             return response()->json($collection);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -91,7 +74,7 @@ class LocalitateController extends Controller
     }
 
     /**
-     * Create localitate.
+     * Create judet.
      * Add Data Type BRE(A)D
      *
      * @param Request $request - data sent by form | by http request
@@ -103,31 +86,30 @@ class LocalitateController extends Controller
         $result = array();
 
         try {
-            if(Auth::user()->hasPermission('add_localitati')){
+            if(Auth::user()->hasPermission('add_judete')){
                 // validate data
                 $this->validate($request, [
                     'nume' => 'required',
-                    'judet_id' => 'required',
                 ]);
-                // check if exist a localitate with similar slug
+                // check if exist a judet with similar slug
                 $slug = str_slug($request->input('nume'));
-                if(Localitate::where('slug', '=', $slug)->count() > 0) {
+                if(Judet::where('slug', '=', $slug)->count() > 0) {
                     do {
                         $slug = $slug . '-' . rand(0, 99);
-                    } while (Localitate::where('slug', '=', $slug)->count() > 0);
+                    } while (Judet::where('slug', '=', $slug)->count() > 0);
                 }
                 // insert slug in the request array
                 $request->request->add(['slug' => $slug]);
 
-                // create localitate
-                $collection = Localitate::create($request->all());
+                // create judet
+                $collection = Judet::create($request->all());
                 $result['message'] = 'success';
-                $result['description'] = 'Localitatea [' . $collection['nume'] .'] creata.';
+                $result['description'] = 'Judetul [' . $collection['nume'] .' -> '. $collection['slug'] .'] creat.';
             } else {
                 // add a audit log
                 $auditLog = array(
                     'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                    'new_value' => '401 /localitate/adaugare',
+                    'new_value' => '401 /judete/adaugare',
                     'user_id' => Auth::user()->id
                 );
                 Audit::create($auditLog);
@@ -143,7 +125,7 @@ class LocalitateController extends Controller
     }
 
     /**
-     * Edit individual localitate.
+     * Edit individual judet.
      * Edit our Data Type BR(E)AD
      *
      * @param Request $request - data sent by form | by http request
@@ -154,22 +136,22 @@ class LocalitateController extends Controller
         $result = array();
 
         try{
-            if($localitateModel = Localitate::find($request->input('id'))){
-                if(Auth::user()->hasPermission('edit_localitati')){
-                    $requestOld = $localitateModel->toArray();
+            if($judetModel = Judet::find($request->input('id'))){
+                if(Auth::user()->hasPermission('edit_judete')){
+                    $requestOld = $judetModel->toArray();
                     $requestData = $request->all();
                     unset($requestData['id'], $requestData['_url']);
                     // set new slug
                     $slug = str_slug($requestData['nume']);
-                    if(Localitate::where('slug', '=', $slug)->count() > 0) {
+                    if(Judet::where('slug', '=', $slug)->count() > 0) {
                         do {
                             $slug = $slug . '-' . rand(0, 99);
-                        } while (Localitate::where('slug', '=', $slug)->count() > 0);
+                        } while (Judet::where('slug', '=', $slug)->count() > 0);
                     }
                     // insert slug in the request array
                     $requestData['slug'] = $slug;
 
-                    $localitateModel->update($requestData);
+                    $judetModel->update($requestData);
                     // add a audit log
                     $dataOld = '';
                     $dataChanged = '';
@@ -180,19 +162,19 @@ class LocalitateController extends Controller
                     $dataOld = substr($dataOld, 0, -2);
                     $dataChanged = substr($dataChanged, 0, -2);
                     $auditLog = array(
-                        'description' => 'Localitatea [' . $localitateModel->nume . '] modificata cu succes.',
+                        'description' => 'Judetul [' . $judetModel->nume . ' -> ' . $judetModel->slug . '] modificat cu succes.',
                         'old_value' => $dataOld,
                         'new_value' => $dataChanged,
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
                     $result['message'] = 'success';
-                    $result['description'] = 'Localitatea [' . $localitateModel->nume . '] modificata cu succes.';
+                    $result['description'] = 'Judet [' . $judetModel->nume . ' -> ' . $judetModel->slug . '] modificat cu succes.';
                 } else {
                     // add a audit log
                     $auditLog = array(
                         'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                        'new_value' => '401 /localitati/editare',
+                        'new_value' => '401 /judete/editare',
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
@@ -201,7 +183,7 @@ class LocalitateController extends Controller
                 }
             } else {
                 $result['message'] = 'fail';
-                $result['description'] = 'Localitate inexistenta.';
+                $result['description'] = 'Judet inexistenta.';
             }
         } catch (QueryException $exception) {
             $result['message'] = 'fail';
@@ -215,7 +197,7 @@ class LocalitateController extends Controller
      * Delete localitate.
      * Delete our Data Type BREA(D)
      *
-     * @param integer $id - Localitate ID
+     * @param integer $id - Judet ID
      * @return array JSON
      */
     public function delete($id)
@@ -223,30 +205,33 @@ class LocalitateController extends Controller
         $result = array();
 
         try {
-            if(Auth::user()->hasPermission('delete_localitati')) {
-                // soft delete localitate
-                $localitateModel = Localitate::find($id);
-                $count = Localitate::destroy($id);
+            if(Auth::user()->hasPermission('delete_judete')) {
+                // soft delete judet
+                $judetModel = Judet::find($id);
+                $count = Judet::destroy($id);
 
                 if($count === 1)
                 {
+                    // soft delete all localitati records
+                    Localitate::where('judet_id', '=', $id)->update(['deleted_at' => Carbon::now()]);
+
                     $auditLog = array(
-                        'description' =>  'Localitatea [' . $localitateModel->nume . ' -> ' . $localitateModel->slug . '] stearsa cu succes.',
+                        'description' =>  'Judetul [' . $judetModel->nume . ' -> ' . $judetModel->slug . '] sters cu succes.',
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
 
                     $result['message'] = 'success';
-                    $result['description'] = 'Localitatea [' . $localitateModel->nume . ' -> ' . $localitateModel->slug . '] stearsa cu succes.';
+                    $result['description'] = 'Judetul [' . $judetModel->nume . ' -> ' . $judetModel->slug . '] sters cu succes.';
                 } else {
                     $result['message'] = 'fail';
-                    $result['description'] = 'Localitatea nu poate fi stearsa. Probabil nu exista.';
+                    $result['description'] = 'Judetul nu poate fi sters. Probabil nu exista.';
                 }
             } else {
                 // add a audit log
                 $auditLog = array(
                     'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                    'new_value' => '401 /localitati/stergere',
+                    'new_value' => '401 /judete/stergere',
                     'user_id' => Auth::user()->id
                 );
                 Audit::create($auditLog);

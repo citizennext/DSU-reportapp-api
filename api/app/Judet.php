@@ -20,6 +20,15 @@ class Judet extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nume', 'slug',
+    ];
+
+    /**
      * Get the loc that owned by the judet.
      */
     public function localitate()
