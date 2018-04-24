@@ -139,6 +139,53 @@ paths:
                     localitate: null
                     judet: null
                     unitate_id: 7
+                    active: 1
+                    rol:
+                      id: 6
+                      name: "structura"
+                      display_name: "Coordonator structura"
+                      created_at: "2018-03-24 19:02:35"
+                      updated_at: "2018-03-24 19:02:35"
+                    unitate:
+                      id: 7
+                      parent_id: 4
+                      nume: "SMURD National"
+                      descriere: null
+                      adresa: null
+                      cod_postal: null
+                      telefon: null
+                      created_at: "2018-03-26 16:39:21"
+                      updated_at: "2018-03-26 16:39:21"
+                      deleted_at: null
+                      localitate: "Targu-Mures"
+                      judet: "Mures"
+                      departament_id: 1
+                      departament: 
+                        id: 1
+                        nume: "SMURD"
+                        descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
+                        adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
+                        cod_postal: "540136"
+                        localitate: "Targu-Mures"
+                        judet: "Mures"
+                        telefon: "+40 265 210 110"
+                        created_at: "2018-03-26 09:51:28"
+                        updated_at: "2018-03-26 09:51:28"
+                        deleted_at: null
+                      parent: 
+                          id: 4
+                          parent_id: 7
+                          nume: "Statia centrala SMURD SIBIU"
+                          descriere: "SMURD judet Sibiu"
+                          adresa: "str. Vasile Carlova, nr.16-22"
+                          cod_postal: "550017"
+                          telefon: "+40 269 123 456"
+                          created_at: "2018-03-26 10:25:29"
+                          updated_at: "2018-03-28 08:37:34"
+                          deleted_at: null
+                          localitate: "Sibiu"
+                          judet: "Sibiu"
+                          departament_id: 1
                 items:
                   $ref: '#/components/schemas/Users'
         '200 Fail':
@@ -199,6 +246,53 @@ paths:
                     localitate: null
                     judet: null
                     unitate_id: 7
+                    active: 1
+                    rol:
+                      id: 6
+                      name: "structura"
+                      display_name: "Coordonator structura"
+                      created_at: "2018-03-24 19:02:35"
+                      updated_at: "2018-03-24 19:02:35"
+                    unitate:
+                      id: 7
+                      parent_id: 4
+                      nume: "SMURD National"
+                      descriere: null
+                      adresa: null
+                      cod_postal: null
+                      telefon: null
+                      created_at: "2018-03-26 16:39:21"
+                      updated_at: "2018-03-26 16:39:21"
+                      deleted_at: null
+                      localitate: "Targu-Mures"
+                      judet: "Mures"
+                      departament_id: 1
+                      departament: 
+                        id: 1
+                        nume: "SMURD"
+                        descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
+                        adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
+                        cod_postal: "540136"
+                        localitate: "Targu-Mures"
+                        judet: "Mures"
+                        telefon: "+40 265 210 110"
+                        created_at: "2018-03-26 09:51:28"
+                        updated_at: "2018-03-26 09:51:28"
+                        deleted_at: null
+                      parent: 
+                          id: 4
+                          parent_id: 7
+                          nume: "Statia centrala SMURD SIBIU"
+                          descriere: "SMURD judet Sibiu"
+                          adresa: "str. Vasile Carlova, nr.16-22"
+                          cod_postal: "550017"
+                          telefon: "+40 269 123 456"
+                          created_at: "2018-03-26 10:25:29"
+                          updated_at: "2018-03-28 08:37:34"
+                          deleted_at: null
+                          localitate: "Sibiu"
+                          judet: "Sibiu"
+                          departament_id: 1
                 items:
                   $ref: '#/components/schemas/Users'
         '200 Fail':
@@ -573,7 +667,7 @@ paths:
                   $ref: '#/components/schemas/Localitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitati/{id}:
+  /localitate/{id}:
     get:
       summary: READ - localitate
       description: 'Returneaza o localitate bazat pe id, inclusiv relatii'
@@ -621,7 +715,7 @@ paths:
                   $ref: '#/components/schemas/Localitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitati/slug/{slug}:
+  /localitate/slug/{slug}:
     get:
       summary: READ - localitate
       description: 'Returneaza o localitate bazat pe slug, inclusiv relatii'
@@ -668,7 +762,7 @@ paths:
                   $ref: '#/components/schemas/Localitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitati/editare:
+  /localitate/editare:
     put:
       summary: EDIT - editare localitate
       description: 'Editarea datelor unei localitati'
@@ -726,7 +820,7 @@ paths:
                   description: "Localitate inexistenta."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitati/adaugare:
+  /localitate/adaugare:
     post:
       summary: ADD - inregistrare localitate noua
       description: 'Inregistrarea unei noi localitati'
@@ -782,7 +876,7 @@ paths:
                   email: ["The judet id field is required."]
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitati/stergere/{id}:
+  /localitate/stergere/{id}:
     delete:
       summary: DELETE - localitati
       description: 'Sterge(soft) o localitate bazat pe id, inclusiv relatii'
@@ -863,7 +957,7 @@ paths:
                   $ref: '#/components/schemas/Judete'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judete/{id}:
+  /judet/{id}:
     get:
       summary: READ - judet
       description: 'Returneaza un judet bazat pe id'
@@ -903,7 +997,7 @@ paths:
                   $ref: '#/components/schemas/Judete'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judete/slug/{slug}:
+  /judet/slug/{slug}:
     get:
       summary: READ - judet
       description: 'Returneaza un judet bazat pe slug'
@@ -942,7 +1036,7 @@ paths:
                   $ref: '#/components/schemas/Judete'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judete/editare:
+  /judet/editare:
     put:
       summary: EDIT - editare judet
       description: 'Editarea datelor unui judet'
@@ -999,7 +1093,7 @@ paths:
                   description: "Judet inexistent."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judete/adaugare:
+  /judet/adaugare:
     post:
       summary: ADD - inregistrare judet nou
       description: 'Inregistrarea unui nou judet'
@@ -1053,7 +1147,7 @@ paths:
                   email: ["The nume field is required."]
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judete/stergere/{id}:
+  /judet/stergere/{id}:
     delete:
       summary: DELETE - judete
       description: 'Sterge(soft) un judet bazat pe id, inclusiv relatii - localitati'
@@ -1093,6 +1187,364 @@ paths:
                 example:
                   message: "fail"
                   description: "Judetul nu poate fi stears. Probabil nu exista."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /unitati:
+    get:
+      summary: BROWSE - unitati
+      description: 'Returneaza toata colectia Unitati, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      tags:
+        - Unitati
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate unitatile.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 7
+                    parent_id: null
+                    nume: "SMURD National"
+                    descriere: null
+                    adresa: null
+                    cod_postal: null
+                    telefon: null
+                    created_at: "2018-03-26 16:39:21"
+                    updated_at: "2018-03-26 16:39:21"
+                    deleted_at: null
+                    localitate: "Targu-Mures"
+                    judet: "Mures"
+                    departament_id: 1
+                    parent: null
+                    departament: 
+                      id: 1
+                      nume: "SMURD"
+                      descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
+                      adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
+                      cod_postal: "540136"
+                      localitate: "Targu-Mures"
+                      judet: "Mures"
+                      telefon: "+40 265 210 110"
+                      created_at: "2018-03-26 09:51:28"
+                      updated_at: "2018-03-26 09:51:28"
+                      deleted_at: null
+                  - id: 4
+                    parent_id: 7
+                    nume: "Statia centrala SMURD SIBIU"
+                    descriere: "SMURD judet Sibiu"
+                    adresa: "str. Vasile Carlova, nr.16-22"
+                    cod_postal: "550017"
+                    telefon: "+40 269 123 456"
+                    created_at: "2018-03-26 10:25:29"
+                    updated_at: "2018-03-28 08:37:34"
+                    deleted_at: null
+                    localitate: "Sibiu"
+                    judet: "Sibiu"
+                    departament_id: 1
+                    parent: 
+                      id: 7
+                      parent_id: null
+                      nume: "SMURD National"
+                      descriere: null
+                      adresa: null
+                      cod_postal: null
+                      telefon: null
+                      created_at: "2018-03-26 16:39:21"
+                      updated_at: "2018-03-26 16:39:21"
+                      deleted_at: null
+                      localitate: "Targu-Mures"
+                      judet: "Mures"
+                      departament_id: 1
+                    departament: 
+                      id: 1
+                      nume: "SMURD"
+                      descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
+                      adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
+                      cod_postal: "540136"
+                      localitate: "Targu-Mures"
+                      judet: "Mures"
+                      telefon: "+40 265 210 110"
+                      created_at: "2018-03-26 09:51:28"
+                      updated_at: "2018-03-26 09:51:28"
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Unitati'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /unitati/parent/{id}:
+    get:
+      summary: BROWSE - unitati cu un singur parinte
+      description: 'Returneaza toate unitatile apartanand unei unitati parinte, bazat pe id-ul unitatii parinte'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: id-ul parintelui
+      tags:
+        - Unitati
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate unitatile apartand de acelasi parinte.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                  - id: 2
+                    judet_id: 1
+                    slug: aiud
+                    nume: Aiud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Unitati'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /unitate/{id}:
+    get:
+      summary: READ - localitate
+      description: 'Returneaza o localitate bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID-ul localitatii
+      tags:
+        - Unitati
+      responses:
+        '200':
+          description: Success. Obiect JSON cu localitatea.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    judet_id: 1
+                    slug: abrud
+                    nume: Abrud
+                    created_at: '2018-03-25 11:46:19'
+                    updated_at: null
+                    deleted_at: null
+                    judet:
+                      id: 1
+                      slug: alba
+                      nume: Alba
+                      created_at: '2018-03-25 11:21:19'
+                      updated_at: null
+                      deleted_at: null
+                items:
+                  $ref: '#/components/schemas/Unitati'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /unitate/editare:
+    put:
+      summary: EDIT - editare localitate
+      description: 'Editarea datelor unei localitati'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Datele pentru editare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - nume
+              example:
+                id: 1
+                nume: "Nume modificat"
+                judet_id: 1
+              items:
+                  $ref: '#/components/schemas/Localitati'
+      tags:
+        - Unitati
+      responses:
+        '200 Success':
+          description: Localitate modificata cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Localitatea [Abrud] modificata cu succes."
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Localitate inexistenta."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /unitate/adaugare:
+    post:
+      summary: ADD - inregistrare localitate noua
+      description: 'Inregistrarea unei noi localitati'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+      requestBody:
+        description: Datele pentru iregistrare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nume
+                - judet_id
+              example:
+                nume: "Abrud"
+                judet_id: "1"
+              items:
+                  $ref: '#/components/schemas/Localitati'
+      tags:
+        - Unitati
+      responses:
+        '200 Success':
+          description: Localitate creata.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Localitatea [Abrud] creata."
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  email: ["The judet id field is required."]
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /unitate/stergere/{id}:
+    delete:
+      summary: DELETE - localitati
+      description: 'Sterge(soft) o localitate bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: bearer {token}
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id-ul localitatii
+      tags:
+        - Unitati
+      responses:
+        '200 Success':
+          description: Localitate stearsa cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Localitatea [Abrud -> abrud-58] stearsa cu succes."
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Localitatea nu poate fi stearsa. Probabil nu exista."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 components:
@@ -1161,6 +1613,25 @@ components:
         deleted_at:
           type: string
           format: date-time
+    Roles:
+      type: object
+      required:
+        - id
+        - nume
+      properties:
+        id:
+          type: integer
+          format: int64
+        nume:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     Localitati:
       type: object
       required:
@@ -1199,6 +1670,46 @@ components:
         nume:
           type: string
         slug:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+    Unitati:
+      type: object
+      required:
+        - id
+        - parent_id
+        - departament_id
+        - nume
+      properties:
+        id:
+          type: integer
+          format: int64
+        parent_id:
+          type: integer
+          format: int64
+        departament_id:
+          type: integer
+          format: int64
+        nume:
+          type: string
+        descriere:
+          type: string
+        adresa:
+          type: string
+        cod_postal:
+          type: string
+        localitate:
+          type: string
+        judet:
+          type: string
+        telefon:
           type: string
         created_at:
           type: string
