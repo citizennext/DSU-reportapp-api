@@ -20,6 +20,15 @@ class Departament extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nume', 'descriere', 'adresa', 'cod_postal', 'localitate', 'judet', 'telefon',
+    ];
+
+    /**
      * Get the unitati that is owened by the departament.
      */
     public function unitati() {

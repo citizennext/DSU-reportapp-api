@@ -109,6 +109,9 @@ $router->group(['prefix' => 'unitati'], function($router) {
     // <api_url>/unitati/parinte/{id}
     $router->get('parinte/{id}', 'UnitateController@unitatiByParent');
 
+    // <api_url>/unitati/departament/{id}
+    $router->get('departament/{id}', 'UnitateController@unitatiByDepartament');
+
 });
 $router->group(['prefix' => 'unitate'], function($router) {
 
@@ -123,4 +126,26 @@ $router->group(['prefix' => 'unitate'], function($router) {
 
     // <api_url>/unitate/stergere/{id}
     $router->delete('stergere/{id}', 'UnitateController@delete');
+});
+
+// Departamente routes
+$router->group(['prefix' => 'departamente'], function($router) {
+
+    // <api_url>/departamente
+    $router->get('/', 'DepartamentController@index');
+
+});
+$router->group(['prefix' => 'departament'], function($router) {
+
+    // <api_url>/departament/{id}
+    $router->get('{id}', 'DepartamentController@find');
+
+    // <api_url>/departament/adaugare
+    $router->post('adaugare/', 'DepartamentController@create');
+
+    // <api_url>/departament/editare
+    $router->put('editare/', 'DepartamentController@edit');
+
+    // <api_url>/departament/stergere/{id}
+    $router->delete('stergere/{id}', 'DepartamentController@delete');
 });
