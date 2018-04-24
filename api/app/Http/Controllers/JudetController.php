@@ -136,11 +136,11 @@ class JudetController extends Controller
         $result = array();
 
         try{
-            if($judetModel = Judet::find($request->input('id'))){
+            if($judetModel = Judet::find($request->input('request_id'))){
                 if(Auth::user()->hasPermission('edit_judete')){
                     $requestOld = $judetModel->toArray();
                     $requestData = $request->all();
-                    unset($requestData['id'], $requestData['_url']);
+                    unset($requestData['id'], $requestData['request_id'], $requestData['_url']);
                     // set new slug
                     $slug = str_slug($requestData['nume']);
                     if(Judet::where('slug', '=', $slug)->count() > 0) {

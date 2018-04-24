@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Auth;
 
 use App\User;
+use App\Unitate;
 use App\Setting;
 use App\Audit;
 
@@ -130,7 +131,7 @@ class UserController extends Controller
 
         try{
             if(Auth::user()->hasPermission('read_users')){
-                $collection = User::find($id);
+                $collection = User::with(['rol', 'unitate.departament', 'unitate.parent'])->find($id);
                 if(!empty($collection)) {
                     $result['message'] = 'success';
                     $result['user'] = $collection;
@@ -170,7 +171,7 @@ class UserController extends Controller
 
         try{
             if(Auth::user()->hasPermission('read_users')){
-                $collection = User::where('email', $email)->first();
+                $collection = User::with(['rol', 'unitate.departament', 'unitate.parent'])->where('email', $email)->first();
                 if(!empty($collection)) {
                     $result['message'] = 'success';
                     $result['user'] = $collection;

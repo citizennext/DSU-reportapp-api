@@ -46,6 +46,14 @@ class User extends Model implements Authenticatable
     }
 
     /**
+     * Get the role that user belongs to.
+     */
+    public function rol()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    /**
      * Check if user has a permission, based on role.
      *
      * @param string $permission - Slug of permission
