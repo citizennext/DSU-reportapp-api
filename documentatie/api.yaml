@@ -19,7 +19,9 @@ paths:
   /utilizator/logare:
     post:
       summary: autentificare utilizator
-      description: 'Autentifica un utilizator pe baza parolei si user-name (email) si returneaza un token criptat pentru access API'
+      description: >-
+        Autentifica un utilizator pe baza parolei si user-name (email) si
+        returneaza un token criptat pentru access API
       parameters:
         - in: header
           name: Content-Type
@@ -40,35 +42,36 @@ paths:
               properties:
                 email:
                   type: string
-                  example: "tudor.rusu@hotmail.com"
+                  example: tudor.rusu@hotmail.com
                 parola:
                   type: string
-                  example: "123654789"
+                  example: '123654789'
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        200 Success:
           description: API Token criptat.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  api_key: "eyJpdiI6IlpOQ04wTURNcUEzK0dsMlE2OW5paGc9PSIsInZhbHVlIjoiZExURk1maHV6bHRIaU5lQkMyMStPM3RRMzQwRnZuK3ZXdThNUG9FemEyNGpjN3JXNGxaVTBYVlZwdWJFeWIzMlE2SlhLZXk1aWxTXC9NU2szRmlOd1dxbWRUbzRjc1YzdTI4VFdpSVcrdmh3PSIsIm1hYyI6IjUyMGRlZDJkMTk5NDFhMmM5MDEyMzIwNmNlNmIwMGE4OGZiNTA3NzRlYjUwZjNkMWZmNTUzMGQyYmIxZjFjOWMifQ=="
-        '200 Fail':
-          description: Utilizator existent, dar inactiv.
+                  message: success
+                  api_key: >-
+                    eyJpdiI6IlpOQ04wTURNcUEzK0dsMlE2OW5paGc9PSIsInZhbHVlIjoiZExURk1maHV6bHRIaU5lQkMyMStPM3RRMzQwRnZuK3ZXdThNUG9FemEyNGpjN3JXNGxaVTBYVlZwdWJFeWIzMlE2SlhLZXk1aWxTXC9NU2szRmlOd1dxbWRUbzRjc1YzdTI4VFdpSVcrdmh3PSIsIm1hYyI6IjUyMGRlZDJkMTk5NDFhMmM5MDEyMzIwNmNlNmIwMGE4OGZiNTA3NzRlYjUwZjNkMWZmNTUzMGQyYmIxZjFjOWMifQ==
+        200 Fail:
+          description: 'Utilizator existent, dar inactiv.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Utilizatorul #1 [tudor.rusu@hotmail.com] inactiv"
+                  message: fail
+                  description: 'Utilizatorul #1 [tudor.rusu@hotmail.com] inactiv'
   /utilizator/delogare:
     post:
       summary: deautentificare utilizator
-      description: 'Deautentifica un utilizator pe baza token-ului criptat'
+      description: Deautentifica un utilizator pe baza token-ului criptat
       security:
         - apiKey: []
       parameters:
@@ -77,7 +80,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       tags:
         - Utilizatori
       responses:
@@ -88,7 +91,7 @@ paths:
               schema:
                 type: array
                 example:
-                  status: "success"
+                  status: success
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /utilizator/{id}:
@@ -103,7 +106,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -114,24 +117,26 @@ paths:
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Obiect JSON cu utilizatorul.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
+                  message: success
                   user:
                     id: 5
-                    nume: "Tester"
-                    email: "tester.structura@dsu.ro"
-                    created_at: "2018-03-26 16:41:19"
-                    updated_at: "2018-03-26 16:41:19"
-                    avatar: "users/default.png"
+                    nume: Tester
+                    email: tester.structura@dsu.ro
+                    created_at: '2018-03-26 16:41:19'
+                    updated_at: '2018-03-26 16:41:19'
+                    avatar: users/default.png
                     role_id: 6
                     deleted_at: null
-                    prenume: "Structura Smurd"
+                    prenume: Structura Smurd
                     telefon_s: null
                     telefon_p: null
                     adresa: null
@@ -142,63 +147,65 @@ paths:
                     active: 1
                     rol:
                       id: 6
-                      name: "structura"
-                      display_name: "Coordonator structura"
-                      created_at: "2018-03-24 19:02:35"
-                      updated_at: "2018-03-24 19:02:35"
+                      name: structura
+                      display_name: Coordonator structura
+                      created_at: '2018-03-24 19:02:35'
+                      updated_at: '2018-03-24 19:02:35'
                     unitate:
                       id: 7
                       parent_id: 4
-                      nume: "SMURD National"
+                      nume: SMURD National
                       descriere: null
                       adresa: null
                       cod_postal: null
                       telefon: null
-                      created_at: "2018-03-26 16:39:21"
-                      updated_at: "2018-03-26 16:39:21"
+                      created_at: '2018-03-26 16:39:21'
+                      updated_at: '2018-03-26 16:39:21'
                       deleted_at: null
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
+                      localitate: Targu-Mures
+                      judet: Mures
                       departament_id: 1
-                      departament: 
+                      departament:
                         id: 1
-                        nume: "SMURD"
-                        descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                        adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                        cod_postal: "540136"
-                        localitate: "Targu-Mures"
-                        judet: "Mures"
-                        telefon: "+40 265 210 110"
-                        created_at: "2018-03-26 09:51:28"
-                        updated_at: "2018-03-26 09:51:28"
+                        nume: SMURD
+                        descriere: >-
+                          Scopul SMURD este transferul unui echipaj medical
+                          spitalicesc, cu dotarea necesară, la locul unde se
+                          află un pacient în stare critică, în vederea acordării
+                          de asistență medicală de urgență calificată.
+                        adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                        cod_postal: '540136'
+                        localitate: Targu-Mures
+                        judet: Mures
+                        telefon: +40 265 210 110
+                        created_at: '2018-03-26 09:51:28'
+                        updated_at: '2018-03-26 09:51:28'
                         deleted_at: null
-                      parent: 
-                          id: 4
-                          parent_id: 7
-                          nume: "Statia centrala SMURD SIBIU"
-                          descriere: "SMURD judet Sibiu"
-                          adresa: "str. Vasile Carlova, nr.16-22"
-                          cod_postal: "550017"
-                          telefon: "+40 269 123 456"
-                          created_at: "2018-03-26 10:25:29"
-                          updated_at: "2018-03-28 08:37:34"
-                          deleted_at: null
-                          localitate: "Sibiu"
-                          judet: "Sibiu"
-                          departament_id: 1
+                      parent:
+                        id: 4
+                        parent_id: 7
+                        nume: Statia centrala SMURD SIBIU
+                        descriere: SMURD judet Sibiu
+                        adresa: 'str. Vasile Carlova, nr.16-22'
+                        cod_postal: '550017'
+                        telefon: +40 269 123 456
+                        created_at: '2018-03-26 10:25:29'
+                        updated_at: '2018-03-28 08:37:34'
+                        deleted_at: null
+                        localitate: Sibiu
+                        judet: Sibiu
+                        departament_id: 1
                 items:
                   $ref: '#/components/schemas/Users'
-        '200 Fail':
+        200 Fail:
           description: Utilizator inexistent - id-ul nu exista in baza de date.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Utilizator inexistent."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Utilizator inexistent.
   /utilizator/email/{email}:
     get:
       summary: READ - utilizator
@@ -211,7 +218,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: email
           required: true
@@ -221,24 +228,26 @@ paths:
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Obiect JSON cu utilizatorul.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
+                  message: success
                   user:
                     id: 5
-                    nume: "Tester"
-                    email: "tester.structura@dsu.ro"
-                    created_at: "2018-03-26 16:41:19"
-                    updated_at: "2018-03-26 16:41:19"
-                    avatar: "users/default.png"
+                    nume: Tester
+                    email: tester.structura@dsu.ro
+                    created_at: '2018-03-26 16:41:19'
+                    updated_at: '2018-03-26 16:41:19'
+                    avatar: users/default.png
                     role_id: 6
                     deleted_at: null
-                    prenume: "Structura Smurd"
+                    prenume: Structura Smurd
                     telefon_s: null
                     telefon_p: null
                     adresa: null
@@ -249,67 +258,69 @@ paths:
                     active: 1
                     rol:
                       id: 6
-                      name: "structura"
-                      display_name: "Coordonator structura"
-                      created_at: "2018-03-24 19:02:35"
-                      updated_at: "2018-03-24 19:02:35"
+                      name: structura
+                      display_name: Coordonator structura
+                      created_at: '2018-03-24 19:02:35'
+                      updated_at: '2018-03-24 19:02:35'
                     unitate:
                       id: 7
                       parent_id: 4
-                      nume: "SMURD National"
+                      nume: SMURD National
                       descriere: null
                       adresa: null
                       cod_postal: null
                       telefon: null
-                      created_at: "2018-03-26 16:39:21"
-                      updated_at: "2018-03-26 16:39:21"
+                      created_at: '2018-03-26 16:39:21'
+                      updated_at: '2018-03-26 16:39:21'
                       deleted_at: null
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
+                      localitate: Targu-Mures
+                      judet: Mures
                       departament_id: 1
-                      departament: 
+                      departament:
                         id: 1
-                        nume: "SMURD"
-                        descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                        adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                        cod_postal: "540136"
-                        localitate: "Targu-Mures"
-                        judet: "Mures"
-                        telefon: "+40 265 210 110"
-                        created_at: "2018-03-26 09:51:28"
-                        updated_at: "2018-03-26 09:51:28"
+                        nume: SMURD
+                        descriere: >-
+                          Scopul SMURD este transferul unui echipaj medical
+                          spitalicesc, cu dotarea necesară, la locul unde se
+                          află un pacient în stare critică, în vederea acordării
+                          de asistență medicală de urgență calificată.
+                        adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                        cod_postal: '540136'
+                        localitate: Targu-Mures
+                        judet: Mures
+                        telefon: +40 265 210 110
+                        created_at: '2018-03-26 09:51:28'
+                        updated_at: '2018-03-26 09:51:28'
                         deleted_at: null
-                      parent: 
-                          id: 4
-                          parent_id: 7
-                          nume: "Statia centrala SMURD SIBIU"
-                          descriere: "SMURD judet Sibiu"
-                          adresa: "str. Vasile Carlova, nr.16-22"
-                          cod_postal: "550017"
-                          telefon: "+40 269 123 456"
-                          created_at: "2018-03-26 10:25:29"
-                          updated_at: "2018-03-28 08:37:34"
-                          deleted_at: null
-                          localitate: "Sibiu"
-                          judet: "Sibiu"
-                          departament_id: 1
+                      parent:
+                        id: 4
+                        parent_id: 7
+                        nume: Statia centrala SMURD SIBIU
+                        descriere: SMURD judet Sibiu
+                        adresa: 'str. Vasile Carlova, nr.16-22'
+                        cod_postal: '550017'
+                        telefon: +40 269 123 456
+                        created_at: '2018-03-26 10:25:29'
+                        updated_at: '2018-03-28 08:37:34'
+                        deleted_at: null
+                        localitate: Sibiu
+                        judet: Sibiu
+                        departament_id: 1
                 items:
                   $ref: '#/components/schemas/Users'
-        '200 Fail':
+        200 Fail:
           description: Utilizator inexistent - email-ul nu exista in baza de date.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Utilizator inexistent."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Utilizator inexistent.
   /utilizator/editare:
     put:
       summary: EDIT - editare utilizator
-      description: 'Editarea datelor unui utilizator'
+      description: Editarea datelor unui utilizator
       security:
         - apiKey: []
       parameters:
@@ -324,7 +335,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru editare
         required: true
@@ -336,37 +347,37 @@ paths:
                 - id
               example:
                 id: 74
-                nume: "Nume modificat"
-                prenume: "Prenume modificat"
+                nume: Nume modificat
+                prenume: Prenume modificat
               items:
-                  $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/Users'
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Utilizator modificat cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Utilizator [test.add@dsu.ro] modificat cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+                  message: success
+                  description: 'Utilizator [test.add@dsu.ro] modificat cu succes.'
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Utilizator inexistent."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Utilizator inexistent.
   /utilizator/resetare-parola:
     put:
       summary: EDIT - resetare parola utilizator
-      description: 'Resetarea parolei unui utilizator'
+      description: Resetarea parolei unui utilizator
       security:
         - apiKey: []
       parameters:
@@ -381,7 +392,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Noua parola
         required: true
@@ -392,27 +403,29 @@ paths:
               required:
                 - parola
               example:
-                parola: "asdagfsdh656asdasd"
+                parola: asdagfsdh656asdasd
               items:
-                  $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/Users'
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Utilizator modificat cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Parola utilizatorului [test.add@dsu.ro] modificata cu succes."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: success
+                  description: >-
+                    Parola utilizatorului [test.add@dsu.ro] modificata cu
+                    succes.
   /utilizator/adaugare:
     post:
       summary: ADD - inregistrare utilizator nou
-      description: 'Inregistrarea unui nou utilizator'
+      description: Inregistrarea unui nou utilizator
       security:
         - apiKey: []
       parameters:
@@ -427,7 +440,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru iregistrare
         required: true
@@ -442,41 +455,42 @@ paths:
                 - telefon_s
                 - unitate_id
               example:
-                nume: "Test"
-                prenume: "Adaugare Utilizator"
-                email: "test.add@dsu.ro"
-                role_id: "3"
-                telefon_s: "+40569874569"
-                telefon_p: "0230569874"
-                adresa: "str. Mihai Viteazau, nr. 5"
-                cod_postal: "52987"
-                localitate: "Selimbar"
-                judet: "Sibiu"
-                unitate_id: "7"
+                nume: Test
+                prenume: Adaugare Utilizator
+                email: test.add@dsu.ro
+                role_id: '3'
+                telefon_s: '+40569874569'
+                telefon_p: 0230569874
+                adresa: 'str. Mihai Viteazau, nr. 5'
+                cod_postal: '52987'
+                localitate: Selimbar
+                judet: Sibiu
+                unitate_id: '7'
               items:
-                  $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/Users'
       tags:
         - Utilizatori
       responses:
-        '200 Success':
-          description: Utilizator creat, dar inactiv.
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
+          description: 'Utilizator creat, dar inactiv.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Utilizator [test.add@dsu.ro] creat, dar inactiv"
-        '200 Fail':
+                  message: success
+                  description: 'Utilizator [test.add@dsu.ro] creat, dar inactiv'
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  email: ["The email field is required."]
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  email:
+                    - The email field is required.
   /utilizator/activare/{token}:
     get:
       summary: activare utilizator
@@ -491,24 +505,26 @@ paths:
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        200 Success:
           description: Contul a fost activat cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Contul a fost activat cu succes."
-        '200 Fail':
-          description: Utilizator activat deja sau inexistent - id-ul nu exista in baza de date.
+                  message: success
+                  description: Contul a fost activat cu succes.
+        200 Fail:
+          description: >-
+            Utilizator activat deja sau inexistent - id-ul nu exista in baza de
+            date.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Utilizator activat deja sau inexistent."
+                  message: fail
+                  description: Utilizator activat deja sau inexistent.
   /utilizator/stergere/{id}:
     delete:
       summary: DELETE - utilizator
@@ -521,7 +537,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -531,30 +547,32 @@ paths:
       tags:
         - Utilizatori
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Utilizator sters cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Utilizator [test.add@dsu.ro] sters cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+                  message: success
+                  description: 'Utilizator [test.add@dsu.ro] sters cu succes.'
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Utilizatorul [test.add@dsu.ro] nu poate fi sters. Probabil nu exista."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  /localitati:
+                  message: fail
+                  description: >-
+                    Utilizatorul [test.add@dsu.ro] nu poate fi sters. Probabil
+                    nu exista.
+  /roluri:
     get:
-      summary: BROWSE - localitati
-      description: 'Returneaza toata colectia Localitati, inclusiv relatii, bazat pe rolul utilizatorului'
+      summary: BROWSE - roluri, inclusiv permisiuni
+      description: Returneaza toata colectia Roluri, inclusiv relatii
       security:
         - apiKey: []
       parameters:
@@ -563,7 +581,567 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate rolurile.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    name: "sysadmin"
+                    display_name: "Administrator sistem"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
+                    deleted_at: null
+                    permisiuni:
+                      - id: 1
+                        key: "browse_admin"
+                        table_name: null
+                        created_at: "2018-03-08 18:23:37"
+                        updated_at: "2018-03-08 18:23:37"
+                        permission_group_id: null
+                        deleted_at: null
+                        pivot: 
+                          role_id: 1
+                          permission_id: 1
+                      - id: 5
+                        key: "browse_menus"
+                        table_name: "menus"
+                        created_at: "2018-03-08 18:23:37"
+                        updated_at: "2018-03-08 18:23:37"
+                        permission_group_id: null
+                        deleted_at: null
+                        pivot: 
+                          role_id: 1
+                          permission_id: 5
+                  - id: 2
+                    name: "raportor"
+                    display_name: "Raportor"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
+                    deleted_at: null
+                    permisiuni:
+                      - id: 36
+                        key: "browse_unitati"
+                        table_name: "unitati"
+                        created_at: "2018-03-08 18:23:37"
+                        updated_at: "2018-03-08 18:23:37"
+                        permission_group_id: null
+                        deleted_at: null
+                        pivot: 
+                          role_id: 2
+                          permission_id: 36
+                items:
+                  $ref: '#/components/schemas/Roles'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /rol/{id}:
+    get:
+      summary: READ - rol
+      description: 'Returneaza un rol bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID-ul rolului
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200':
+          description: Success. Obiect JSON cu rolul.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  id: 2
+                  name: "raportor"
+                  display_name: "Raportor"
+                  created_at: '2018-03-26 16:39:21'
+                  updated_at: '2018-03-26 16:39:21'
+                  deleted_at: null
+                  permisiuni:
+                    - id: 36
+                      key: "browse_unitati"
+                      table_name: "unitati"
+                      created_at: "2018-03-08 18:23:37"
+                      updated_at: "2018-03-08 18:23:37"
+                      permission_group_id: null
+                      deleted_at: null
+                      pivot: 
+                        role_id: 2
+                        permission_id: 36
+                items:
+                  $ref: '#/components/schemas/Roles'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /rol/editare:
+    put:
+      summary: EDIT - editare rol
+      description: Editarea datelor unui rol, inclusiv datele din tabela pivot
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+      requestBody:
+        description: Datele pentru editare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - request_id
+              example:
+                request_id: 12
+                display_name: "Nume modificat rol"
+                pivot:
+                  - 1
+                  - 61
+              items:
+                $ref: '#/components/schemas/Roles'
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200 Success':
+          description: Rol modificat cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Rolul [Nume modificat rol] modificat cu succes."
+        '200 Fail':
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: fail
+                  description: "Rol inexistent."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /rol/adaugare:
+    post:
+      summary: ADD - inregistrare rol nou
+      description: Inregistrarea unui nou rol, cu pivotare pe permisiuni
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+      requestBody:
+        description: Datele pentru iregistrare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              example:
+                name: "rol_testare_cu_permisiuni"
+                pivot:
+                  - 61
+                  - 62
+              items:
+                $ref: '#/components/schemas/Roles'
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200 Success':
+          description: Rol creata.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: success
+                  description: 'Rolul [rol_testare_cu_permisiuni] creat.'
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  name:
+                    - The name field is required.
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /rol/stergere/{id}:
+    delete:
+      summary: DELETE - rol
+      description: "Sterge(soft) un rol bazat pe id, inclusiv relatii pivot"
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id-ul rolului
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200 Success':
+          description: "Rol sters cu succes."
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Rolul [Rol Testare] sters cu succes."
+        '200 Fail':
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Rolul nu poate fi sters. Probabil nu exista."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /permisiuni:
+    get:
+      summary: BROWSE - permisiuni, inclusiv roluri
+      description: Returneaza toata colectia Permisiuni, inclusiv relatii
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200':
+          description: Success. Lista obiect JSON cu toate permisiunile.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  - id: 1
+                    key: "browse_admin"
+                    table_name: null
+                    created_at: "2018-03-08 18:23:37"
+                    updated_at: "2018-03-08 18:23:37"
+                    permission_group_id: null
+                    deleted_at: null
+                    roluri:
+                      - id: 1
+                        name: "sysadmin"
+                        display_name: "Administrator sistem"
+                        created_at: '2018-03-26 16:39:21'
+                        updated_at: '2018-03-26 16:39:21'
+                        deleted_at: null
+                        pivot: 
+                          role_id: 1
+                          permission_id: 1
+                      - id: 2
+                        name: "raportor"
+                        display_name: "Raportor"
+                        created_at: '2018-03-26 16:39:21'
+                        updated_at: '2018-03-26 16:39:21'
+                        deleted_at: null
+                        pivot: 
+                          role_id: 2
+                          permission_id: 1
+                  - id: 2
+                    key: "browse_database"
+                    table_name: null
+                    created_at: "2018-03-08 18:23:37"
+                    updated_at: "2018-03-08 18:23:37"
+                    permission_group_id: null
+                    deleted_at: null
+                    roluri:
+                      - id: 1
+                        name: "sysadmin"
+                        display_name: "Administrator sistem"
+                        created_at: '2018-03-26 16:39:21'
+                        updated_at: '2018-03-26 16:39:21'
+                        deleted_at: null
+                        pivot: 
+                          role_id: 1
+                          permission_id: 2
+                items:
+                  $ref: '#/components/schemas/Permissions'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /permisiune/{id}:
+    get:
+      summary: READ - permisiune
+      description: 'Returneaza o permisiune bazat pe id, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID-ul permisiunii
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200':
+          description: Success. Obiect JSON cu permisiunea.
+          content:
+            application/json:
+              schema:
+                type: array
+                example:
+                  id: 2
+                  key: "browse_database"
+                  table_name: null
+                  created_at: "2018-03-08 18:23:37"
+                  updated_at: "2018-03-08 18:23:37"
+                  permission_group_id: null
+                  deleted_at: null
+                  roluri:
+                    - id: 1
+                      name: "sysadmin"
+                      display_name: "Administrator sistem"
+                      created_at: '2018-03-26 16:39:21'
+                      updated_at: '2018-03-26 16:39:21'
+                      deleted_at: null
+                      pivot: 
+                        role_id: 1
+                        permission_id: 2
+                items:
+                  $ref: '#/components/schemas/Permissions'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /permisiune/editare:
+    put:
+      summary: EDIT - editare permisiune
+      description: Editarea datelor unei permisiuni, inclusiv datele din tabela pivot
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+      requestBody:
+        description: Datele pentru editare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - request_id
+              example:
+                request_id: 12
+                key: "Nume modificat permisiune"
+              items:
+                $ref: '#/components/schemas/Permissions'
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200 Success':
+          description: Permisiune modificata cu succes.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Permisiunea [Nume modificat permisiune] modificata cu succes."
+        '200 Fail':
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: fail
+                  description: "Permisiune inexistenta."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /permisiune/adaugare:
+    post:
+      summary: ADD - inregistrare permisiune noua
+      description: Inregistrarea unei noi permisiuni, cu pivotare pe roluri
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Content-Type
+          required: true
+          schema:
+            type: string
+            default: application/json
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+      requestBody:
+        description: Datele pentru iregistrare
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - key
+              example:
+                key: "permisiune_testare_cu_roluri"
+                pivot:
+                  - 1
+                  - 10
+              items:
+                $ref: '#/components/schemas/Permissions'
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200 Success':
+          description: Permisiune creata.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: success
+                  description: 'Permisiunea [permisiune_testare_cu_roluri] creata.'
+        '200 Fail':
+          description: Lipsa unui camp obligatoriu.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key:
+                    - The key field is required.
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /permisiune/stergere/{id}:
+    delete:
+      summary: DELETE - permisiune
+      description: "Sterge(soft) o permisiune bazat pe id, inclusiv relatii pivot"
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id-ul permisiunii
+      tags:
+        - Roluri si Permisiuni
+      responses:
+        '200 Success':
+          description: "Permisiune stearsa cu succes."
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "success"
+                  description: "Permisiunea [test_permisiune] stearsa cu succes."
+        '200 Fail':
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "fail"
+                  description: "Permisiunea nu poate fi stearsa. Probabil nu exista."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /localitati:
+    get:
+      summary: BROWSE - localitati
+      description: >-
+        Returneaza toata colectia Localitati, inclusiv relatii, bazat pe rolul
+        utilizatorului
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
       tags:
         - Localitati
       responses:
@@ -618,7 +1196,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: slug
           required: true
@@ -679,7 +1257,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -727,7 +1305,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: slug
           required: true
@@ -765,7 +1343,7 @@ paths:
   /localitate/editare:
     put:
       summary: EDIT - editare localitate
-      description: 'Editarea datelor unei localitati'
+      description: Editarea datelor unei localitati
       security:
         - apiKey: []
       parameters:
@@ -780,7 +1358,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru editare
         required: true
@@ -792,10 +1370,10 @@ paths:
                 - request_id
               example:
                 request_id: 4
-                nume: "Nume modificat"
+                nume: Nume modificat
                 judet_id: 1
               items:
-                  $ref: '#/components/schemas/Localitati'
+                $ref: '#/components/schemas/Localitati'
       tags:
         - Localitati
       responses:
@@ -806,23 +1384,23 @@ paths:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Localitatea [Abrud] modificata cu succes."
+                  message: success
+                  description: 'Localitatea [Abrud] modificata cu succes.'
         '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Localitate inexistenta."
+                  message: fail
+                  description: Localitate inexistenta.
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /localitate/adaugare:
     post:
       summary: ADD - inregistrare localitate noua
-      description: 'Inregistrarea unei noi localitati'
+      description: Inregistrarea unei noi localitati
       security:
         - apiKey: []
       parameters:
@@ -837,7 +1415,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru iregistrare
         required: true
@@ -849,10 +1427,10 @@ paths:
                 - nume
                 - judet_id
               example:
-                nume: "Abrud"
-                judet_id: "1"
+                nume: Abrud
+                judet_id: '1'
               items:
-                  $ref: '#/components/schemas/Localitati'
+                $ref: '#/components/schemas/Localitati'
       tags:
         - Localitati
       responses:
@@ -863,8 +1441,8 @@ paths:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Localitatea [Abrud] creata."
+                  message: success
+                  description: 'Localitatea [Abrud] creata.'
         '200 Fail':
           description: Lipsa unui camp obligatoriu.
           content:
@@ -872,7 +1450,8 @@ paths:
               schema:
                 type: object
                 example:
-                  email: ["The judet id field is required."]
+                  email:
+                    - The judet id field is required.
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /localitate/stergere/{id}:
@@ -887,7 +1466,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -904,23 +1483,23 @@ paths:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Localitatea [Abrud -> abrud-58] stearsa cu succes."
+                  message: success
+                  description: 'Localitatea [Abrud -> abrud-58] stearsa cu succes.'
         '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Localitatea nu poate fi stearsa. Probabil nu exista."
+                  message: fail
+                  description: Localitatea nu poate fi stearsa. Probabil nu exista.
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /judete:
     get:
       summary: BROWSE - judete
-      description: 'Returneaza toata colectia Judete'
+      description: Returneaza toata colectia Judete
       security:
         - apiKey: []
       parameters:
@@ -929,7 +1508,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       tags:
         - Judete
       responses:
@@ -959,7 +1538,7 @@ paths:
   /judet/{id}:
     get:
       summary: READ - judet
-      description: 'Returneaza un judet bazat pe id'
+      description: Returneaza un judet bazat pe id
       security:
         - apiKey: []
       parameters:
@@ -968,7 +1547,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -999,7 +1578,7 @@ paths:
   /judet/slug/{slug}:
     get:
       summary: READ - judet
-      description: 'Returneaza un judet bazat pe slug'
+      description: Returneaza un judet bazat pe slug
       security:
         - apiKey: []
       parameters:
@@ -1008,7 +1587,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: slug
           required: true
@@ -1038,7 +1617,7 @@ paths:
   /judet/editare:
     put:
       summary: EDIT - editare judet
-      description: 'Editarea datelor unui judet'
+      description: Editarea datelor unui judet
       security:
         - apiKey: []
       parameters:
@@ -1053,7 +1632,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru editare
         required: true
@@ -1065,36 +1644,36 @@ paths:
                 - request_id
               example:
                 request_id: 1
-                nume: "Nume modificat"
+                nume: Nume modificat
               items:
-                  $ref: '#/components/schemas/Judete'
+                $ref: '#/components/schemas/Judete'
       tags:
         - Judete
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Localitate modificata cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Juedtul [Alba] modificat cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+                  message: success
+                  description: 'Juedtul [Alba] modificat cu succes.'
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Judet inexistent."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Judet inexistent.
   /judet/adaugare:
     post:
       summary: ADD - inregistrare judet nou
-      description: 'Inregistrarea unui nou judet'
+      description: Inregistrarea unui nou judet
       security:
         - apiKey: []
       parameters:
@@ -1109,7 +1688,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru iregistrare
         required: true
@@ -1120,31 +1699,32 @@ paths:
               required:
                 - nume
               example:
-                nume: "Alba"
+                nume: Alba
               items:
-                  $ref: '#/components/schemas/Judete'
+                $ref: '#/components/schemas/Judete'
       tags:
         - Judete
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Judet creat.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Judetul [Alba -> alba] creat."
-        '200 Fail':
+                  message: success
+                  description: 'Judetul [Alba -> alba] creat.'
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  email: ["The nume field is required."]
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  email:
+                    - The nume field is required.
   /judet/stergere/{id}:
     delete:
       summary: DELETE - judete
@@ -1157,7 +1737,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1167,26 +1747,26 @@ paths:
       tags:
         - Judete
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Judet stearsa cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Judetul [Alba -> alba] stears cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, numele de exemplu.
+                  message: success
+                  description: 'Judetul [Alba -> alba] stears cu succes.'
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, numele de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Judetul nu poate fi stears. Probabil nu exista."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Judetul nu poate fi stears. Probabil nu exista.
   /unitati:
     get:
       summary: BROWSE - unitati
@@ -1199,7 +1779,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       tags:
         - Unitati
       responses:
@@ -1212,68 +1792,76 @@ paths:
                 example:
                   - id: 7
                     parent_id: null
-                    nume: "SMURD National"
+                    nume: SMURD National
                     descriere: null
                     adresa: null
                     cod_postal: null
                     telefon: null
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
+                    localitate: Targu-Mures
+                    judet: Mures
                     departament_id: 1
                     parent: null
-                    departament: 
+                    departament:
                       id: 1
-                      nume: "SMURD"
-                      descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                      adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                      cod_postal: "540136"
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
-                      telefon: "+40 265 210 110"
-                      created_at: "2018-03-26 09:51:28"
-                      updated_at: "2018-03-26 09:51:28"
+                      nume: SMURD
+                      descriere: >-
+                        Scopul SMURD este transferul unui echipaj medical
+                        spitalicesc, cu dotarea necesară, la locul unde se află
+                        un pacient în stare critică, în vederea acordării de
+                        asistență medicală de urgență calificată.
+                      adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                      cod_postal: '540136'
+                      localitate: Targu-Mures
+                      judet: Mures
+                      telefon: +40 265 210 110
+                      created_at: '2018-03-26 09:51:28'
+                      updated_at: '2018-03-26 09:51:28'
                       deleted_at: null
                   - id: 4
                     parent_id: 7
-                    nume: "Statia centrala SMURD SIBIU"
-                    descriere: "SMURD judet Sibiu"
-                    adresa: "str. Vasile Carlova, nr.16-22"
-                    cod_postal: "550017"
-                    telefon: "+40 269 123 456"
-                    created_at: "2018-03-26 10:25:29"
-                    updated_at: "2018-03-28 08:37:34"
+                    nume: Statia centrala SMURD SIBIU
+                    descriere: SMURD judet Sibiu
+                    adresa: 'str. Vasile Carlova, nr.16-22'
+                    cod_postal: '550017'
+                    telefon: +40 269 123 456
+                    created_at: '2018-03-26 10:25:29'
+                    updated_at: '2018-03-28 08:37:34'
                     deleted_at: null
-                    localitate: "Sibiu"
-                    judet: "Sibiu"
+                    localitate: Sibiu
+                    judet: Sibiu
                     departament_id: 1
-                    parent: 
+                    parent:
                       id: 7
                       parent_id: null
-                      nume: "SMURD National"
+                      nume: SMURD National
                       descriere: null
                       adresa: null
                       cod_postal: null
                       telefon: null
-                      created_at: "2018-03-26 16:39:21"
-                      updated_at: "2018-03-26 16:39:21"
+                      created_at: '2018-03-26 16:39:21'
+                      updated_at: '2018-03-26 16:39:21'
                       deleted_at: null
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
+                      localitate: Targu-Mures
+                      judet: Mures
                       departament_id: 1
-                    departament: 
+                    departament:
                       id: 1
-                      nume: "SMURD"
-                      descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                      adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                      cod_postal: "540136"
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
-                      telefon: "+40 265 210 110"
-                      created_at: "2018-03-26 09:51:28"
-                      updated_at: "2018-03-26 09:51:28"
+                      nume: SMURD
+                      descriere: >-
+                        Scopul SMURD este transferul unui echipaj medical
+                        spitalicesc, cu dotarea necesară, la locul unde se află
+                        un pacient în stare critică, în vederea acordării de
+                        asistență medicală de urgență calificată.
+                      adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                      cod_postal: '540136'
+                      localitate: Targu-Mures
+                      judet: Mures
+                      telefon: +40 265 210 110
+                      created_at: '2018-03-26 09:51:28'
+                      updated_at: '2018-03-26 09:51:28'
                       deleted_at: null
                 items:
                   $ref: '#/components/schemas/Unitati'
@@ -1282,7 +1870,9 @@ paths:
   /unitati/parinte/{id}:
     get:
       summary: BROWSE - unitati cu un singur parinte
-      description: 'Returneaza toate unitatile apartanand unei unitati parinte, bazat pe id-ul unitatii parinte'
+      description: >-
+        Returneaza toate unitatile apartanand unei unitati parinte, bazat pe
+        id-ul unitatii parinte
       security:
         - apiKey: []
       parameters:
@@ -1291,7 +1881,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1303,7 +1893,9 @@ paths:
         - Unitati
       responses:
         '200':
-          description: Success. Lista obiect JSON cu toate unitatile apartand de acelasi parinte.
+          description: >-
+            Success. Lista obiect JSON cu toate unitatile apartand de acelasi
+            parinte.
           content:
             application/json:
               schema:
@@ -1311,55 +1903,63 @@ paths:
                 example:
                   - id: 4
                     parent_id: 7
-                    nume: "SMURD National"
+                    nume: SMURD National
                     descriere: null
                     adresa: null
                     cod_postal: null
                     telefon: null
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
+                    localitate: Targu-Mures
+                    judet: Mures
                     departament_id: 1
                     parent: null
-                    departament: 
+                    departament:
                       id: 1
-                      nume: "SMURD"
-                      descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                      adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                      cod_postal: "540136"
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
-                      telefon: "+40 265 210 110"
-                      created_at: "2018-03-26 09:51:28"
-                      updated_at: "2018-03-26 09:51:28"
+                      nume: SMURD
+                      descriere: >-
+                        Scopul SMURD este transferul unui echipaj medical
+                        spitalicesc, cu dotarea necesară, la locul unde se află
+                        un pacient în stare critică, în vederea acordării de
+                        asistență medicală de urgență calificată.
+                      adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                      cod_postal: '540136'
+                      localitate: Targu-Mures
+                      judet: Mures
+                      telefon: +40 265 210 110
+                      created_at: '2018-03-26 09:51:28'
+                      updated_at: '2018-03-26 09:51:28'
                       deleted_at: null
                   - id: 5
                     parent_id: 7
-                    nume: "SMURD National"
+                    nume: SMURD National
                     descriere: null
                     adresa: null
                     cod_postal: null
                     telefon: null
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
+                    localitate: Targu-Mures
+                    judet: Mures
                     departament_id: 1
                     parent: null
-                    departament: 
+                    departament:
                       id: 1
-                      nume: "SMURD"
-                      descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                      adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                      cod_postal: "540136"
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
-                      telefon: "+40 265 210 110"
-                      created_at: "2018-03-26 09:51:28"
-                      updated_at: "2018-03-26 09:51:28"
+                      nume: SMURD
+                      descriere: >-
+                        Scopul SMURD este transferul unui echipaj medical
+                        spitalicesc, cu dotarea necesară, la locul unde se află
+                        un pacient în stare critică, în vederea acordării de
+                        asistență medicală de urgență calificată.
+                      adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                      cod_postal: '540136'
+                      localitate: Targu-Mures
+                      judet: Mures
+                      telefon: +40 265 210 110
+                      created_at: '2018-03-26 09:51:28'
+                      updated_at: '2018-03-26 09:51:28'
                       deleted_at: null
                 items:
                   $ref: '#/components/schemas/Unitati'
@@ -1368,7 +1968,9 @@ paths:
   /unitati/departament/{id}:
     get:
       summary: BROWSE - unitati din acelasi departament
-      description: 'Returneaza toate unitatile apartanand unui departament, bazat pe id-ul departamentului'
+      description: >-
+        Returneaza toate unitatile apartanand unui departament, bazat pe id-ul
+        departamentului
       security:
         - apiKey: []
       parameters:
@@ -1377,7 +1979,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1389,7 +1991,9 @@ paths:
         - Unitati
       responses:
         '200':
-          description: Success. Lista obiect JSON cu toate unitatile apartand de acelasi departament.
+          description: >-
+            Success. Lista obiect JSON cu toate unitatile apartand de acelasi
+            departament.
           content:
             application/json:
               schema:
@@ -1397,44 +2001,44 @@ paths:
                 example:
                   - id: 4
                     parent_id: null
-                    nume: "SMURD National"
+                    nume: SMURD National
                     descriere: null
                     adresa: null
                     cod_postal: null
                     telefon: null
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
+                    localitate: Targu-Mures
+                    judet: Mures
                     departament_id: 1
                     parent: null
                   - id: 5
                     parent_id: 7
-                    nume: "SMURD National"
+                    nume: SMURD National
                     descriere: null
                     adresa: null
                     cod_postal: null
                     telefon: null
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
+                    localitate: Targu-Mures
+                    judet: Mures
                     departament_id: 1
-                    parent:  
+                    parent:
                       id: 7
                       parent_id: null
-                      nume: "SMURD Test"
+                      nume: SMURD Test
                       descriere: null
                       adresa: null
                       cod_postal: null
                       telefon: null
-                      created_at: "2018-03-26 16:39:21"
-                      updated_at: "2018-03-26 16:39:21"
+                      created_at: '2018-03-26 16:39:21'
+                      updated_at: '2018-03-26 16:39:21'
                       deleted_at: null
-                      localitate: "Targu-Mures"
-                      judet: "Mures"
+                      localitate: Targu-Mures
+                      judet: Mures
                       departament_id: 1
                 items:
                   $ref: '#/components/schemas/Unitati'
@@ -1452,7 +2056,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1472,42 +2076,46 @@ paths:
                 example:
                   id: 4
                   parent_id: 7
-                  nume: "Statia centrala SMURD SIBIU"
-                  descriere: "SMURD judet Sibiu"
-                  adresa: "str. Vasile Carlova, nr.16-22"
-                  cod_postal: "550017"
-                  telefon: "+40 269 123 456"
-                  created_at: "2018-03-26 10:25:29"
-                  updated_at: "2018-03-28 08:37:34"
+                  nume: Statia centrala SMURD SIBIU
+                  descriere: SMURD judet Sibiu
+                  adresa: 'str. Vasile Carlova, nr.16-22'
+                  cod_postal: '550017'
+                  telefon: +40 269 123 456
+                  created_at: '2018-03-26 10:25:29'
+                  updated_at: '2018-03-28 08:37:34'
                   deleted_at: null
-                  localitate: "Sibiu"
-                  judet: "Sibiu"
+                  localitate: Sibiu
+                  judet: Sibiu
                   departament_id: 1
-                  parent: 
+                  parent:
                     id: 7
                     parent_id: null
-                    nume: "SMURD National"
+                    nume: SMURD National
                     descriere: null
                     adresa: null
                     cod_postal: null
                     telefon: null
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
+                    localitate: Targu-Mures
+                    judet: Mures
                     departament_id: 1
-                  departament: 
+                  departament:
                     id: 1
-                    nume: "SMURD"
-                    descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                    adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                    cod_postal: "540136"
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
-                    telefon: "+40 265 210 110"
-                    created_at: "2018-03-26 09:51:28"
-                    updated_at: "2018-03-26 09:51:28"
+                    nume: SMURD
+                    descriere: >-
+                      Scopul SMURD este transferul unui echipaj medical
+                      spitalicesc, cu dotarea necesară, la locul unde se află un
+                      pacient în stare critică, în vederea acordării de
+                      asistență medicală de urgență calificată.
+                    adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                    cod_postal: '540136'
+                    localitate: Targu-Mures
+                    judet: Mures
+                    telefon: +40 265 210 110
+                    created_at: '2018-03-26 09:51:28'
+                    updated_at: '2018-03-26 09:51:28'
                     deleted_at: null
                 items:
                   $ref: '#/components/schemas/Unitati'
@@ -1516,7 +2124,7 @@ paths:
   /unitate/editare:
     put:
       summary: EDIT - editare unitate
-      description: 'Editarea datelor unei unitati'
+      description: Editarea datelor unei unitati
       security:
         - apiKey: []
       parameters:
@@ -1531,7 +2139,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru editare
         required: true
@@ -1543,36 +2151,38 @@ paths:
                 - request_id
               example:
                 request_id: 8
-                nume: "Nume modificat Testare Unitate SMURD"
+                nume: Nume modificat Testare Unitate SMURD
               items:
-                  $ref: '#/components/schemas/Unitati'
+                $ref: '#/components/schemas/Unitati'
       tags:
         - Unitati
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Unitate modificata cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Unitatea [Nume modificat Testare Unitate SMURD] modificata cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+                  message: success
+                  description: >-
+                    Unitatea [Nume modificat Testare Unitate SMURD] modificata
+                    cu succes.
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Localitate inexistenta."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Localitate inexistenta.
   /unitate/adaugare:
     post:
       summary: ADD - inregistrare unitate noua
-      description: 'Inregistrarea unei noi unitati'
+      description: Inregistrarea unei noi unitati
       security:
         - apiKey: []
       parameters:
@@ -1587,7 +2197,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru iregistrare
         required: true
@@ -1600,35 +2210,36 @@ paths:
                 - departament_id
                 - telefon
               example:
-                nume: "Unitate test"
+                nume: Unitate test
                 parent_id: 7
                 departament_id: 1
-                descriere: "Unitate SMURD pentru teste"
-                telefon: "0745 222333"
+                descriere: Unitate SMURD pentru teste
+                telefon: 0745 222333
               items:
-                  $ref: '#/components/schemas/Unitati'
+                $ref: '#/components/schemas/Unitati'
       tags:
         - Unitati
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Unitate creata.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Unitate [Unitate test] creata."
-        '200 Fail':
+                  message: success
+                  description: 'Unitate [Unitate test] creata.'
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  telefon: ["The telefon field is required."]
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  telefon:
+                    - The telefon field is required.
   /unitate/stergere/{id}:
     delete:
       summary: DELETE - unitate
@@ -1641,7 +2252,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1651,30 +2262,32 @@ paths:
       tags:
         - Unitati
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Unitate stearsa cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Unitatea [Nume modificat Testare Unitate SMURD] stearsa cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+                  message: success
+                  description: >-
+                    Unitatea [Nume modificat Testare Unitate SMURD] stearsa cu
+                    succes.
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Unitatea nu poate fi stearsa. Probabil nu exista."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Unitatea nu poate fi stearsa. Probabil nu exista.
   /departamente:
     get:
       summary: BROWSE - departamente
-      description: 'Returneaza toata colectia Departamente'
+      description: Returneaza toata colectia Departamente
       security:
         - apiKey: []
       parameters:
@@ -1683,7 +2296,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       tags:
         - Departamente
       responses:
@@ -1695,26 +2308,30 @@ paths:
                 type: array
                 example:
                   - id: 1
-                    nume: "SMURD"
-                    descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                    adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                    cod_postal: "540136"
-                    localitate: "Targu-Mures"
-                    judet: "Mures"
-                    telefon: "+40 265 210 110"
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    nume: SMURD
+                    descriere: >-
+                      Scopul SMURD este transferul unui echipaj medical
+                      spitalicesc, cu dotarea necesară, la locul unde se află un
+                      pacient în stare critică, în vederea acordării de
+                      asistență medicală de urgență calificată.
+                    adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                    cod_postal: '540136'
+                    localitate: Targu-Mures
+                    judet: Mures
+                    telefon: +40 265 210 110
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
                   - id: 2
-                    nume: "CivicTech"
-                    descriere: "Dezvoltatorii aplicatiei de raportare DSU"
-                    adresa: "Splaiul Unirii 165 Timpuri Noi Square, clădirea 2, etaj 1"
-                    cod_postal: "030133"
-                    localitate: "Sector 3"
-                    judet: "Bucuresti"
-                    telefon: "+40 728 453 297"
-                    created_at: "2018-03-26 16:39:21"
-                    updated_at: "2018-03-26 16:39:21"
+                    nume: CivicTech
+                    descriere: Dezvoltatorii aplicatiei de raportare DSU
+                    adresa: 'Splaiul Unirii 165 Timpuri Noi Square, clădirea 2, etaj 1'
+                    cod_postal: '030133'
+                    localitate: Sector 3
+                    judet: Bucuresti
+                    telefon: +40 728 453 297
+                    created_at: '2018-03-26 16:39:21'
+                    updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
                 items:
                   $ref: '#/components/schemas/Departamente'
@@ -1723,7 +2340,7 @@ paths:
   /departament/{id}:
     get:
       summary: READ - departament
-      description: 'Returneaza un departament bazat pe id'
+      description: Returneaza un departament bazat pe id
       security:
         - apiKey: []
       parameters:
@@ -1732,7 +2349,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1751,15 +2368,19 @@ paths:
                 type: array
                 example:
                   id: 1
-                  nume: "SMURD"
-                  descriere: "Scopul SMURD este transferul unui echipaj medical spitalicesc, cu dotarea necesară, la locul unde se află un pacient în stare critică, în vederea acordării de asistență medicală de urgență calificată."
-                  adresa: "Str. Prof. Dr. Gheorghe Marinescu nr. 50"
-                  cod_postal: "540136"
-                  localitate: "Targu-Mures"
-                  judet: "Mures"
-                  telefon: "+40 265 210 110"
-                  created_at: "2018-03-26 16:39:21"
-                  updated_at: "2018-03-26 16:39:21"
+                  nume: SMURD
+                  descriere: >-
+                    Scopul SMURD este transferul unui echipaj medical
+                    spitalicesc, cu dotarea necesară, la locul unde se află un
+                    pacient în stare critică, în vederea acordării de asistență
+                    medicală de urgență calificată.
+                  adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                  cod_postal: '540136'
+                  localitate: Targu-Mures
+                  judet: Mures
+                  telefon: +40 265 210 110
+                  created_at: '2018-03-26 16:39:21'
+                  updated_at: '2018-03-26 16:39:21'
                   deleted_at: null
                 items:
                   $ref: '#/components/schemas/Departamente'
@@ -1768,7 +2389,7 @@ paths:
   /departament/editare:
     put:
       summary: EDIT - editare departament
-      description: 'Editarea datelor unui departament'
+      description: Editarea datelor unui departament
       security:
         - apiKey: []
       parameters:
@@ -1783,7 +2404,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru editare
         required: true
@@ -1795,36 +2416,38 @@ paths:
                 - request_id
               example:
                 request_id: 5
-                nume: "Nume modificat Testare Departament"
+                nume: Nume modificat Testare Departament
               items:
-                  $ref: '#/components/schemas/Departamente'
+                $ref: '#/components/schemas/Departamente'
       tags:
         - Departamente
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Departament modificat cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Departamentul [Nume modificat Testare Departament] modificat cu succes."
-        '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+                  message: success
+                  description: >-
+                    Departamentul [Nume modificat Testare Departament] modificat
+                    cu succes.
+        200 Fail:
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Departament inexistent."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Departament inexistent.
   /departament/adaugare:
     post:
       summary: ADD - inregistrare departament nou
-      description: 'Inregistrarea unui nou depatament'
+      description: Inregistrarea unui nou depatament
       security:
         - apiKey: []
       parameters:
@@ -1839,7 +2462,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
       requestBody:
         description: Datele pentru inregistrare
         required: true
@@ -1851,37 +2474,40 @@ paths:
                 - nume
                 - telefon
               example:
-                nume: "Departament test 1"
-                descriere: "Departament pentru testare"
-                telefon: "0745 222333"
+                nume: Departament test 1
+                descriere: Departament pentru testare
+                telefon: 0745 222333
               items:
-                  $ref: '#/components/schemas/Departamente'
+                $ref: '#/components/schemas/Departamente'
       tags:
         - Departamente
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Departament creat.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Departamentul [Departament test 1] creat."
-        '200 Fail':
+                  message: success
+                  description: 'Departamentul [Departament test 1] creat.'
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  telefon: ["The telefon field is required."]
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  telefon:
+                    - The telefon field is required.
   /departament/stergere/{id}:
     delete:
       summary: DELETE - departament
-      description: 'Sterge(soft) un departament bazat pe id, inclusiv relatii - unitati si utilizatori'
+      description: >-
+        Sterge(soft) un departament bazat pe id, inclusiv relatii - unitati si
+        utilizatori
       security:
         - apiKey: []
       parameters:
@@ -1890,7 +2516,7 @@ paths:
           required: true
           schema:
             type: string
-            default: bearer {token}
+            default: 'bearer {token}'
         - in: path
           name: id
           required: true
@@ -1907,23 +2533,23 @@ paths:
               schema:
                 type: object
                 example:
-                  message: "success"
+                  message: success
                   description: "Departamentul [Nume modificat Testare Departament] sters cu succes."
         '200 Fail':
-          description: Lipsa unui camp obligatoriu, id-ul de exemplu.
+          description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
+                  message: fail
                   description: "Departamentul nu poate fi sters. Probabil nu exista."
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 components:
   responses:
     UnauthorizedError:
-      description: Token-ul lipseste sau este incorect - '{"error":"Unauthorized"}'
+      description: 'Token-ul lipseste sau este incorect - ''{"error":"Unauthorized"}'''
   securitySchemes:
     apiKey:
       type: http
@@ -2003,6 +2629,34 @@ components:
           type: string
           format: date-time
         updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+    Permissions:
+      type: object
+      required:
+        - id
+        - key
+      properties:
+        id:
+          type: integer
+          format: int64
+        key:
+          type: string
+        table_name:
+          type: string
+        permission_group_id:
+          type: integer
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
           type: string
           format: date-time
     Localitati:
