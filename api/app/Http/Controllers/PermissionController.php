@@ -7,11 +7,10 @@ use Illuminate\Database\QueryException;
 use Carbon\Carbon;
 use Auth;
 
-use App\Role;
-use App\User;
+use App\Permission;
 use App\Audit;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,15 +23,15 @@ class RoleController extends Controller
     }
 
     /**
-     * Get all active roles
+     * Get all active permissions
      * Browse our Data Type (B)READ
      *
      * @return array JSON
      */
     public function index()
     {
-        if(Auth::user()->hasPermission('browse_roles')){
-            $collection = Role::with('permisiuni')->where('deleted_at', null)->get();
+        if(Auth::user()->hasPermission('browse_permissions')){
+            $collection = Permission::with('roluri')->where('deleted_at', null)->get();
             return response()->json($collection);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -40,16 +39,16 @@ class RoleController extends Controller
     }
 
     /**
-     * Get individual record Role, by ID
+     * Get individual record Permission, by ID
      * Read our Data Type B(R)EAD
      *
-     * @param integer $id - Role ID
+     * @param integer $id - Permission ID
      * @return array JSON
      */
     public function find($id)
     {
-        if(Auth::user()->hasPermission('read_roles')){
-            $collection = Role::with('permisiuni')->find($id);
+        if(Auth::user()->hasPermission('read_permissions')){
+            $collection = Permission::with('roluri')->find($id);
             return response()->json($collection);
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -57,7 +56,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Edit individual role.
+     * Edit individual Permission.
      * Edit our Data Type BR(E)AD
      *
      * @param Request $request - data sent by form | by http request
@@ -68,14 +67,14 @@ class RoleController extends Controller
         $result = array();
 
         try{
-            if($roleModel = Role::find($request->input('request_id'))){
-                if(Auth::user()->hasPermission('edit_roles')){
-                    $requestOld = $roleModel->toArray();
+            if($permissionModel = Permission::find($request->input('request_id'))){
+                if(Auth::user()->hasPermission('edit_permissions')){
+                    $requestOld = $permissionModel->toArray();
                     $requestData = $request->all();
                     unset($requestData['id'], $requestData['request_id'], $requestData['_url']);
 
-                    $roleModel->update($requestData);
-                    $roleModel->permisiuni()->sync($request->input('pivot'));
+                    $permissionModel->update($requestData);
+                    $permissionModel->roluri()->sync($request->input('pivot'));
                     // add a audit log
                     $dataOld = '';
                     $dataChanged = '';
@@ -88,19 +87,19 @@ class RoleController extends Controller
                     $dataOld = substr($dataOld, 0, -2);
                     $dataChanged = substr($dataChanged, 0, -2);
                     $auditLog = array(
-                        'description' => 'Rolul [' . $roleModel->nume . '] modificat cu succes.',
+                        'description' => 'Permisiunea [' . $permissionModel->key . '] modificata cu succes.',
                         'old_value' => $dataOld,
                         'new_value' => $dataChanged,
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
                     $result['message'] = 'success';
-                    $result['description'] = 'Rolul [' . $roleModel->nume . '] modificat cu succes.';
+                    $result['description'] = 'Permisiunea [' . $permissionModel->key . '] modificata cu succes.';
                 } else {
                     // add a audit log
                     $auditLog = array(
                         'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                        'new_value' => '401 /rol/editare',
+                        'new_value' => '401 /permisiune/editare',
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
@@ -109,7 +108,7 @@ class RoleController extends Controller
                 }
             } else {
                 $result['message'] = 'fail';
-                $result['description'] = 'Rol inexistent.';
+                $result['description'] = 'Permisiune inexistenta.';
             }
         } catch (QueryException $exception) {
             $result['message'] = 'fail';
@@ -120,7 +119,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Create role.
+     * Create permission.
      * Add Data Type BRE(A)D
      *
      * @param Request $request - data sent by form | by http request
@@ -132,22 +131,22 @@ class RoleController extends Controller
         $result = array();
 
         try {
-            if(Auth::user()->hasPermission('add_roles')){
+            if(Auth::user()->hasPermission('add_permissions')){
                 // validate data
                 $this->validate($request, [
-                    'name' => 'required'
+                    'key' => 'required'
                 ]);
 
-                // create role
-                $collection = Role::create($request->all());
-                $collection->permisiuni()->sync($request->input('pivot'));
+                // create permission
+                $collection = Permission::create($request->all());
+                $collection->roluri()->sync($request->input('pivot'));
                 $result['message'] = 'success';
-                $result['description'] = 'Rolul [' . $collection['name'] .'] creat.';
+                $result['description'] = 'Permisiunea [' . $collection['key'] .'] creata.';
             } else {
                 // add a audit log
                 $auditLog = array(
                     'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                    'new_value' => '401 /rol/adaugare',
+                    'new_value' => '401 /permisiune/adaugare',
                     'user_id' => Auth::user()->id
                 );
                 Audit::create($auditLog);
@@ -163,10 +162,10 @@ class RoleController extends Controller
     }
 
     /**
-     * Delete role - soft.
+     * Delete permission - soft.
      * Delete our Data Type BREA(D)
      *
-     * @param integer $id - Role ID
+     * @param integer $id - Permission ID
      * @return array JSON
      */
     public function delete($id)
@@ -174,33 +173,33 @@ class RoleController extends Controller
         $result = array();
 
         try {
-            if(Auth::user()->hasPermission('delete_roles')) {
-                // soft delete role
-                $roleModel = Role::find($id);
-                $count = Role::destroy($id);
+            if(Auth::user()->hasPermission('delete_permissions')) {
+                // soft delete permission
+                $permissionModel = Permission::find($id);
+                $count = Permission::destroy($id);
 
                 if($count === 1)
                 {
-                    // detach all pivot permissions
-                    $roleModel->permisiuni()->detach();
+                    // detach all pivot roles
+                    $permissionModel->roluri()->detach();
 
                     $auditLog = array(
-                        'description' =>  'Rolul [' . $roleModel->name . '] sters cu succes.',
+                        'description' =>  'Permisiunea [' . $permissionModel->key . '] stearsa cu succes.',
                         'user_id' => Auth::user()->id
                     );
                     Audit::create($auditLog);
 
                     $result['message'] = 'success';
-                    $result['description'] = 'Rolul [' . $roleModel->name . '] sters cu succes.';
+                    $result['description'] = 'Permisiunea [' . $permissionModel->key . '] stearsa cu succes.';
                 } else {
                     $result['message'] = 'fail';
-                    $result['description'] = 'Rolul nu poate fi sters. Probabil nu exista.';
+                    $result['description'] = 'Permisiunea nu poate fi stearsa. Probabil nu exista.';
                 }
             } else {
                 // add a audit log
                 $auditLog = array(
                     'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
-                    'new_value' => '401 /rol/stergere',
+                    'new_value' => '401 /permisiune/stergere',
                     'user_id' => Auth::user()->id
                 );
                 Audit::create($auditLog);

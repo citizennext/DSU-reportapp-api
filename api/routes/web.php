@@ -171,3 +171,23 @@ $router->group(['prefix' => 'rol'], function($router) {
     // <api_url>/rol/stergere/{id}
     $router->delete('stergere/{id}', 'RoleController@delete');
 });
+$router->group(['prefix' => 'permisiuni'], function($router) {
+
+    // <api_url>/permisiuni
+    $router->get('/', 'PermissionController@index');
+
+});
+$router->group(['prefix' => 'permisiune'], function($router) {
+
+    // <api_url>/permisiune/{id}
+    $router->get('{id}', 'PermissionController@find');
+
+    // <api_url>/permisiune/adaugare
+    $router->post('adaugare/', 'PermissionController@create');
+
+    // <api_url>/permisiune/editare
+    $router->put('editare/', 'PermissionController@edit');
+
+    // <api_url>/permisiune/stergere/{id}
+    $router->delete('stergere/{id}', 'PermissionController@delete');
+});
