@@ -149,3 +149,45 @@ $router->group(['prefix' => 'departament'], function($router) {
     // <api_url>/departament/stergere/{id}
     $router->delete('stergere/{id}', 'DepartamentController@delete');
 });
+
+// Roluri si Permisiuni routes
+$router->group(['prefix' => 'roluri'], function($router) {
+
+    // <api_url>/roluri
+    $router->get('/', 'RoleController@index');
+
+});
+$router->group(['prefix' => 'rol'], function($router) {
+
+    // <api_url>/rol/{id}
+    $router->get('{id}', 'RoleController@find');
+
+    // <api_url>/rol/adaugare
+    $router->post('adaugare/', 'RoleController@create');
+
+    // <api_url>/rol/editare
+    $router->put('editare/', 'RoleController@edit');
+
+    // <api_url>/rol/stergere/{id}
+    $router->delete('stergere/{id}', 'RoleController@delete');
+});
+$router->group(['prefix' => 'permisiuni'], function($router) {
+
+    // <api_url>/permisiuni
+    $router->get('/', 'PermissionController@index');
+
+});
+$router->group(['prefix' => 'permisiune'], function($router) {
+
+    // <api_url>/permisiune/{id}
+    $router->get('{id}', 'PermissionController@find');
+
+    // <api_url>/permisiune/adaugare
+    $router->post('adaugare/', 'PermissionController@create');
+
+    // <api_url>/permisiune/editare
+    $router->put('editare/', 'PermissionController@edit');
+
+    // <api_url>/permisiune/stergere/{id}
+    $router->delete('stergere/{id}', 'PermissionController@delete');
+});
