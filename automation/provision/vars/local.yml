@@ -3,10 +3,12 @@ server:
   update_cache: yes
 
 nginx:
-  service_host: "dsu.civictech.local"  
+  service_host: "dsu.civictech.local"
   service_document_root: "/vagrant/DSU-reportapp-api/api/public"
-  service_host2: "dsu-admin.civictech.local"  
+  service_host2: "dsu-admin.civictech.local"
   service_document_root2: "/vagrant/DSU-reportapp-api-admin/api-man/public"
+  service_host3: "dsu-portal.civictech.local"
+  service_document_root3: "/vagrant/DSU-reportapp-portal/portal/public"
   service_admin_email: "lucian.stuparu@civictech.ro"
   renew_ssl_now: "off"
   generate_dhparams: "on"
@@ -14,7 +16,7 @@ nginx:
   certificate_key_path: "/etc/ssl/private/dsu.civictech.local.key"
   generate_ssl_now: "on"
   self_signed_certificate:
-    - name: "DSU"      
+    - name: "DSU"
       country: "RO"
       state: "Bucharest"
       locality: "Bucharest"
@@ -75,4 +77,3 @@ php_fpm_config_pool:
 #      value: "4"
 #    - option: "pm.max_spare_servers"
 #      value: "6"
-
