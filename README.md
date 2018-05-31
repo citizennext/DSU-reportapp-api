@@ -3,6 +3,7 @@
 [![Latest Unstable Version](https://img.shields.io/badge/unstable-0.1.3-orange.svg?format=flat-square)](https://github.com/civictechro/DSU-reportapp-api/releases/tag/version/0.1.3)
 [![Open Issues](https://img.shields.io/github/issues/civictechro/DSU-reportapp-api.svg?format=flat-square)](https://github.com/civictechro/DSU-reportapp-api/issues)
 [![Software License](https://img.shields.io/github/license/civictechro/DSU-reportapp-api.svg?style=flat-square)](https://github.com/civictechro/DSU-reportapp-api/blob/master/LICENSE)
+[![Code consistency](http://squizlabs.github.io/PHP_CodeSniffer/analysis/squizlabs/PHP_CodeSniffer/grade.svg)](https://squizlabs.github.io/PHP_CodeSniffer/analysis/civictechro/DSU-reportapp-api/)
 
 # DSU-report-api
 API pentru aplicatia de raportare integrata a DSU
