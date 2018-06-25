@@ -16,6 +16,12 @@
   with_items: "{{ php.extensions }}"
   when: php.extensions is defined
 
+- name: Install PHP Memcached extension (Debian).
+  apt:
+    name: "php-memcached"
+    state: present
+  notify: Restart PHP-FPM
+
 - name: Install & configure Xdebug
   include: xdebug.yml
   when: php.xdebug|default(false)

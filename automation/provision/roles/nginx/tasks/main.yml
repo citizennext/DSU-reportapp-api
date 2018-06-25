@@ -31,7 +31,7 @@
   copy: src=gzip.conf dest=/etc/nginx/conf.d/gzip.conf owner=root group=root
 
 - name: Copy httpauth settings file
-  copy: src=httpauth.conf dest=/etc/nginx/conf.d/httpauth.conf owner=root group=root  
+  copy: src=httpauth.conf dest=/etc/nginx/conf.d/httpauth.conf owner=root group=root
   when: app.htpasswd_user is defined
 
 - name: Ensures conf.d/ssl directory exists
@@ -44,22 +44,22 @@
     - sites-enabled
 
 - name: Generate http auth password file
-  htpasswd: 
+  htpasswd:
       path: /etc/nginx/conf.d/passwdfile
       name: "{{ app.htpasswd_user }}"
-      password: "{{ app.htpasswd_pass }}" 
+      password: "{{ app.htpasswd_pass }}"
       owner: root
       group: root
-      mode: 0644  
+      mode: 0644
   when: app.htpasswd_user is defined
 
 - name: Vhost upload
   template: src=vhost.conf.j2 dest=/etc/nginx/sites-available/vhost.conf
 
 - name: Enable vhost
-  file: 
+  file:
     src: /etc/nginx/sites-available/vhost.conf
-    dest: /etc/nginx/sites-enabled/vhost.conf 
+    dest: /etc/nginx/sites-enabled/vhost.conf
     state: link
 
 # vhost2
@@ -68,17 +68,29 @@
   when: nginx.service_document_root2 is defined
 
 - name: Enable vhost2
-  file: 
+  file:
     src: /etc/nginx/sites-available/vhost2.conf
-    dest: /etc/nginx/sites-enabled/vhost2.conf 
+    dest: /etc/nginx/sites-enabled/vhost2.conf
     state: link
   when: nginx.service_document_root2 is defined
+
+# vhost3
+- name: Vhost3 upload
+  template: src=vhost3.conf.j2 dest=/etc/nginx/sites-available/vhost3.conf
+  when: nginx.service_document_root3 is defined
+
+- name: Enable vhost3
+  file:
+    src: /etc/nginx/sites-available/vhost3.conf
+    dest: /etc/nginx/sites-enabled/vhost3.conf
+    state: link
+  when: nginx.service_document_root3 is defined
 
 # ssl
 - name: Generate dhparams file
   shell: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
   when: nginx.generate_dhparams == "on"
-  
+
 - name: Generate self signed certificate
   shell: openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/{{ nginx.service_host }}.key -out /etc/ssl/certs/{{ nginx.service_host }}.crt -subj "/C={{item.country}}/ST={{item.state}}/L={{item.locality}}/O={{item.organization}}/OU={{item.organizationalunit}}/CN={{item.commonname}}/emailAddress={{item.email}}"
   with_items: "{{ nginx.self_signed_certificate }}"
