@@ -39,30 +39,38 @@ vagrant ssh
 ```
 - Create .env file for DSU-reportapp-api
 ```
-cd /vagrant/DSU-reportapp-api/api/
-cp .env.example .env
+$ cd /vagrant/DSU-reportapp-api/api/
+$ cp .env.example .env
 ```
 - Create .env file for DSU-reportapp-api-admin
 ```
-cd /vagrant/DSU-reportapp-api-admin/api-man/
-cp .env.example .env
+$ cd /vagrant/DSU-reportapp-api-admin/api-man/
+$ cp .env.example .env
 ```
 
 ## 3. Retrieve dependencies
 ```
-cd /vagrant/DSU-reportapp-api-admin/api-man/
-composer dump-autoload
-composer update
+$ cd /vagrant/DSU-reportapp-api-admin/api-man/
+$ composer install
 ```
 
-## 4. Create DB tables and seed test data
+## 4. Generate keys
 ```
-cd /vagrant/DSU-reportapp-api-admin/api-man/
-php artisan migrate
-php artisan db:seed
+$ cd /vagrant/DSU-reportapp-api-admin/api-man/
+$ php artisan key:generate
+
+$ cd /vagrant/DSU-reportapp-api/api/
+$ php artisan key:generate
 ```
 
-## 4 Test
+## 5. Create DB tables and seed test data
+```
+cd /vagrant/DSU-reportapp-api-admin/api-man/
+$ php artisan migrate
+$ php artisan db:seed
+```
+
+## 6 Test
 - browse DSU-reportapp-api and accept certificate warning (in chrome type: badidea)
   - Custom Lumen landing page should be displayed
 ```
