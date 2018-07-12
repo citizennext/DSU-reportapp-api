@@ -1,0 +1,30 @@
+---
+- name: Add PHP official repository
+  apt_repository: repo={{ php.repository }} state=present
+  when: ansible_distribution == "Ubuntu" and php.repository is defined
+
+- name: Install PHP CLI
+  package: pkg={{ php.package_cli }} state=present
+  when: php.package_cli is defined
+
+- name: Install PHP-FPM
+  package: pkg={{ php.package_fpm }} state=present
+  when: php.package_fpm is defined
+
+- name: Install PHP extensions
+  package: pkg={{ item }} state=latest
+  with_items: "{{ php.extensions }}"
+  when: php.extensions is defined
+
+- name: Install PHP Memcached extension (Debian).
+  apt:
+    name: "php-memcached"
+    state: present
+  notify: Restart PHP-FPM
+
+- name: Install & configure Xdebug
+  include: xdebug.yml
+  when: php.xdebug|default(false)
+
+- name: Configure PHP and PHP-FPM
+  include: configure.yml
