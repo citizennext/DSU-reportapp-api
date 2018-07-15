@@ -88,7 +88,7 @@
 
 # ssl
 - name: Generate dhparams file
-  shell: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+  shell: sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
   when: nginx.generate_dhparams == "on"
 
 - name: Generate self signed certificate

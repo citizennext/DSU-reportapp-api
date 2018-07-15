@@ -1,0 +1,25 @@
+---
+- name: DEV2 VM Provisioning
+  hosts: "dev2"
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: no
+  vars_files:
+    - vars/dev2.yml
+    - vars/dev2_secrets.yml
+
+  pre_tasks:
+  - name: Install python for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+    register: output
+    changed_when: output.stdout != ""
+  - name: Gathering Facts
+    setup:
+
+  roles:
+    - server
+    - nginx
+    - php
+    - postgres
+    - app
