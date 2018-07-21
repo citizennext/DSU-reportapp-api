@@ -21,3 +21,4 @@ api/storage/logs/
 ### PhpStorm ###
 .idea/
 /.idea
+api/composer\.lock
