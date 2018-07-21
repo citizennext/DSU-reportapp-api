@@ -11,6 +11,7 @@ use App\Mail\WelcomeUtilizator;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Auth;
+use Validator;
 
 use App\User;
 use App\Unitate;
@@ -40,40 +41,65 @@ class UserController extends Controller
     {
         $result = array();
 
+
         try {
             // validate data
-            $this->validate($request, [
+            $rules = [
                 'email' => 'required',
                 'parola' => 'required'
-            ]);
+            ];
+            $messages = [
+                'email.required' => 'Adresa de e-mail este necesara.',
+                'parola.required' => 'Parola este necesara.',
+            ];
 
-            $userModel = User::where('email', $request->input('email'))->first();
-
-            if($userModel->active == 0){
+            $validator = Validator::make($request->json()->all(), $rules, $messages);
+            if ($validator->fails()) {
 
                 $result['message'] = 'fail';
-                $result['description'] = 'Utilizatorul [' . $userModel['email'] .'] este inactiv';
-
-            } elseif(Hash::check($request->input('parola'), $userModel->parola)){
-
-                $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
-                $apikey = base64_encode(str_random(40));
-                User::where('email', $request->input('email'))->update(['api_key' => $apikey, 'api_key_expire' => Carbon::now()->addMinutes($expireApiKeyTime)]);
-
-                // add a audit log
-                $auditLog = array(
-                    'description' => 'Autentificare utilizator ' . (strlen($userModel->prenume) > 0 ? $userModel->prenume . ' ' . $userModel->nume : $userModel->nume),
-                    'new_value' => 'Succes',
-                    'user_id' => $userModel->id
-                );
-                Audit::create($auditLog);
-
-                $result['message'] = 'success';
-                $result['api_key'] = encrypt($apikey);
+                $result['description'] = $validator->errors();
+                return response()->json($result, 401);
 
             } else {
-                $result['message'] = 'fail';
-                return response()->json($result, 401);
+                // check if email exist
+                if(User::where('email', $request->input('email'))->first()) {
+
+                    $userModel = User::where('email', $request->input('email'))->first();
+
+                    // check if user is active (soft delete)
+                    if ($userModel->active == 0) {
+
+                        $result['message'] = 'fail';
+                        $result['description'] = 'Utilizatorul [' . $userModel['email'] . '] este inactiv';
+                        return response()->json($result)->setStatusCode(493, 'Fail utilizator');
+
+                    } elseif (Hash::check($request->input('parola'), $userModel->parola)) {
+
+                        $expireApiKeyTime = Setting::where('key', 'api.api_key_expire')->first()->value;
+                        $apikey = base64_encode(str_random(40));
+                        User::where('email', $request->input('email'))->update(['api_key' => $apikey, 'api_key_expire' => Carbon::now()->addMinutes($expireApiKeyTime)]);
+
+                        // add a audit log
+                        $auditLog = array(
+                            'description' => 'Autentificare utilizator ' . (strlen($userModel->prenume) > 0 ? $userModel->prenume . ' ' . $userModel->nume : $userModel->nume),
+                            'new_value' => 'Succes',
+                            'user_id' => $userModel->id
+                        );
+                        Audit::create($auditLog);
+
+                        $result['message'] = 'success';
+                        $result['api_key'] = encrypt($apikey);
+
+                    } else {
+                        $result['message'] = 'fail';
+                        $result['description'] = 'Parola utilizatorului [' . $userModel['email'] . '] este incorecta.';
+                        return response()->json($result)->setStatusCode(492, 'Fail parola');
+                    }
+                } else {
+                    $result['message'] = 'fail';
+                    $result['description'] = 'Nu exista nici un utilizator cu aceasta adresa de e-mail [' . $request->input('email') . '].';
+                    return response()->json($result)->setStatusCode(491, 'Fail e-mail');
+                }
             }
         } catch (QueryException $exception) {
             $result['message'] = 'fail';

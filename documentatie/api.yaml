@@ -59,7 +59,25 @@ paths:
                   message: success
                   api_key: >-
                     eyJpdiI6IlpOQ04wTURNcUEzK0dsMlE2OW5paGc9PSIsInZhbHVlIjoiZExURk1maHV6bHRIaU5lQkMyMStPM3RRMzQwRnZuK3ZXdThNUG9FemEyNGpjN3JXNGxaVTBYVlZwdWJFeWIzMlE2SlhLZXk1aWxTXC9NU2szRmlOd1dxbWRUbzRjc1YzdTI4VFdpSVcrdmh3PSIsIm1hYyI6IjUyMGRlZDJkMTk5NDFhMmM5MDEyMzIwNmNlNmIwMGE4OGZiNTA3NzRlYjUwZjNkMWZmNTUzMGQyYmIxZjFjOWMifQ==
-        200 Fail:
+        491 Fail email:
+          description: 'Nu exista un utilizator cu aceasta adresa de email'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: fail
+                  description: 'Nu exista nici un utilizator cu aceasta adresa de e-mail [tudor.rusu@hotmail.com]'
+        492 Fail parola:
+          description: 'Utilizator existent, dar parola gresita.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: fail
+                  description: 'Parola utilizatorului [tudor.rusu@hotmail.com] este incorecta.'
+        493 Fail utilizator:
           description: 'Utilizator existent, dar inactiv.'
           content:
             application/json:
@@ -67,7 +85,7 @@ paths:
                 type: object
                 example:
                   message: fail
-                  description: 'Utilizatorul #1 [tudor.rusu@hotmail.com] inactiv'
+                  description: 'Utilizatorul [tudor.rusu@hotmail.com] inactiv'
   /utilizator/delogare:
     post:
       summary: deautentificare utilizator
