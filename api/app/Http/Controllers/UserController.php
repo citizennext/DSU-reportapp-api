@@ -199,6 +199,45 @@ class UserController extends Controller
     }
 
     /**
+     * Get individual user.
+     * Read our Data Type B(R)EAD
+     *
+     * @return array JSON
+     */
+    public function profil()
+    {
+        $result = array();
+
+        try{
+            if(Auth::user()->hasPermission('read_users')){
+                $collection = User::with(['rol', 'unitate.departament', 'unitate.parent'])->find(Auth::user()->id);
+                if(!empty($collection)) {
+                    $result['message'] = 'success';
+                    $result['user'] = $collection;
+                } else {
+                    $result['message'] = 'fail';
+                    $result['description'] = 'Utilizator inexistent.';
+                }
+            } else {
+                // add a audit log
+                $auditLog = array(
+                    'description' => 'Accesare neautorizata ' . (strlen(Auth::user()->prenume) > 0 ? Auth::user()->prenume . ' ' . Auth::user()->nume : Auth::user()->nume),
+                    'new_value' => '401 /users/{id}',
+                    'user_id' => Auth::user()->id
+                );
+                Audit::create($auditLog);
+                $result['message'] = 'fail';
+                return response()->json($result, 401);
+            }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
+    }
+
+    /**
      * Create user.
      * Add Data Type BRE(A)D
      *
