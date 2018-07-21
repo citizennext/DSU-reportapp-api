@@ -45,6 +45,9 @@ $router->group(['prefix' => 'utilizator'], function($router) {
     // <api_url>/utilizator/resetare-parola
     $router->put('resetare-parola/', 'UserController@resetPassword');
 
+    // <api_url>/utilizator/profil
+    $router->get('profil/', 'UserController@profil');
+
 });
 
 // Localitati routes

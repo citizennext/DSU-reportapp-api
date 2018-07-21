@@ -89,12 +89,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
+                type: object
                 example:
-                  status: success
+                  message: success
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /utilizator/{id}:
+  '/utilizator/{id}':
     get:
       summary: READ - utilizator
       description: 'Returneaza un user bazat pe id, inclusiv relatii'
@@ -206,7 +206,7 @@ paths:
                 example:
                   message: fail
                   description: Utilizator inexistent.
-  /utilizator/email/{email}:
+  '/utilizator/email/{email}':
     get:
       summary: READ - utilizator
       description: 'Returneaza un user bazat pe email, inclusiv relatii'
@@ -310,6 +310,111 @@ paths:
                   $ref: '#/components/schemas/Users'
         200 Fail:
           description: Utilizator inexistent - email-ul nu exista in baza de date.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: fail
+                  description: Utilizator inexistent.
+  '/utilizator/profil':
+    get:
+      summary: READ - utilizator
+      description: 'Returneaza datele utilizatorului logat, inclusiv relatii'
+      security:
+        - apiKey: []
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: 'bearer {token}'
+      tags:
+        - Utilizatori
+      responses:
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
+          description: Obiect JSON cu utilizatorul.
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: success
+                  user:
+                    id: 5
+                    nume: Tester
+                    email: tester.structura@dsu.ro
+                    created_at: '2018-03-26 16:41:19'
+                    updated_at: '2018-03-26 16:41:19'
+                    avatar: users/default.png
+                    role_id: 6
+                    deleted_at: null
+                    prenume: Structura Smurd
+                    telefon_s: null
+                    telefon_p: null
+                    adresa: null
+                    cod_postal: null
+                    localitate: null
+                    judet: null
+                    unitate_id: 7
+                    active: 1
+                    rol:
+                      id: 6
+                      name: structura
+                      display_name: Coordonator structura
+                      created_at: '2018-03-24 19:02:35'
+                      updated_at: '2018-03-24 19:02:35'
+                    unitate:
+                      id: 7
+                      parent_id: 4
+                      nume: SMURD National
+                      descriere: null
+                      adresa: null
+                      cod_postal: null
+                      telefon: null
+                      created_at: '2018-03-26 16:39:21'
+                      updated_at: '2018-03-26 16:39:21'
+                      deleted_at: null
+                      localitate: Targu-Mures
+                      judet: Mures
+                      departament_id: 1
+                      departament:
+                        id: 1
+                        nume: SMURD
+                        descriere: >-
+                          Scopul SMURD este transferul unui echipaj medical
+                          spitalicesc, cu dotarea necesară, la locul unde se
+                          află un pacient în stare critică, în vederea acordării
+                          de asistență medicală de urgență calificată.
+                        adresa: Str. Prof. Dr. Gheorghe Marinescu nr. 50
+                        cod_postal: '540136'
+                        localitate: Targu-Mures
+                        judet: Mures
+                        telefon: +40 265 210 110
+                        created_at: '2018-03-26 09:51:28'
+                        updated_at: '2018-03-26 09:51:28'
+                        deleted_at: null
+                      parent:
+                        id: 4
+                        parent_id: 7
+                        nume: Statia centrala SMURD SIBIU
+                        descriere: SMURD judet Sibiu
+                        adresa: 'str. Vasile Carlova, nr.16-22'
+                        cod_postal: '550017'
+                        telefon: +40 269 123 456
+                        created_at: '2018-03-26 10:25:29'
+                        updated_at: '2018-03-28 08:37:34'
+                        deleted_at: null
+                        localitate: Sibiu
+                        judet: Sibiu
+                        departament_id: 1
+                items:
+                  $ref: '#/components/schemas/Users'
+        200 Fail:
+          description: Utilizator inexistent.
           content:
             application/json:
               schema:
@@ -491,7 +596,7 @@ paths:
                 example:
                   email:
                     - The email field is required.
-  /utilizator/activare/{token}:
+  '/utilizator/activare/{token}':
     get:
       summary: activare utilizator
       description: 'Activeaza un cont de utilizator, bazat pe remember_token'
@@ -525,7 +630,7 @@ paths:
                 example:
                   message: fail
                   description: Utilizator activat deja sau inexistent.
-  /utilizator/stergere/{id}:
+  '/utilizator/stergere/{id}':
     delete:
       summary: DELETE - utilizator
       description: 'Sterge(soft) un utilizator bazat pe id, inclusiv relatii'
@@ -571,8 +676,8 @@ paths:
                     nu exista.
   /roluri:
     get:
-      summary: BROWSE - roluri, inclusiv permisiuni
-      description: Returneaza toata colectia Roluri, inclusiv relatii
+      summary: 'BROWSE - roluri, inclusiv permisiuni'
+      description: 'Returneaza toata colectia Roluri, inclusiv relatii'
       security:
         - apiKey: []
       parameters:
@@ -593,54 +698,54 @@ paths:
                 type: array
                 example:
                   - id: 1
-                    name: "sysadmin"
-                    display_name: "Administrator sistem"
+                    name: sysadmin
+                    display_name: Administrator sistem
                     created_at: '2018-03-26 16:39:21'
                     updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
                     permisiuni:
                       - id: 1
-                        key: "browse_admin"
+                        key: browse_admin
                         table_name: null
-                        created_at: "2018-03-08 18:23:37"
-                        updated_at: "2018-03-08 18:23:37"
+                        created_at: '2018-03-08 18:23:37'
+                        updated_at: '2018-03-08 18:23:37'
                         permission_group_id: null
                         deleted_at: null
-                        pivot: 
+                        pivot:
                           role_id: 1
                           permission_id: 1
                       - id: 5
-                        key: "browse_menus"
-                        table_name: "menus"
-                        created_at: "2018-03-08 18:23:37"
-                        updated_at: "2018-03-08 18:23:37"
+                        key: browse_menus
+                        table_name: menus
+                        created_at: '2018-03-08 18:23:37'
+                        updated_at: '2018-03-08 18:23:37'
                         permission_group_id: null
                         deleted_at: null
-                        pivot: 
+                        pivot:
                           role_id: 1
                           permission_id: 5
                   - id: 2
-                    name: "raportor"
-                    display_name: "Raportor"
+                    name: raportor
+                    display_name: Raportor
                     created_at: '2018-03-26 16:39:21'
                     updated_at: '2018-03-26 16:39:21'
                     deleted_at: null
                     permisiuni:
                       - id: 36
-                        key: "browse_unitati"
-                        table_name: "unitati"
-                        created_at: "2018-03-08 18:23:37"
-                        updated_at: "2018-03-08 18:23:37"
+                        key: browse_unitati
+                        table_name: unitati
+                        created_at: '2018-03-08 18:23:37'
+                        updated_at: '2018-03-08 18:23:37'
                         permission_group_id: null
                         deleted_at: null
-                        pivot: 
+                        pivot:
                           role_id: 2
                           permission_id: 36
                 items:
                   $ref: '#/components/schemas/Roles'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /rol/{id}:
+  '/rol/{id}':
     get:
       summary: READ - rol
       description: 'Returneaza un rol bazat pe id, inclusiv relatii'
@@ -671,20 +776,20 @@ paths:
                 type: array
                 example:
                   id: 2
-                  name: "raportor"
-                  display_name: "Raportor"
+                  name: raportor
+                  display_name: Raportor
                   created_at: '2018-03-26 16:39:21'
                   updated_at: '2018-03-26 16:39:21'
                   deleted_at: null
                   permisiuni:
                     - id: 36
-                      key: "browse_unitati"
-                      table_name: "unitati"
-                      created_at: "2018-03-08 18:23:37"
-                      updated_at: "2018-03-08 18:23:37"
+                      key: browse_unitati
+                      table_name: unitati
+                      created_at: '2018-03-08 18:23:37'
+                      updated_at: '2018-03-08 18:23:37'
                       permission_group_id: null
                       deleted_at: null
-                      pivot: 
+                      pivot:
                         role_id: 2
                         permission_id: 36
                 items:
@@ -694,7 +799,7 @@ paths:
   /rol/editare:
     put:
       summary: EDIT - editare rol
-      description: Editarea datelor unui rol, inclusiv datele din tabela pivot
+      description: 'Editarea datelor unui rol, inclusiv datele din tabela pivot'
       security:
         - apiKey: []
       parameters:
@@ -721,7 +826,7 @@ paths:
                 - request_id
               example:
                 request_id: 12
-                display_name: "Nume modificat rol"
+                display_name: Nume modificat rol
                 pivot:
                   - 1
                   - 61
@@ -730,16 +835,18 @@ paths:
       tags:
         - Roluri si Permisiuni
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Rol modificat cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Rolul [Nume modificat rol] modificat cu succes."
-        '200 Fail':
+                  message: success
+                  description: 'Rolul [Nume modificat rol] modificat cu succes.'
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
@@ -747,13 +854,11 @@ paths:
                 type: object
                 example:
                   message: fail
-                  description: "Rol inexistent."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  description: Rol inexistent.
   /rol/adaugare:
     post:
       summary: ADD - inregistrare rol nou
-      description: Inregistrarea unui nou rol, cu pivotare pe permisiuni
+      description: 'Inregistrarea unui nou rol, cu pivotare pe permisiuni'
       security:
         - apiKey: []
       parameters:
@@ -779,7 +884,7 @@ paths:
               required:
                 - name
               example:
-                name: "rol_testare_cu_permisiuni"
+                name: rol_testare_cu_permisiuni
                 pivot:
                   - 61
                   - 62
@@ -788,7 +893,9 @@ paths:
       tags:
         - Roluri si Permisiuni
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Rol creata.
           content:
             application/json:
@@ -797,7 +904,7 @@ paths:
                 example:
                   message: success
                   description: 'Rolul [rol_testare_cu_permisiuni] creat.'
-        '200 Fail':
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
@@ -806,12 +913,10 @@ paths:
                 example:
                   name:
                     - The name field is required.
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  /rol/stergere/{id}:
+  '/rol/stergere/{id}':
     delete:
       summary: DELETE - rol
-      description: "Sterge(soft) un rol bazat pe id, inclusiv relatii pivot"
+      description: 'Sterge(soft) un rol bazat pe id, inclusiv relatii pivot'
       security:
         - apiKey: []
       parameters:
@@ -830,30 +935,30 @@ paths:
       tags:
         - Roluri si Permisiuni
       responses:
-        '200 Success':
-          description: "Rol sters cu succes."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
+          description: Rol sters cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Rolul [Rol Testare] sters cu succes."
-        '200 Fail':
+                  message: success
+                  description: 'Rolul [Rol Testare] sters cu succes.'
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Rolul nu poate fi sters. Probabil nu exista."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Rolul nu poate fi sters. Probabil nu exista.
   /permisiuni:
     get:
-      summary: BROWSE - permisiuni, inclusiv roluri
-      description: Returneaza toata colectia Permisiuni, inclusiv relatii
+      summary: 'BROWSE - permisiuni, inclusiv roluri'
+      description: 'Returneaza toata colectia Permisiuni, inclusiv relatii'
       security:
         - apiKey: []
       parameters:
@@ -874,53 +979,53 @@ paths:
                 type: array
                 example:
                   - id: 1
-                    key: "browse_admin"
+                    key: browse_admin
                     table_name: null
-                    created_at: "2018-03-08 18:23:37"
-                    updated_at: "2018-03-08 18:23:37"
+                    created_at: '2018-03-08 18:23:37'
+                    updated_at: '2018-03-08 18:23:37'
                     permission_group_id: null
                     deleted_at: null
                     roluri:
                       - id: 1
-                        name: "sysadmin"
-                        display_name: "Administrator sistem"
+                        name: sysadmin
+                        display_name: Administrator sistem
                         created_at: '2018-03-26 16:39:21'
                         updated_at: '2018-03-26 16:39:21'
                         deleted_at: null
-                        pivot: 
+                        pivot:
                           role_id: 1
                           permission_id: 1
                       - id: 2
-                        name: "raportor"
-                        display_name: "Raportor"
+                        name: raportor
+                        display_name: Raportor
                         created_at: '2018-03-26 16:39:21'
                         updated_at: '2018-03-26 16:39:21'
                         deleted_at: null
-                        pivot: 
+                        pivot:
                           role_id: 2
                           permission_id: 1
                   - id: 2
-                    key: "browse_database"
+                    key: browse_database
                     table_name: null
-                    created_at: "2018-03-08 18:23:37"
-                    updated_at: "2018-03-08 18:23:37"
+                    created_at: '2018-03-08 18:23:37'
+                    updated_at: '2018-03-08 18:23:37'
                     permission_group_id: null
                     deleted_at: null
                     roluri:
                       - id: 1
-                        name: "sysadmin"
-                        display_name: "Administrator sistem"
+                        name: sysadmin
+                        display_name: Administrator sistem
                         created_at: '2018-03-26 16:39:21'
                         updated_at: '2018-03-26 16:39:21'
                         deleted_at: null
-                        pivot: 
+                        pivot:
                           role_id: 1
                           permission_id: 2
                 items:
                   $ref: '#/components/schemas/Permissions'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /permisiune/{id}:
+  '/permisiune/{id}':
     get:
       summary: READ - permisiune
       description: 'Returneaza o permisiune bazat pe id, inclusiv relatii'
@@ -951,20 +1056,20 @@ paths:
                 type: array
                 example:
                   id: 2
-                  key: "browse_database"
+                  key: browse_database
                   table_name: null
-                  created_at: "2018-03-08 18:23:37"
-                  updated_at: "2018-03-08 18:23:37"
+                  created_at: '2018-03-08 18:23:37'
+                  updated_at: '2018-03-08 18:23:37'
                   permission_group_id: null
                   deleted_at: null
                   roluri:
                     - id: 1
-                      name: "sysadmin"
-                      display_name: "Administrator sistem"
+                      name: sysadmin
+                      display_name: Administrator sistem
                       created_at: '2018-03-26 16:39:21'
                       updated_at: '2018-03-26 16:39:21'
                       deleted_at: null
-                      pivot: 
+                      pivot:
                         role_id: 1
                         permission_id: 2
                 items:
@@ -974,7 +1079,7 @@ paths:
   /permisiune/editare:
     put:
       summary: EDIT - editare permisiune
-      description: Editarea datelor unei permisiuni, inclusiv datele din tabela pivot
+      description: 'Editarea datelor unei permisiuni, inclusiv datele din tabela pivot'
       security:
         - apiKey: []
       parameters:
@@ -1001,22 +1106,26 @@ paths:
                 - request_id
               example:
                 request_id: 12
-                key: "Nume modificat permisiune"
+                key: Nume modificat permisiune
               items:
                 $ref: '#/components/schemas/Permissions'
       tags:
         - Roluri si Permisiuni
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Permisiune modificata cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Permisiunea [Nume modificat permisiune] modificata cu succes."
-        '200 Fail':
+                  message: success
+                  description: >-
+                    Permisiunea [Nume modificat permisiune] modificata cu
+                    succes.
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
@@ -1024,13 +1133,11 @@ paths:
                 type: object
                 example:
                   message: fail
-                  description: "Permisiune inexistenta."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  description: Permisiune inexistenta.
   /permisiune/adaugare:
     post:
       summary: ADD - inregistrare permisiune noua
-      description: Inregistrarea unei noi permisiuni, cu pivotare pe roluri
+      description: 'Inregistrarea unei noi permisiuni, cu pivotare pe roluri'
       security:
         - apiKey: []
       parameters:
@@ -1056,7 +1163,7 @@ paths:
               required:
                 - key
               example:
-                key: "permisiune_testare_cu_roluri"
+                key: permisiune_testare_cu_roluri
                 pivot:
                   - 1
                   - 10
@@ -1065,7 +1172,9 @@ paths:
       tags:
         - Roluri si Permisiuni
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Permisiune creata.
           content:
             application/json:
@@ -1074,7 +1183,7 @@ paths:
                 example:
                   message: success
                   description: 'Permisiunea [permisiune_testare_cu_roluri] creata.'
-        '200 Fail':
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
@@ -1083,12 +1192,10 @@ paths:
                 example:
                   key:
                     - The key field is required.
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  /permisiune/stergere/{id}:
+  '/permisiune/stergere/{id}':
     delete:
       summary: DELETE - permisiune
-      description: "Sterge(soft) o permisiune bazat pe id, inclusiv relatii pivot"
+      description: 'Sterge(soft) o permisiune bazat pe id, inclusiv relatii pivot'
       security:
         - apiKey: []
       parameters:
@@ -1107,26 +1214,26 @@ paths:
       tags:
         - Roluri si Permisiuni
       responses:
-        '200 Success':
-          description: "Permisiune stearsa cu succes."
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
+          description: Permisiune stearsa cu succes.
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "success"
-                  description: "Permisiunea [test_permisiune] stearsa cu succes."
-        '200 Fail':
+                  message: success
+                  description: 'Permisiunea [test_permisiune] stearsa cu succes.'
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  message: "fail"
-                  description: "Permisiunea nu poate fi stearsa. Probabil nu exista."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  message: fail
+                  description: Permisiunea nu poate fi stearsa. Probabil nu exista.
   /localitati:
     get:
       summary: BROWSE - localitati
@@ -1184,7 +1291,7 @@ paths:
                   $ref: '#/components/schemas/Localitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitati/judet/{slug}:
+  '/localitati/judet/{slug}':
     get:
       summary: BROWSE - localitati dintr-un judet
       description: 'Returneaza toate localitatile dintr-um judet, bazat pe slug-ul judetului'
@@ -1245,7 +1352,7 @@ paths:
                   $ref: '#/components/schemas/Localitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitate/{id}:
+  '/localitate/{id}':
     get:
       summary: READ - localitate
       description: 'Returneaza o localitate bazat pe id, inclusiv relatii'
@@ -1293,7 +1400,7 @@ paths:
                   $ref: '#/components/schemas/Localitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /localitate/slug/{slug}:
+  '/localitate/slug/{slug}':
     get:
       summary: READ - localitate
       description: 'Returneaza o localitate bazat pe slug, inclusiv relatii'
@@ -1377,7 +1484,9 @@ paths:
       tags:
         - Localitati
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Localitate modificata cu succes.
           content:
             application/json:
@@ -1386,7 +1495,7 @@ paths:
                 example:
                   message: success
                   description: 'Localitatea [Abrud] modificata cu succes.'
-        '200 Fail':
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
@@ -1395,8 +1504,6 @@ paths:
                 example:
                   message: fail
                   description: Localitate inexistenta.
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
   /localitate/adaugare:
     post:
       summary: ADD - inregistrare localitate noua
@@ -1434,7 +1541,9 @@ paths:
       tags:
         - Localitati
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Localitate creata.
           content:
             application/json:
@@ -1443,7 +1552,7 @@ paths:
                 example:
                   message: success
                   description: 'Localitatea [Abrud] creata.'
-        '200 Fail':
+        200 Fail:
           description: Lipsa unui camp obligatoriu.
           content:
             application/json:
@@ -1452,9 +1561,7 @@ paths:
                 example:
                   email:
                     - The judet id field is required.
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-  /localitate/stergere/{id}:
+  '/localitate/stergere/{id}':
     delete:
       summary: DELETE - localitati
       description: 'Sterge(soft) o localitate bazat pe id, inclusiv relatii'
@@ -1476,7 +1583,9 @@ paths:
       tags:
         - Localitati
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Localitate stearsa cu succes.
           content:
             application/json:
@@ -1485,7 +1594,7 @@ paths:
                 example:
                   message: success
                   description: 'Localitatea [Abrud -> abrud-58] stearsa cu succes.'
-        '200 Fail':
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
@@ -1494,8 +1603,6 @@ paths:
                 example:
                   message: fail
                   description: Localitatea nu poate fi stearsa. Probabil nu exista.
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
   /judete:
     get:
       summary: BROWSE - judete
@@ -1535,7 +1642,7 @@ paths:
                   $ref: '#/components/schemas/Judete'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judet/{id}:
+  '/judet/{id}':
     get:
       summary: READ - judet
       description: Returneaza un judet bazat pe id
@@ -1575,7 +1682,7 @@ paths:
                   $ref: '#/components/schemas/Judete'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /judet/slug/{slug}:
+  '/judet/slug/{slug}':
     get:
       summary: READ - judet
       description: Returneaza un judet bazat pe slug
@@ -1725,7 +1832,7 @@ paths:
                 example:
                   email:
                     - The nume field is required.
-  /judet/stergere/{id}:
+  '/judet/stergere/{id}':
     delete:
       summary: DELETE - judete
       description: 'Sterge(soft) un judet bazat pe id, inclusiv relatii - localitati'
@@ -1867,7 +1974,7 @@ paths:
                   $ref: '#/components/schemas/Unitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /unitati/parinte/{id}:
+  '/unitati/parinte/{id}':
     get:
       summary: BROWSE - unitati cu un singur parinte
       description: >-
@@ -1965,7 +2072,7 @@ paths:
                   $ref: '#/components/schemas/Unitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /unitati/departament/{id}:
+  '/unitati/departament/{id}':
     get:
       summary: BROWSE - unitati din acelasi departament
       description: >-
@@ -2044,7 +2151,7 @@ paths:
                   $ref: '#/components/schemas/Unitati'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /unitate/{id}:
+  '/unitate/{id}':
     get:
       summary: READ - unitate
       description: 'Returneaza o unitate bazat pe id, inclusiv relatii'
@@ -2240,7 +2347,7 @@ paths:
                 example:
                   telefon:
                     - The telefon field is required.
-  /unitate/stergere/{id}:
+  '/unitate/stergere/{id}':
     delete:
       summary: DELETE - unitate
       description: 'Sterge(soft) o unitate bazat pe id, inclusiv relatii'
@@ -2337,7 +2444,7 @@ paths:
                   $ref: '#/components/schemas/Departamente'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-  /departament/{id}:
+  '/departament/{id}':
     get:
       summary: READ - departament
       description: Returneaza un departament bazat pe id
@@ -2502,7 +2609,7 @@ paths:
                 example:
                   telefon:
                     - The telefon field is required.
-  /departament/stergere/{id}:
+  '/departament/stergere/{id}':
     delete:
       summary: DELETE - departament
       description: >-
@@ -2526,7 +2633,9 @@ paths:
       tags:
         - Departamente
       responses:
-        '200 Success':
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        200 Success:
           description: Departament stears cu succes.
           content:
             application/json:
@@ -2534,8 +2643,10 @@ paths:
                 type: object
                 example:
                   message: success
-                  description: "Departamentul [Nume modificat Testare Departament] sters cu succes."
-        '200 Fail':
+                  description: >-
+                    Departamentul [Nume modificat Testare Departament] sters cu
+                    succes.
+        200 Fail:
           description: 'Lipsa unui camp obligatoriu, id-ul de exemplu.'
           content:
             application/json:
@@ -2543,9 +2654,7 @@ paths:
                 type: object
                 example:
                   message: fail
-                  description: "Departamentul nu poate fi sters. Probabil nu exista."
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
+                  description: Departamentul nu poate fi sters. Probabil nu exista.
 components:
   responses:
     UnauthorizedError:
