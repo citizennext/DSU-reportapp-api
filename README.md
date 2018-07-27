@@ -51,7 +51,7 @@ $ cp .env.example .env
 ## 3. Retrieve dependencies
 ```
 $ cd /vagrant/DSU-reportapp-api/api/
-$ composer update
+$ composer install
 
 $ cd /vagrant/DSU-reportapp-api-admin/api-man/
 $ composer install

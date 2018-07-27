@@ -43,7 +43,10 @@ $router->group(['prefix' => 'utilizator'], function($router) {
     $router->delete('stergere/{id}', 'UserController@delete');
 
     // <api_url>/utilizator/resetare-parola
-    $router->put('resetare-parola/', 'UserController@resetPassword');
+    $router->put('resetare-parola/', ['as' => 'resetare.parola', 'uses' => 'UserController@resetPassword']);
+
+    // <api_url>/utilizator/am-uitat-parola
+    $router->post('am-uitat-parola/', 'UserController@forgotPassword');
 
     // <api_url>/utilizator/profil
     $router->get('profil/', 'UserController@profil');

@@ -9,6 +9,7 @@ use Illuminate\Database\QueryException;
 use App\Mail\ActivareUtilizator;
 use App\Mail\WelcomeUtilizator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Carbon\Carbon;
 use Auth;
 use Validator;
@@ -17,6 +18,7 @@ use App\User;
 use App\Unitate;
 use App\Setting;
 use App\Audit;
+use App\Mail\ForgotPassword;
 
 class UserController extends Controller
 {
@@ -515,6 +517,42 @@ class UserController extends Controller
                 $result['message'] = 'fail';
                 return response()->json($result, 401);
             }
+        } catch (QueryException $exception) {
+            $result['message'] = 'fail';
+            $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
+        }
+
+        return response()->json($result);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $result = array();
+
+        try{
+            $user = User::where('email', $request->input('email'))->first();
+
+            if (empty($user)) {
+              $result['message'] = 'fail';
+              $result['description'] = 'Nu exista niciun utilizator cu aceasta adresa de email';
+              return response()->json($result, 404);
+            }
+
+            $token = Password::createToken($user);
+
+            Mail::to($user->email, $user->prenume)->send(new ForgotPassword($user, $token));
+
+            $auditLog = array(
+                'description' => 'Utilizatorul [' . $user->email . '] a cerut recuperarea parolei.',
+                'new_value' => 'forgot password',
+                'user_id' => $user->id
+            );
+            Audit::create($auditLog);
+
+            $result['message'] = 'success';
+            $result['description'] = 'Ai primit un email cu instructiuni pentru resetarea parolei';
+            return response()->json($result);
+
         } catch (QueryException $exception) {
             $result['message'] = 'fail';
             $result['description'] = 'DB Exception #' . $exception->errorInfo[1] . '[' .$exception->errorInfo[2] . ']';
