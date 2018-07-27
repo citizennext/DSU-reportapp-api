@@ -10,22 +10,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use App\Setting;
 
-class ActivareUtilizator extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $user;
-    protected $parola;
+    protected $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($userId, $parola)
+    public function __construct($user, $token)
     {
-        $this->user = User::find($userId);
-        $this->parola = $parola;
+        $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -37,19 +37,18 @@ class ActivareUtilizator extends Mailable
     {
         return $this->from(Setting::where('key', 'site.api.email_support')->first()->value, Setting::where('key', 'site.api.support_signature')->first()->value)
             ->replyTo('no-reply@example.com', 'NO REPLY')
-            ->subject('Activare utilizator')
-            ->markdown('emails.users.activare', [
+            ->subject('Resetare parolă')
+            ->markdown('emails.users.forgot-pass', [
                 'level' => 'success',
                 'greeting' => 'Bună ' . (!empty($this->user->prenume) ? $this->user->prenume . ' ' . $this->user->nume : $this->user->nume) . ',',
-                'message_1' => 'Contul tău de utilizator pentru aplicația de raportare integrată DSU a fost creat cu succes. Pentru conectare, contul tău trebuie activat. Datele tale de conectare sunt:',
-                'message_2' => 'Păstreaza aceste date pentru conectare, necesare dupa activarea contului, apăsând butonul de mai jos.',
+                'message_1' => 'Am primit de la tine o cerere de resetare a parolei.',
+                'message_2' => 'Dacă nu ai inițiat această cerere te rugăm să ignori acest email.',
                 'user_name' => $this->user->email,
-                'password' => $this->parola,
-                'actionUrl' => url(route('activare.utilizator', ['token' => $this->user->remember_token])),
-                'actionText' => 'Activare',
+                'actionUrl' => url(route('resetare.parola', ['token' => $this->token])),
+                'actionText' => 'Schimbă parola',
                 'salutation' => 'Toate cele bune,',
                 'signature' => 'Echipa tehnică',
-                'subcopy_content' => sprintf('Dacă întâmpini probleme la clic pe butonul Activare, copiază și inserează adresa URL de mai jos în browser-ul tău:'),
+                'subcopy_content' => sprintf('Dacă întâmpini probleme la clic pe butonul Schimbă parola, copiază și inserează adresa URL de mai jos în browser-ul tău:'),
         ]);
     }
 }
