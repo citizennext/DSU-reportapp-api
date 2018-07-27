@@ -33,8 +33,8 @@ class WelcomeUtilizator extends Mailable
      */
     public function build()
     {
-        return $this->from(Setting::where('key', 'api.email_support')->first()->value, Setting::where('key', 'api.support_signature')->first()->value)
-            ->replyTo('no-reply@dsu-api.ro', 'NO REPLY')
+        return $this->from(Setting::where('key', 'site.api.email_support')->first()->value, Setting::where('key', 'site.api.support_signature')->first()->value)
+            ->replyTo('no-reply@example.com', 'NO REPLY')
             ->subject('Cont de utilizator activat')
             ->markdown('emails.users.welcome', [
                 'level' => 'success',
