@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements Authenticatable
+class User extends Model implements
+    Authenticatable,
+    CanResetPasswordContract
 {
-    use AuthenticableTrait, SoftDeletes;
+    use AuthenticableTrait, SoftDeletes, CanResetPassword;
 
     /**
      * The attributes that should be mutated to dates.
@@ -67,4 +71,5 @@ class User extends Model implements Authenticatable
         }
         return false;
     }
+
 }
