@@ -37,12 +37,7 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'token',
-            'provider' => 'users',
-        ],
-
-        'api' => [
-            'driver' => 'token',
+            'driver' => 'apikey',
             'provider' => 'users',
         ],
     ],

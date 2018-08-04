@@ -32,7 +32,9 @@ class AuthServiceProvider extends ServiceProvider
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
 
-        $this->app['auth']->viaRequest('api', function ($request) {
+        
+
+        $this->app['auth']->viaRequest('apikey', function ($request) {
             if ($request->header('Authorization')) {
                 $apiKey = explode(' ',$request->header('Authorization'));
                 $userModel = User::where(['api_key' => decrypt($apiKey[1]), 'active' => 1])->first();
