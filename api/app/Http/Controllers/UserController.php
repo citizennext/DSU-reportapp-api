@@ -29,7 +29,7 @@ class UserController extends Controller
     public function __construct()
     {
         // set authorization only for specific methods
-        $this->middleware('auth', ['except' => ['autentificare', 'activare', 'edit']]);
+        $this->middleware('auth', ['except' => ['autentificare', 'activare', 'edit', 'forgotPassword']]);
     }
 
     /**
@@ -470,7 +470,7 @@ class UserController extends Controller
             if (empty($user)) {
               $result['message'] = 'fail';
               $result['description'] = 'Nu exista niciun utilizator cu aceasta adresa de email';
-              return response()->json($result, 404);
+              return response()->json($result);
             }
 
             $token = Password::createToken($user);
