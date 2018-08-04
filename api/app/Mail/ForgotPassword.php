@@ -48,7 +48,7 @@ class ForgotPassword extends Mailable
                 'actionText' => 'Schimbă parola',
                 'salutation' => 'Toate cele bune,',
                 'signature' => 'Echipa tehnică',
-                'subcopy_content' => sprintf('Dacă întâmpini probleme la clic pe butonul Schimbă parola, copiază și inserează adresa URL de mai jos în browser-ul tău:'),
+                'subcopy_content' => sprintf('Dacă întâmpini probleme la click pe butonul Schimbă parola, copiază și inserează adresa URL de mai jos în browser-ul tău:'),
         ]);
     }
 }
