@@ -10,12 +10,13 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
-        $this->get('/');
+  public function testExample()
+  {
+      $this->get('/');
 
-        $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
-        );
-    }
+      $this->assertEquals(
+          $this->app->version(),
+            $this->response->getContent()
+      );
+  }
 }

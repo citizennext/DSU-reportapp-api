@@ -12,10 +12,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        $this->app->bind('auth.password', function ($app) {
-            return new PasswordBrokerManager($app);
-        });
-    }
+  public function register()
+  {
+      $this->app->bind('auth.password', function ($app) {
+          return new PasswordBrokerManager($app);
+      });
+  }
 }

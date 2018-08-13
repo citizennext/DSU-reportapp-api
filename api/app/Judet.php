@@ -10,29 +10,29 @@ class Judet extends Model
     use SoftDeletes;
 
     // set custom table name
-    protected $table = 'judete';
+  protected $table = 'judete';
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+  protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
+  protected $fillable = [
         'nume', 'slug',
     ];
 
     /**
      * Get the loc that owned by the judet.
      */
-    public function localitate()
-    {
-        return $this->hasMany(Localitate::class);
-    }
+  public function localitate()
+  {
+      return $this->hasMany(Localitate::class);
+  }
 }

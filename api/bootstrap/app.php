@@ -78,16 +78,16 @@ $app->singleton(
 |
 */
 
-$app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-$app->register(Illuminate\Mail\MailServiceProvider::class);
-$app->register(Sentry\SentryLaravel\SentryLumenServiceProvider::class);
+ $app->register(App\Providers\AppServiceProvider::class);
+ $app->register(App\Providers\AuthServiceProvider::class);
+ $app->register(App\Providers\EventServiceProvider::class);
+ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+ $app->register(Illuminate\Mail\MailServiceProvider::class);
+ $app->register(Sentry\SentryLaravel\SentryLumenServiceProvider::class);
 
-$app->configure('services');
-$app->configure('mail');
-$app->configure('app');
+ $app->configure('services');
+ $app->configure('mail');
+ $app->configure('app');
 
 /*
 |--------------------------------------------------------------------------
@@ -100,10 +100,10 @@ $app->configure('app');
 |
 */
 
-$app->router->group([
+ $app->router->group([
     'namespace' => 'App\Http\Controllers',
-], function ($router) {
+ ], function ($router) {
     require __DIR__.'/../routes/web.php';
-});
+ });
 
-return $app;
+ return $app;
