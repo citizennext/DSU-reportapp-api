@@ -10,29 +10,28 @@ class Permission extends Model
     use SoftDeletes;
 
     // set custom table name
-    protected $table = 'permissions';
+  protected $table = 'permissions';
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+  protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
+  protected $fillable = [
         'key', 'table_name', 'permission_group_id',
     ];
 
     /**
      * Get the permissions that are owned by the role.
      */
-    public function roluri() {
-        return $this -> belongsToMany(Role::class);
-    }
-
+  public function roluri() {
+      return $this -> belongsToMany(Role::class);
+  }
 }

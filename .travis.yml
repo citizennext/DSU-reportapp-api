@@ -20,7 +20,7 @@ before_script:
   - php artisan cache:clear
 
 script:
-  - api/phpunit
+  - composer test
 
 services:
   - postgresql

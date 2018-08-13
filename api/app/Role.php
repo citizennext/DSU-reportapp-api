@@ -10,35 +10,35 @@ class Role extends Model
     use SoftDeletes;
 
     // set custom table name
-    protected $table = 'roles';
+  protected $table = 'roles';
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+  protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
+  protected $fillable = [
         'name', 'display_name',
     ];
 
     /**
      * Get the user that owns the role.
      */
-    public function user() {
-        return $this -> hasOne(User::class);
-    }
+  public function user() {
+      return $this -> hasOne(User::class);
+  }
 
     /**
      * Get the permissions that are owned by the role.
      */
-    public function permisiuni() {
-        return $this -> belongsToMany(Permission::class);
-    }
+  public function permisiuni() {
+      return $this -> belongsToMany(Permission::class);
+  }
 }

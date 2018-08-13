@@ -16,7 +16,7 @@ $router->get('/', function () use ($router) {
 });
 
 // Users routes
-$router->group(['prefix' => 'utilizator'], function($router) {
+$router->group(['prefix' => 'utilizator'], function ($router) {
 
     // <api_url>/utilizator/logare
     $router->post('logare/', ['as' => 'login.utilizator', 'uses' => 'UserController@autentificare']);
@@ -47,20 +47,18 @@ $router->group(['prefix' => 'utilizator'], function($router) {
 
     // <api_url>/utilizator/am-uitat-parola
     $router->post('am-uitat-parola/', 'UserController@forgotPassword');
-
 });
 
 // Localitati routes
-$router->group(['prefix' => 'localitati'], function($router) {
+$router->group(['prefix' => 'localitati'], function ($router) {
 
     // <api_url>/localitati
     $router->get('/', 'LocalitateController@index');
 
     // <api_url>/localitati/judet/{slug}
     $router->get('/judet/{slug}', 'LocalitateController@localitatiByJudet');
-
 });
-$router->group(['prefix' => 'localitate'], function($router) {
+$router->group(['prefix' => 'localitate'], function ($router) {
 
     // <api_url>/localitate/{id}
     $router->get('{id}', 'LocalitateController@find');
@@ -79,13 +77,12 @@ $router->group(['prefix' => 'localitate'], function($router) {
 });
 
 // Judete routes
-$router->group(['prefix' => 'judete'], function($router) {
+$router->group(['prefix' => 'judete'], function ($router) {
 
     // <api_url>/judete
     $router->get('/', 'JudetController@index');
-
 });
-$router->group(['prefix' => 'judet'], function($router) {
+$router->group(['prefix' => 'judet'], function ($router) {
 
     // <api_url>/judet/{id}
     $router->get('{id}', 'JudetController@find');
@@ -104,7 +101,7 @@ $router->group(['prefix' => 'judet'], function($router) {
 });
 
 // Unitati routes
-$router->group(['prefix' => 'unitati'], function($router) {
+$router->group(['prefix' => 'unitati'], function ($router) {
 
     // <api_url>/unitati
     $router->get('/', 'UnitateController@index');
@@ -114,9 +111,8 @@ $router->group(['prefix' => 'unitati'], function($router) {
 
     // <api_url>/unitati/departament/{id}
     $router->get('departament/{id}', 'UnitateController@unitatiByDepartament');
-
 });
-$router->group(['prefix' => 'unitate'], function($router) {
+$router->group(['prefix' => 'unitate'], function ($router) {
 
     // <api_url>/unitate/{id}
     $router->get('{id}', 'UnitateController@find');
@@ -132,13 +128,12 @@ $router->group(['prefix' => 'unitate'], function($router) {
 });
 
 // Departamente routes
-$router->group(['prefix' => 'departamente'], function($router) {
+$router->group(['prefix' => 'departamente'], function ($router) {
 
     // <api_url>/departamente
     $router->get('/', 'DepartamentController@index');
-
 });
-$router->group(['prefix' => 'departament'], function($router) {
+$router->group(['prefix' => 'departament'], function ($router) {
 
     // <api_url>/departament/{id}
     $router->get('{id}', 'DepartamentController@find');
@@ -154,13 +149,12 @@ $router->group(['prefix' => 'departament'], function($router) {
 });
 
 // Roluri si Permisiuni routes
-$router->group(['prefix' => 'roluri'], function($router) {
+$router->group(['prefix' => 'roluri'], function ($router) {
 
     // <api_url>/roluri
     $router->get('/', 'RoleController@index');
-
 });
-$router->group(['prefix' => 'rol'], function($router) {
+$router->group(['prefix' => 'rol'], function ($router) {
 
     // <api_url>/rol/{id}
     $router->get('{id}', 'RoleController@find');
@@ -174,13 +168,12 @@ $router->group(['prefix' => 'rol'], function($router) {
     // <api_url>/rol/stergere/{id}
     $router->delete('stergere/{id}', 'RoleController@delete');
 });
-$router->group(['prefix' => 'permisiuni'], function($router) {
+$router->group(['prefix' => 'permisiuni'], function ($router) {
 
     // <api_url>/permisiuni
     $router->get('/', 'PermissionController@index');
-
 });
-$router->group(['prefix' => 'permisiune'], function($router) {
+$router->group(['prefix' => 'permisiune'], function ($router) {
 
     // <api_url>/permisiune/{id}
     $router->get('{id}', 'PermissionController@find');
