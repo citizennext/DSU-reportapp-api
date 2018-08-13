@@ -16,7 +16,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
+  protected $dontReport = [
         AuthorizationException::class,
         HttpException::class,
         ModelNotFoundException::class,
@@ -31,13 +31,13 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return void
      */
-    public function report(Exception $e)
-    {
-        if (app()->bound('sentry') && $this->shouldReport($e)) {
-          app('sentry')->captureException($e);
-        }
-        parent::report($e);
+  public function report(Exception $e)
+  {
+    if (app()->bound('sentry') && $this->shouldReport($e)) {
+      app('sentry')->captureException($e);
     }
+      parent::report($e);
+  }
 
     /**
      * Render an exception into an HTTP response.
@@ -46,8 +46,8 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
-    {
-        return parent::render($request, $e);
-    }
+  public function render($request, Exception $e)
+  {
+      return parent::render($request, $e);
+  }
 }

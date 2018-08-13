@@ -1,4 +1,27 @@
-sudo: false
+sudo: enabled
+
 language: php
+
 php:
+  - 7.0
   - 7.1
+
+  before_install
+
+before_script:
+  - cp api/.env.example api/.env
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
+  - php artisan key:generate
+  - sudo chown www-data:ubuntu -R bootstrap
+  - sudo chmod 775 -R storage/logs
+  - sudo chown www-data:ubuntu -R storage/
+  - php artisan view:clear
+  - php artisan cache:clear
+  - cd api
+
+script:
+  - composer test
+
+services:
+  - postgresql

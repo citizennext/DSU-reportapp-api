@@ -28,14 +28,14 @@ Nume utilizator: {{$user_name}}<br />Parola: <strong>{{$password}}</strong>
 @isset($actionText)
 <?php
 switch ($level) {
-    case 'success':
-        $color = 'green';
+  case 'success':
+      $color = 'green';
         break;
-    case 'error':
-        $color = 'red';
+  case 'error':
+      $color = 'red';
         break;
-    default:
-        $color = 'blue';
+  default:
+      $color = 'blue';
 }
 ?>
 @component('mail::button', ['url' => $actionUrl, 'color' => $color])
