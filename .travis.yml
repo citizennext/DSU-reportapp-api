@@ -18,6 +18,7 @@ before_script:
   - sudo chown www-data:ubuntu -R storage/
   - php artisan view:clear
   - php artisan cache:clear
+  - cd api
 
 script:
   - composer test
