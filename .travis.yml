@@ -6,8 +6,6 @@ php:
   - 7.0
   - 7.1
 
-  before_install
-
 before_script:
   - cp api/.env.example api/.env
   - composer self-update
