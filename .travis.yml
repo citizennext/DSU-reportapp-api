@@ -1,4 +1,17 @@
-sudo: false
+sudo: enabled
+
 language: php
+
 php:
   - 7.1
+
+before_script:
+  - cp api/.env.example api/.env
+  - cd api
+  - composer install --prefer-source --no-interaction --dev
+
+script:
+  - composer test
+
+services:
+  - postgresql
