@@ -9,6 +9,7 @@ php:
 before_script:
   - cp api/.env.example api/.env
   - composer self-update
+  - cd api
   - composer install --prefer-source --no-interaction --dev
   - php artisan key:generate
   - sudo chown www-data:ubuntu -R bootstrap
@@ -16,7 +17,6 @@ before_script:
   - sudo chown www-data:ubuntu -R storage/
   - php artisan view:clear
   - php artisan cache:clear
-  - cd api
 
 script:
   - composer test
