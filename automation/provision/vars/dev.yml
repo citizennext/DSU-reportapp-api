@@ -9,7 +9,7 @@ nginx:
   service_document_root2: "/var/www/DSU-reportapp-api-admin/api-man/public"
   service_admin_email: "lucian.stuparu@civictech.ro"
   renew_ssl_now: "off"
-  generate_dhparams: "off"
+  generate_dhparams: "on"
   certificate_path: "/etc/ssl/certs/dev-api.dsuapp.ro.crt"
   certificate_key_path: "/etc/ssl/private/dev-api.dsuapp.ro.key"
   generate_ssl_now: "on"
