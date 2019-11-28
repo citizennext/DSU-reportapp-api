@@ -4,9 +4,9 @@ server:
 
 nginx:
   service_host: "api-dsureportapp.citizennext.ro"
-  service_document_root: "/var/www/DSU-reportapp-api/api/public"
+  service_document_root: "/var/www/DSU-reportapp-api/current/api/public"
   service_host2: "api-admin-dsureportapp.citizennext.ro"
-  service_document_root2: "/var/www/DSU-reportapp-api-admin/api-man/public"
+  service_document_root2: "/var/www/DSU-reportapp-api-admin/current/api-man/public"
   service_admin_email: "lucian.stuparu@civictech.ro"
   renew_ssl_now: "off"
   generate_dhparams: "on"
